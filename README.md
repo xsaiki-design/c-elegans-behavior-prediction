@@ -3,7 +3,7 @@
 **Question:** while a worm crawls forward, can its brain activity tell us it is about to reverse, in a worm the model
 has never seen?
 
-**Status: in progress, no results yet.** The data pipeline is built and tested; the analysis plan is written down
+**Status: in progress, no results yet.** The data pipeline and analysis code are built and tested; the analysis plan is written down
 (and dated in git) before any results, in [`docs/decisions/`](docs/decisions).
 
 ## Data
@@ -32,6 +32,7 @@ Needs [uv](https://docs.astral.sh/uv/).
 uv sync                            # install the exact package versions
 uv run python -m worms.download    # fetch and checksum the data (~570 MB) into data/
 uv run pytest                      # tests
+uv run python -m worms.run         # leave-one-worm-out analysis -> results/
 ```
 
 ## Layout
@@ -39,6 +40,9 @@ uv run pytest                      # tests
 ```
 worms/data.py       load one worm: traces, reversal labels, time, neuron names
 worms/download.py   download + verify the dataset
+worms/features.py   prediction target, neuron-class features, body-only baseline features
+worms/evaluate.py   leave-one-worm-out scoring
+worms/run.py        runs it all; settings mirror docs/decisions
 tests/              tests
 docs/decisions/     each design decision: why, alternatives, references
 docs/reading-list.md
