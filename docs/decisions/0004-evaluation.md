@@ -14,9 +14,8 @@
   "reversal starts soon" is the rarer class.
 - **Baselines the brain model must beat:**
   1. *Chance:* AUC 0.5.
-  2. *Behaviour only:* the same model given only what the body shows — current velocity and time since the last
-     reversal. (Head angle was left out: its sign convention differs between recordings, a per-file correction the
-     authors document; not worth the risk for a baseline.) **This is the real bar.** Reversal timing isn't random, so timing alone predicts some of them. *(Results note: it's a cool-down, a reversal is less likely right after another; time since the last one alone scores AUC 0.63.)*
+  2. *Behaviour only:* the same model given only what the body shows — current velocity, head angle, and time since the
+     last reversal. **This is the real bar.** Reversal timing isn't random, so timing alone predicts some of them.
 - **Compare fairly:** for each worm, brain model AUC vs behaviour-only AUC; test the 40 paired differences
   (Wilcoxon signed-rank).
 - **Fix settings in advance.** Horizon, features and model settings are chosen in these documents before looking at
@@ -62,3 +61,13 @@
   <https://scikit-learn.org/stable/modules/cross_validation.html>
 - *An Introduction to Statistical Learning*, Chapter 4 (logistic regression) and Chapter 5 (cross-validation):
   <https://www.statlearning.com>
+
+## Correction log
+
+- **2026-11-08, head angle.** The first results run left head angle out of the body baseline (its sign convention
+  differs by recording, and the code skipped it instead of correcting it), and this file was edited in the same commit
+  as the results to match. A review caught it: a weaker baseline would flatter the brain. Fixed by restoring the baseline
+  as planned, with the sign corrected per recording from the authors' dataset list, and re-running everything. The
+  published numbers use the planned baseline.
+- **2026-11-08, heat cut-off.** Frames just before a heat stimulus whose 5-second prediction window reached into the heated
+  part were kept by mistake (88 positive frames across 18 worms). Now dropped, as 0002 intended.
