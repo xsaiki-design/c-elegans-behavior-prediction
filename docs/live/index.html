@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Live Worm Forecast</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="A model running in your browser predicts when a real C. elegans worm will reverse, from its whole-brain activity.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<style>
+/* Layout: a microscope field (the worm) beside an instrument readout (risk, alarm, neurons). One deliberate dark look. */
+:root {
+  --bg: #0d1820;
+  --field: #10212b;
+  --grid: rgba(150, 190, 210, 0.10);
+  --ink: #e4ecee;
+  --muted: #8ea3ab;
+  --rule: #24384342;
+  --line: #27404b;
+  --worm: #e8dcc4;
+  --risk: #ff8a3d;
+  --body: #9aa7ac;
+  --reversal: #b39af0;
+  --neuron: #5cb8f0;
+  --ok: #6fd3a0;
+  --display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --text: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --data: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+  margin: 0; color: var(--ink); font: 14px/1.5 var(--text);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 28px;
+}
+main { max-width: 1100px; margin: 0 auto; display: grid; gap: 14px; }
+header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 8px 20px; }
+h1 { margin: 0; font: 600 clamp(22px, 3.4vw, 30px)/1.1 var(--display); letter-spacing: 0.01em; text-wrap: balance; }
+.sub { color: var(--muted); margin: 4px 0 0; max-width: 62ch; }
+.stage { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 14px; }
+@media (max-width: 820px) { .stage { grid-template-columns: minmax(0, 1fr); } }
+.field { position: relative; background: var(--field); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; aspect-ratio: 4 / 3; min-height: 260px; max-width: 100%; }
+.field canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hud { position: absolute; left: 12px; top: 10px; right: 12px; display: flex; justify-content: space-between; gap: 10px; font: 12px var(--data); color: var(--muted); pointer-events: none; }
+.state { padding: 2px 8px; border-radius: 99px; border: 1px solid var(--line); color: var(--ink); }
+.state.rev { border-color: var(--reversal); color: var(--reversal); }
+.scalebar { position: absolute; left: 12px; bottom: 10px; font: 11px var(--data); color: var(--muted); display: grid; gap: 3px; pointer-events: none; }
+.scalebar i { display: block; height: 2px; background: var(--muted); }
+.key-legend { position: absolute; right: 12px; bottom: 10px; display: grid; gap: 2px; justify-items: end; font: 11px var(--data); color: var(--muted); pointer-events: none; text-align: right; }
+.key-legend b { font-weight: 500; }
+.panel { background: var(--field); border: 1px solid var(--line); border-radius: 8px; padding: 14px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.label { font: 500 11px/1 var(--data); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.risk { display: flex; align-items: baseline; gap: 10px; }
+.risk b { font: 500 40px/1 var(--data); font-variant-numeric: tabular-nums; color: var(--risk); }
+.risk span { color: var(--muted); }
+.meter { height: 8px; border-radius: 4px; background: var(--line); position: relative; overflow: hidden; }
+.meter i { position: absolute; inset: 0 auto 0 0; background: var(--risk); width: 0; transition: width 0.15s linear; }
+.meter u { position: absolute; top: -2px; bottom: -2px; width: 2px; background: var(--ink); opacity: 0.7; }
+.alarm { font: 600 13px var(--display); letter-spacing: 0.04em; text-transform: uppercase; padding: 6px 10px; border-radius: 6px; border: 1px solid var(--line); color: var(--muted); text-align: center; transition: all 0.15s; }
+.alarm.on { color: var(--bg); background: var(--risk); border-color: var(--risk); }
+canvas.spark { width: 100%; height: 70px; display: block; }
+.neurons { display: grid; grid-template-columns: repeat(auto-fill, minmax(38px, 1fr)); gap: 6px 4px; }
+.n { display: grid; justify-items: center; gap: 2px; font: 9.5px var(--data); color: var(--muted); }
+.n i { width: 16px; height: 16px; border-radius: 50%; background: var(--neuron); opacity: 0.15; transition: opacity 0.12s linear; }
+.n.key { color: var(--ink); }
+.n.key i { outline: 1.5px solid var(--ink); outline-offset: 1px; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; }
+button, select { font: 500 13px var(--text); color: var(--ink); background: var(--field); border: 1px solid var(--line); border-radius: 6px; padding: 6px 12px; cursor: pointer; }
+button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+button:focus-visible, select:focus-visible { outline: 2px solid var(--neuron); outline-offset: 2px; }
+.check { font: 12px var(--data); color: var(--muted); }
+.check b { color: var(--ok); font-weight: 500; }
+footer { color: var(--muted); font-size: 12.5px; display: flex; flex-wrap: wrap; gap: 4px 16px; justify-content: space-between; }
+footer a { color: var(--neuron); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <h1>Live Worm Forecast</h1>
+      <p class="sub">A real <i>C. elegans</i> recording, replayed. The model runs here in your browser and reads the
+        worm's brain activity frame by frame to estimate whether it will start crawling backwards in the next 5 seconds.
+        It never saw this worm during training.</p>
+    </div>
+    <div class="controls" role="group" aria-label="Playback">
+      <button id="play" type="button">Pause</button>
+      <button type="button" data-speed="1" aria-pressed="false">1×</button>
+      <button type="button" data-speed="4" aria-pressed="true">4×</button>
+      <button type="button" data-speed="12" aria-pressed="false">12×</button>
+      <select id="worm" aria-label="Recording"></select>
+    </div>
+  </header>
+
+  <div class="stage">
+    <div class="field" aria-label="The worm, drawn from its recorded body posture">
+      <canvas id="scope"></canvas>
+      <div class="hud"><span id="clock">0:00</span><span class="state" id="state">forward</span></div>
+      <div class="scalebar"><i id="bar" style="width:60px"></i><span>0.25 mm</span></div>
+      <div class="key-legend"><span><b style="color:var(--risk)">orange glow</b> predicted risk</span><span><b style="color:var(--reversal)">violet</b> reversing</span><span>dots: the head's path</span></div>
+    </div>
+
+    <section class="panel" aria-label="Model readout">
+      <div class="label">Reversal risk, next 5 s</div>
+      <div class="risk"><b id="risk">–</b><span id="riskNote">from brain + body</span></div>
+      <div class="meter" aria-hidden="true"><i id="meter"></i><u id="thr"></u></div>
+      <div class="alarm" id="alarm">Watching</div>
+      <div class="controls" role="group" aria-label="Model">
+        <button type="button" data-model="brain+body" aria-pressed="true">Brain + body</button>
+        <button type="button" data-model="body" aria-pressed="false">Body only</button>
+      </div>
+      <div class="label">Last 40 seconds</div>
+      <canvas class="spark" id="spark" aria-label="Risk over the last 40 seconds, with reversals in violet"></canvas>
+      <div class="label">Neuron activity (46 named classes)</div>
+      <div class="neurons" id="neurons"></div>
+      <p class="check" id="check">Checking the live model…</p>
+    </section>
+  </div>
+
+  <footer>
+    <span>Data: Atanas, Kim et al., <a href="https://doi.org/10.1016/j.cell.2023.07.035">Cell 2023</a>. Leave-one-worm-out logistic regression; across 40 unseen worms, adding brain activity raised AUC from 0.61 to 0.68.</span>
+    <a href="https://github.com/xsaiki-design/c-elegans-behavior-prediction">How it works</a>
+  </footer>
+</main>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const KEY = ["AIB", "AVA", "AVE", "RIM", "RME", "AIY", "RIA", "SMD"];
+  const MM_PER_POINT = 0.0385; // spacing of the drawn body points (about 1 mm worm)
+  const VIEW_MM = 1.6; // field of view width
+  let D, worm, n, spf, fsr, risks, thr, t = 0, speed = 4, playing = true, last = 0, modelName = "brain+body";
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const cssVar = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+
+  // --- the model: rebuild the features for frame f, then scale, weight and squash (same as scikit-learn) ---
+  function features(f, name) {
+    const body = [worm.velocity[f], worm.head_angle[f], fsr[f]];
+    if (name === "body") return body;
+    const a = worm.activity[f], b = worm.activity[f - D.change_frames];
+    return [...a, ...a.map((v, i) => v - b[i]), ...body];
+  }
+  function risk(f, name) {
+    if (f < D.change_frames || worm.reversing[f]) return null; // only asked while crawling forward
+    const p = worm.models[name], x = features(f, name);
+    let z = p.intercept;
+    for (let i = 0; i < x.length; i++) z += ((x[i] - p.mean[i]) / p.scale[i]) * p.coef[i];
+    return 1 / (1 + Math.exp(-z));
+  }
+
+  function load(i) {
+    worm = D.worms[i]; n = worm.velocity.length; spf = worm.seconds_per_frame;
+    fsr = new Array(n); let lastRev = 0;
+    for (let f = 0; f < n; f++) { if (worm.reversing[f]) lastRev = f; fsr[f] = f - lastRev; }
+    computeRisks();
+    // self-check: the browser's numbers against the offline analysis
+    let maxDiff = 0, k = 0;
+    worm.reference_risk.forEach((ref, f) => { if (ref !== null) { maxDiff = Math.max(maxDiff, Math.abs(risk(f, "brain+body") - ref)); k++; } });
+    $("check").innerHTML = maxDiff < 0.001
+      ? `Live model check: <b>matches the offline analysis</b> on ${k} frames (largest difference ${maxDiff.toExponential(1)}). This worm's AUC: ${worm.auc.brain_body.toFixed(2)} brain + body vs ${worm.auc.body.toFixed(2)} body only.`
+      : `Live model check: differs from the offline analysis by up to ${maxDiff.toFixed(3)}.`;
+    t = Math.max(D.change_frames, (worm.reversing.indexOf(1) || 0) - 20);
+  }
+  function computeRisks() {
+    risks = Array.from({ length: n }, (_, f) => risk(f, modelName));
+    const s = risks.filter((v) => v !== null).sort((a, b) => a - b);
+    thr = s[Math.floor(0.8 * s.length)]; // alarm on this worm's riskiest 20% of moments, as in the analysis
+    $("thr").style.left = `${thr * 100}%`;
+  }
+
+  // --- drawing ---
+  const scope = $("scope"), sctx = scope.getContext("2d"), spark = $("spark"), kctx = spark.getContext("2d");
+  function fit(c, ctx) {
+    const r = c.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1);
+    if (c.width !== Math.round(r.width * dpr)) { c.width = Math.round(r.width * dpr); c.height = Math.round(r.height * dpr); }
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return [r.width, r.height];
+  }
+  const lerp = (a, b, u) => a + (b - a) * u;
+
+  function headAt(tf) {
+    const f = Math.min(n - 2, Math.floor(tf)), u = tf - f;
+    return [lerp(worm.x_mm[f], worm.x_mm[f + 1], u), -lerp(worm.y_mm[f], worm.y_mm[f + 1], u)]; // screen y points down
+  }
+  function centerline(tf) {
+    const f = Math.min(n - 2, Math.floor(tf)), u = tf - f;
+    const a0 = worm.posture[f], a1 = worm.posture[f + 1];
+    let [x, y] = headAt(tf);
+    const pts = [[x, y]];
+    for (let k = 0; k < a0.length; k++) {
+      const th = lerp(a0[k], a1[k], u);
+      x -= MM_PER_POINT * Math.cos(th); y += MM_PER_POINT * Math.sin(th); // head-first; angle points the way the head faces
+      pts.push([x, y]);
+    }
+    return pts;
+  }
+
+  function drawScope(tf, r) {
+    const [w, h] = fit(scope, sctx), pxmm = w / VIEW_MM;
+    const pts = centerline(tf), mid = pts[Math.floor(pts.length / 2)];
+    const ox = w / 2 - mid[0] * pxmm, oy = h / 2 - mid[1] * pxmm; // camera follows the worm
+    sctx.clearRect(0, 0, w, h);
+    // agar grid, fixed to the ground, so it slides as the worm moves
+    sctx.strokeStyle = cssVar("--grid"); sctx.lineWidth = 1;
+    const g = 0.1 * pxmm;
+    for (let gx = ((ox % g) + g) % g; gx < w; gx += g) { sctx.beginPath(); sctx.moveTo(gx, 0); sctx.lineTo(gx, h); sctx.stroke(); }
+    for (let gy = ((oy % g) + g) % g; gy < h; gy += g) { sctx.beginPath(); sctx.moveTo(0, gy); sctx.lineTo(w, gy); sctx.stroke(); }
+    // head trail, last ~20 s
+    sctx.beginPath();
+    for (let k = Math.max(0, Math.floor(tf) - 33); k <= Math.floor(tf); k++) {
+      const [hx, hy] = headAt(k); const X = ox + hx * pxmm, Y = oy + hy * pxmm;
+      k === Math.max(0, Math.floor(tf) - 33) ? sctx.moveTo(X, Y) : sctx.lineTo(X, Y);
+    }
+    sctx.strokeStyle = cssVar("--muted"); sctx.globalAlpha = 0.35; sctx.setLineDash([2, 4]); sctx.stroke(); sctx.setLineDash([]); sctx.globalAlpha = 1;
+    // body: a tapered stroke; glows with risk, violet while reversing
+    const rev = worm.reversing[Math.floor(tf)];
+    const glow = rev ? cssVar("--reversal") : cssVar("--risk");
+    const strength = rev ? 0.9 : r === null ? 0 : Math.max(0, (r - 0.15) / 0.6);
+    sctx.lineCap = "round"; sctx.lineJoin = "round";
+    for (const [width, color, alpha, blur] of [[0.075, glow, Math.min(1, strength), 18], [0.06, cssVar("--worm"), 1, 0]]) {
+      sctx.shadowColor = color; sctx.shadowBlur = blur; sctx.globalAlpha = alpha;
+      for (let k = 0; k < pts.length - 1; k++) {
+        const taper = k < 3 ? 0.55 + 0.15 * k : 1 - Math.max(0, (k - 12) / 14);
+        sctx.lineWidth = width * pxmm * taper; sctx.strokeStyle = color;
+        sctx.beginPath(); sctx.moveTo(ox + pts[k][0] * pxmm, oy + pts[k][1] * pxmm); sctx.lineTo(ox + pts[k + 1][0] * pxmm, oy + pts[k + 1][1] * pxmm); sctx.stroke();
+      }
+    }
+    sctx.shadowBlur = 0; sctx.globalAlpha = 1;
+    // head marker
+    sctx.fillStyle = cssVar("--bg"); sctx.beginPath(); sctx.arc(ox + pts[0][0] * pxmm, oy + pts[0][1] * pxmm, 0.012 * pxmm, 0, 7); sctx.fill();
+    $("bar").style.width = `${0.25 * pxmm}px`;
+  }
+
+  function drawSpark(tf) {
+    const [w, h] = fit(spark, kctx), win = Math.round(40 / spf), f1 = Math.floor(tf), f0 = Math.max(0, f1 - win);
+    const x = (f) => ((f - (f1 - win)) / win) * w, y = (v) => h - 4 - v * (h - 8);
+    kctx.clearRect(0, 0, w, h);
+    kctx.fillStyle = cssVar("--reversal"); kctx.globalAlpha = 0.28;
+    for (let f = f0; f <= f1; f++) if (worm.reversing[f]) kctx.fillRect(x(f), 0, Math.max(1, w / win + 0.5), h);
+    kctx.globalAlpha = 1;
+    kctx.strokeStyle = cssVar("--ink"); kctx.globalAlpha = 0.35; kctx.setLineDash([3, 3]);
+    kctx.beginPath(); kctx.moveTo(0, y(thr)); kctx.lineTo(w, y(thr)); kctx.stroke(); kctx.setLineDash([]); kctx.globalAlpha = 1;
+    kctx.strokeStyle = cssVar(modelName === "body" ? "--body" : "--risk"); kctx.lineWidth = 2; kctx.beginPath();
+    let pen = false;
+    for (let f = f0; f <= f1; f++) {
+      const v = risks[f];
+      if (v === null) { pen = false; continue; }
+      pen ? kctx.lineTo(x(f), y(v)) : kctx.moveTo(x(f), y(v)); pen = true;
+    }
+    kctx.stroke();
+  }
+
+  let dots = [];
+  function buildNeurons() {
+    const box = $("neurons"); box.replaceChildren();
+    const order = [...KEY.filter((c) => D.classes.includes(c)), ...D.classes.filter((c) => !KEY.includes(c))];
+    dots = order.map((c) => {
+      const d = document.createElement("div"); d.className = "n" + (KEY.includes(c) ? " key" : ""); d.title = c;
+      d.innerHTML = `<i></i>${c}`; box.appendChild(d);
+      return [D.classes.indexOf(c), d.firstChild];
+    });
+  }
+  function drawNeurons(f) {
+    const a = worm.activity[f];
+    for (const [i, el] of dots) el.style.opacity = (0.12 + 0.88 * Math.max(0, Math.min(1, (a[i] + 1) / 4))).toFixed(2);
+  }
+
+  function frame(now) {
+    const dt = last ? Math.min(0.1, (now - last) / 1000) : 0; last = now;
+    if (playing) { t += (dt * speed) / spf; if (t >= n - 2) t = D.change_frames; }
+    const f = Math.floor(t), r = risks[f];
+    drawScope(t, r); drawSpark(t); drawNeurons(f);
+    $("clock").textContent = `${Math.floor(f * spf / 60)}:${String(Math.floor(f * spf % 60)).padStart(2, "0")}`;
+    const rev = !!worm.reversing[f];
+    $("state").textContent = rev ? "reversing" : "forward"; $("state").className = "state" + (rev ? " rev" : "");
+    $("risk").textContent = r === null ? "–" : `${Math.round(r * 100)}%`;
+    $("meter").style.width = `${(r ?? 0) * 100}%`;
+    const on = r !== null && r > thr;
+    $("alarm").textContent = rev ? "Reversing" : on ? "Alarm: reversal likely" : "Watching";
+    $("alarm").className = "alarm" + (on ? " on" : "");
+    if (playing) requestAnimationFrame(frame);
+  }
+  const redraw = () => { if (!playing) { last = 0; requestAnimationFrame(frame); } };
+
+  fetch("showcase.json").then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }).then((d) => {
+    D = d; buildNeurons();
+    d.worms.forEach((w, i) => { const o = document.createElement("option"); o.value = i; o.textContent = `Worm ${i + 1} (${w.uid})`; $("worm").appendChild(o); });
+    load(0);
+    if (reduce) { playing = false; $("play").textContent = "Play"; }
+    requestAnimationFrame(frame);
+    $("worm").addEventListener("change", (e) => { load(+e.target.value); redraw(); });
+    $("play").addEventListener("click", () => { playing = !playing; $("play").textContent = playing ? "Pause" : "Play"; last = 0; requestAnimationFrame(frame); });
+    document.querySelectorAll("[data-speed]").forEach((b) => b.addEventListener("click", () => {
+      speed = +b.dataset.speed; document.querySelectorAll("[data-speed]").forEach((x) => x.setAttribute("aria-pressed", x === b));
+    }));
+    document.querySelectorAll("[data-model]").forEach((b) => b.addEventListener("click", () => {
+      modelName = b.dataset.model; computeRisks();
+      $("riskNote").textContent = modelName === "body" ? "from body only" : "from brain + body";
+      document.querySelectorAll("[data-model]").forEach((x) => x.setAttribute("aria-pressed", x === b)); redraw();
+    }));
+    addEventListener("resize", redraw);
+  }).catch((err) => { $("check").textContent = `Couldn't load the recording (showcase.json): ${err.message}. Reload to try again.`; });
+})();
+</script>
+</body>
+</html>

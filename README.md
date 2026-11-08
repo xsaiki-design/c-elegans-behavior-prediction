@@ -13,6 +13,9 @@ within seconds; the brain's lasts at least 10 s.
 
 ![How far ahead](figures/horizon_curve.png)
 
+**[Live version](https://xsaiki-design.github.io/c-elegans-behavior-prediction/live/)**: the real worm crawling, its
+neurons, and the model running in your browser frame by frame (it checks itself against the offline analysis).
+
 Full write-up: [`docs/writeup.md`](docs/writeup.md) (2–3 pages: method, results, checks, limitations).
 Short Q&A: [`docs/faq.md`](docs/faq.md).
 
@@ -69,6 +72,7 @@ uv run python -m worms.run         # analysis -> results/summary.json
 uv run python -m worms.figures     # figures/ from the results
 uv run python -m worms.demo_data   # held-out predictions for the interactive page -> docs/demo-data.json
 uv run python -m worms.alarms      # alarm analysis -> results/alarms.json
+uv run python -m worms.showcase_data  # 3 typical worms + their held-out models for the live page -> docs/live/
 ```
 
 To view the interactive page locally: `python -m http.server -d docs`, then open http://localhost:8000.
@@ -86,9 +90,23 @@ worms/explore.py    exploratory: a stronger model (boosted trees)
 worms/demo_data.py  exports held-out predictions for the interactive page
 worms/alarms.py     exploratory: reversals caught with equal alarms, by warning time
 docs/index.html     the interactive page (GitHub Pages)
+docs/live/          the live page: animation + the model running in the browser
+worms/showcase_data.py  exports worms and model weights for the live page
 tests/              tests
 docs/               write-up, decisions with references, reading list
 ```
+
+## Put it on a website
+
+The pages are static files, so any site can show them. Once GitHub Pages is on (Settings → Pages → Deploy from branch,
+`main`, `/docs`), embed the live version with:
+
+```html
+<iframe src="https://xsaiki-design.github.io/c-elegans-behavior-prediction/live/" title="Live Worm Forecast"
+        width="100%" height="860" style="border:0" loading="lazy"></iframe>
+```
+
+Or copy `docs/live/` (two files, about 2 MB) into your own site.
 
 ## Next steps
 
