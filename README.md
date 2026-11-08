@@ -14,6 +14,7 @@ within seconds; the brain's lasts at least 10 s.
 ![How far ahead](figures/horizon_curve.png)
 
 Full write-up: [`docs/writeup.md`](docs/writeup.md) (2–3 pages: method, results, checks, limitations).
+Short Q&A: [`docs/faq.md`](docs/faq.md).
 
 ## Key results
 
@@ -57,7 +58,8 @@ Whole-brain calcium imaging of freely moving *C. elegans* from
 
 ## Run it
 
-Needs [uv](https://docs.astral.sh/uv/). About 5 minutes on a laptop.
+Needs [uv](https://docs.astral.sh/uv/). About 5 minutes on a laptop. Checked on 2026-11-08: a fresh clone, download and run reproduced
+`results/summary.json` exactly.
 
 ```bash
 uv sync                            # install the exact package versions
@@ -87,6 +89,11 @@ docs/index.html     the interactive page (GitHub Pages)
 tests/              tests
 docs/               write-up, decisions with references, reading list
 ```
+
+## Next steps
+
+Test whether prediction survives the heat stimulus (a change of state); repeat on a second dataset; try a sequence
+model as a pre-registered follow-up.
 
 ## Limitations
 
