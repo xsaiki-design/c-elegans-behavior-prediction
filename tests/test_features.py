@@ -62,3 +62,12 @@ def test_class_activity_can_scale_using_only_early_frames():
 
     # mean and spread from frames 0-1 only (1.5 and 0.5): later frames don't affect the scaling
     assert x[:, 0].tolist() == [-1.0, 1.0, 3.0]
+
+
+from worms.demo_data import runs
+
+
+def test_runs_gives_start_and_end_of_each_reversal():
+    #                 frame: 0  1  2  3  4  5
+    assert runs(np.array([1, 1, 0, 0, 1, 0], bool)) == [[0, 2], [4, 5]]
+    assert runs(np.array([0, 0, 1], bool)) == [[2, 3]]

@@ -75,10 +75,31 @@ visible in the body.
   expected it's easy, which shows the features and labels line up. It isn't the finding.
 - *Stricter scaling:* scaling each neuron with only the first 3 minutes (no information from later frames) gives the same
   answer: AUC 0.68, better in 33 of 40 worms, p < 0.0001.
+- *Time-shift control:* sliding each worm's brain recording at least 2 minutes out of line with its behaviour removes
+  the effect. Brain alone drops to chance (AUC 0.52) and brain + body falls to body-alone level (0.61, better in only
+  16 of 40 worms). The brain's contribution depends on its timing matching behaviour, not on something static about
+  each worm.
 - *Stronger model (exploratory, not pre-planned):* gradient-boosted trees reach 0.70 with brain + body vs 0.65 with
   body alone, better in 33 of 40 worms (`worms/explore.py`). The finding doesn't depend on the simple model.
 - *Label alignment:* AVA correlates with reversing (+0.36) and the forward neurons AVB and RIB against it (−0.50, −0.60);
   shifting labels by one column removes this (−0.06).
+
+## As an alarm: early warning vs last-second detection
+
+*Exploratory, added after the headline results (`worms/alarms.py`).* AUC scores every moment. A practical question is
+different: if each model raises the same number of alarms, how many reversals does it warn of? Each model alarms on its
+own riskiest 20 % of a worm's moments (other budgets in `results/alarms.json` show the same pattern):
+
+| Warning required before the reversal | Body only catches | Brain + body catches | Brain + body catches more in |
+|---|---|---|---|
+| any (≥ 0.6 s) | **86 %** | 71 % | 4 of 40 worms (fewer in 31) |
+| ≥ 1.8 s | 42 % | **46 %** | 23 of 40 (fewer in 13) |
+| ≥ 3 s | 31 % | **36 %** | 27 of 40 (fewer in 11) |
+
+The body is the better last-second detector: the worm slows down just before it reverses, and speed shows that. Once
+real advance warning is required, the brain model catches more. This is the same story as the "how far ahead" curve,
+told as an alarm, and it is the honest answer to "is the brain model better?": for early warning, yes; for
+last-moment detection, no. The interactive page lets you change both settings.
 
 ## Limitations
 
