@@ -1,5 +1,9 @@
 # Predicting C. elegans reversals from whole-brain activity
 
+[![tests](https://github.com/xsaiki-design/c-elegans-behavior-prediction/actions/workflows/tests.yml/badge.svg)](https://github.com/xsaiki-design/c-elegans-behavior-prediction/actions/workflows/tests.yml)
+**[Try the interactive page](https://xsaiki-design.github.io/c-elegans-behavior-prediction/)**: pick an unseen worm,
+watch the model's risk rise before real reversals, and set your own alarm.
+
 **Question:** while a worm crawls forward, can its brain activity tell us it is about to reverse, beyond what its body
 already shows, in a worm the model has never seen?
 
@@ -19,8 +23,12 @@ Full write-up: [`docs/writeup.md`](docs/writeup.md) (2–3 pages: method, result
 | Brain only (46 named neuron classes) | 0.64 |
 | **Brain + body** | **0.68** (better than body in 32/40 worms, p = 0.0001) |
 
-- **Checks:** stricter scaling gives the same result (0.68, 33/40). Decoding the *current* behaviour is easy (0.89),
+- **Checks:** sliding the brain recording out of sync with behaviour removes the effect (brain alone 0.52, brain + body
+  back to 0.61). Stricter scaling gives the same result (0.68, 33/40). Decoding the *current* behaviour is easy (0.89),
   which confirms the pipeline lines up.
+- **As an alarm** (same number of alarms for both models): the body is the better *last-second* detector, because the
+  worm slows down just before it reverses. With at least 3 s of warning required, the brain model catches more reversals
+  in 27 of 40 worms. [Table](docs/writeup.md#as-an-alarm-early-warning-vs-last-second-detection)
 - **Which neurons:** AIB rising is the clearest build-up signal. AVA/AVE/RIM look *lower* before reversals, but that
   turns out to be leftover activity from the previous reversal. [Details](docs/writeup.md#results)
 - **A stronger model agrees** (exploratory): boosted trees 0.70 vs 0.65, better in 33/40 worms.
@@ -57,7 +65,11 @@ uv run python -m worms.download    # fetch and checksum the data (~570 MB) into 
 uv run pytest                      # tests
 uv run python -m worms.run         # analysis -> results/summary.json
 uv run python -m worms.figures     # figures/ from the results
+uv run python -m worms.demo_data   # held-out predictions for the interactive page -> docs/demo-data.json
+uv run python -m worms.alarms      # alarm analysis -> results/alarms.json
 ```
+
+To view the interactive page locally: `python -m http.server -d docs`, then open http://localhost:8000.
 
 ## Layout
 
@@ -68,7 +80,10 @@ worms/features.py   prediction target, neuron-class features, body-only baseline
 worms/evaluate.py   leave-one-worm-out scoring
 worms/run.py        the pre-set analysis; settings mirror docs/decisions
 worms/figures.py    README figures
-worms/explore.py    exploratory extras, outside the pre-set plan
+worms/explore.py    exploratory: a stronger model (boosted trees)
+worms/demo_data.py  exports held-out predictions for the interactive page
+worms/alarms.py     exploratory: reversals caught with equal alarms, by warning time
+docs/index.html     the interactive page (GitHub Pages)
 tests/              tests
 docs/               write-up, decisions with references, reading list
 ```

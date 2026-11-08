@@ -7,9 +7,9 @@ from pathlib import Path
 import numpy as np
 from scipy.stats import spearmanr, wilcoxon
 
-from worms.data import load_worm
 from sklearn.metrics import roc_auc_score
 
+from worms.data import load_worm
 from worms.evaluate import leave_one_worm_out
 from worms.features import class_activity, frames_since_reversal, reversal_soon, with_change
 
@@ -56,19 +56,30 @@ def before_heat(worm, horizon: int) -> np.ndarray:
     return keep
 
 
-def samples(worm, classes, horizon, scale_frames=None):
-    """Feature sets for one worm, on its usable frames only: body, brain, and both."""
+def frames(worm, classes, horizon, scale_frames=None, brain_shift=0):
+    """Every frame of one worm: feature sets (body, brain, both), labels, and which frames are usable samples.
+
+    brain_shift: slide the brain recording this many frames out of line with behaviour (time-shift control).
+    """
     usable, soon = reversal_soon(worm.reversing, horizon)
     usable &= before_heat(worm, horizon)
     body = np.c_[worm.velocity, worm.head_angle, frames_since_reversal(worm.reversing)]
-    brain = with_change(class_activity(worm, classes, scale_frames), CHANGE_FRAMES)
+    activity = np.roll(class_activity(worm, classes, scale_frames), brain_shift, axis=0)
+    brain = with_change(activity, CHANGE_FRAMES)
     usable &= ~np.isnan(brain).any(axis=1)
     sets = {"body": body, "brain": brain, "brain+body": np.hstack([brain, body])}
+    return sets, soon, usable
+
+
+def samples(worm, classes, horizon, scale_frames=None, brain_shift=0):
+    """Feature sets for one worm, on its usable frames only."""
+    sets, soon, usable = frames(worm, classes, horizon, scale_frames, brain_shift)
     return {name: (x[usable], soon[usable]) for name, x in sets.items()}
 
 
-def score(worms, classes, horizon, scale_frames=None):
-    per_worm = [samples(w, classes, horizon, scale_frames) for w in worms.values()]
+def score(worms, classes, horizon, scale_frames=None, shifts=None):
+    shifts = shifts or {}
+    per_worm = [samples(w, classes, horizon, scale_frames, shifts.get(uid, 0)) for uid, w in worms.items()]
     out = {}
     for name in SETS:
         auc, ap = leave_one_worm_out([s[name] for s in per_worm])
@@ -134,6 +145,10 @@ def main():
     curve = {h: score(worms, classes, h) for h in HORIZONS}
     head = curve[HORIZON]
     strict = score(worms, classes, HORIZON, STRICT_SCALE_FRAMES)
+    # Time-shift control: each worm's brain recording slid by at least 2 min (circularly), so it no longer lines up with behaviour.
+    rng = np.random.default_rng(0)
+    shifts = {uid: int(rng.integers(200, len(w.reversing) - 200)) for uid, w in worms.items()}
+    shifted = score(worms, classes, HORIZON, shifts=shifts)
     summary = {
         "worms": list(worms),
         "classes": classes,
@@ -142,6 +157,7 @@ def main():
         "headline_test": paired_test(head["body"]["auc"], head["brain+body"]["auc"]),
         "brain_alone_vs_body": paired_test(head["body"]["auc"], head["brain"]["auc"]),
         "strict_scaling": {**strict, "test": paired_test(strict["body"]["auc"], strict["brain+body"]["auc"])},
+        "shift_control": {**shifted, "test": paired_test(shifted["body"]["auc"], shifted["brain+body"]["auc"])},
         "decoding_check_auc": decoding_check(worms, classes),
         "neuron_scores": neuron_scores(worms, classes),
         "side_checks": side_checks(worms, classes),
@@ -158,6 +174,8 @@ def main():
     print("brain alone vs body:", summary["brain_alone_vs_body"])
     print("strict scaling, brain+body vs body:", summary["strict_scaling"]["test"],
           f"(median AUC {med(strict['brain+body']['auc']):.3f})")
+    print("time-shift control, brain+body vs body:", summary["shift_control"]["test"],
+          f"(median AUC brain {med(shifted['brain']['auc']):.3f}, brain+body {med(shifted['brain+body']['auc']):.3f})")
     print(f"decoding check (reversing now): median AUC {med(summary['decoding_check_auc']):.3f}")
     print("side checks:", {k: round(v, 3) for k, v in summary["side_checks"].items()})
     print("top single signals:", [(k, round(v, 3)) for k, v in list(summary["neuron_scores"].items())[:10]])

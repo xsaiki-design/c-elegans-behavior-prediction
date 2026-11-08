@@ -11,6 +11,13 @@ def model():
     return make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000))
 
 
+def fit_without(worms: list, i: int, make=model):
+    """A model trained on every worm except worm i."""
+    x = np.vstack([x for j, (x, _) in enumerate(worms) if j != i])
+    y = np.concatenate([y for j, (_, y) in enumerate(worms) if j != i])
+    return make().fit(x, y)
+
+
 def leave_one_worm_out(worms: list, make=model):
     """worms: list of (features, labels). Returns ROC-AUC and average precision per worm, each from a model trained on all the others."""
     aucs, aps = [], []
@@ -19,9 +26,7 @@ def leave_one_worm_out(worms: list, make=model):
             aucs.append(np.nan)
             aps.append(np.nan)
             continue
-        x_train = np.vstack([x for j, (x, _) in enumerate(worms) if j != i])
-        y_train = np.concatenate([y for j, (_, y) in enumerate(worms) if j != i])
-        p = make().fit(x_train, y_train).predict_proba(x_test)[:, 1]
+        p = fit_without(worms, i, make).predict_proba(x_test)[:, 1]
         aucs.append(roc_auc_score(y_test, p))
         aps.append(average_precision_score(y_test, p))
     return np.array(aucs), np.array(aps)
