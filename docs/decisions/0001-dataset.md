@@ -43,8 +43,14 @@ What is in it (checked by loading every file, not taken from the paper):
 - The neuron-label file was written in Julia, which counts from 1. Index `"5"` means trace column 4 in Python.
   `tests/test_data.py` guards this, and a check on real data confirmed it: AVA (backward command neuron) correlates
   +0.36 with reversing, AVB/RIB (forward neurons) −0.50/−0.60, and shifting labels by one column drops AVA to −0.06.
-- Each recording has two halves (`gcamp/idx_splits`). Some recordings in the paper got a heat stimulus partway;
-  **open question:** which files, and whether to drop or mark them.
+- **Heat stimulus:** 30 of 68 recordings got a heat stimulus partway through (around frame 390–800), including 18 of
+  the 40 named-neuron worms. The file records when (`timing/stim_begin_confocal`), and the official dataset list
+  ([CSV](https://raw.githubusercontent.com/flavell-lab/WormWideWeb-data/main/activity/raw/atanas_kim_2023.csv), linked
+  from the Zenodo record) agrees for every file. Heat changes behaviour for minutes, so how to treat these is a decision (0002).
+- **GFP controls:** 3 recordings (2022-01-07-03, 2022-03-16-01, 2022-03-16-02) use GFP, which glows but doesn't track
+  activity. None has named neurons, so they don't enter the main analysis.
+- Older recordings (up to 2022-01-09) were recorded in two 800-frame halves (`gcamp/idx_splits`); newer ones in one piece.
+  Lengths vary from 1,544 to 1,615 frames.
 - `trace_array` is the authors' processed signal (normalised fluorescence). How they normalised it matters for
   comparing worms (see 0003). Read the paper's STAR Methods section on trace processing.
 
