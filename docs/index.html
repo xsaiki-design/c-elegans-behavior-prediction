@@ -197,29 +197,6 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; }
   const pooled = {}; // this worm's risk scores, sorted, per model: alarm levels come from these
   const shown = new Set(["AIB", "AVA"]);
 
-  // reversal starts within t+1..t+H, for every frame
-  function labels(w) {
-    const soon = new Uint8Array(w.velocity.length);
-    for (const [s] of w.reversals) for (let t = Math.max(0, s - H); t < s; t++) soon[t] = 1;
-    return soon;
-  }
-
-  // ROC-AUC with tied ranks averaged (Mann-Whitney U)
-  function auc(scores, y) {
-    const idx = [];
-    for (let i = 0; i < scores.length; i++) if (scores[i] !== null) idx.push(i);
-    idx.sort((a, b) => scores[a] - scores[b]);
-    let rankSumPos = 0, nPos = 0, i = 0;
-    while (i < idx.length) {
-      let j = i;
-      while (j + 1 < idx.length && scores[idx[j + 1]] === scores[idx[i]]) j++;
-      const r = (i + j) / 2 + 1;
-      for (let k = i; k <= j; k++) if (y[idx[k]]) { rankSumPos += r; nPos++; }
-      i = j + 1;
-    }
-    const nNeg = idx.length - nPos;
-    return nPos && nNeg ? (rankSumPos - nPos * (nPos + 1) / 2) / (nPos * nNeg) : null;
-  }
 
   function alarmStats(risk, w, thr, minLead) {
     let caught = 0, total = 0;
@@ -338,12 +315,11 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; }
 
   function drawScore() {
     $("thrv").textContent = `${$("thr").value}%`;
-    const y = labels(worm);
     const rows = [
       ["Brain + body", "var(--brainbody)", "risk_brain_body"],
       ["Body only", "var(--body)", "risk_body"],
     ].map(([name, color, model]) => {
-      const risk = worm[model], s = alarmStats(risk, worm, threshold(model), +$("lead").value), a = auc(risk, y);
+      const risk = worm[model], s = alarmStats(risk, worm, threshold(model), +$("lead").value), a = worm.auc[model === "risk_body" ? "body" : "brain_body"];
       return `<div class="card"><h3><i style="background:${color}"></i>${name}</h3><dl>
         <dt>Reversals warned of in time</dt><dd>${s.caught} of ${s.total}</dd>
         <dt>Median warning before the reversal</dt><dd>${s.lead === null ? "–" : s.lead.toFixed(1) + " s"}</dd>
@@ -397,8 +373,8 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; }
 
   fetch("demo-data.json").then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }).then((d) => {
     data = d; H = d.horizon_frames;
-    // per-worm AUCs, computed here from the exported predictions (they should match the analysis)
-    const per = d.worms.map((w) => { const y = labels(w); return { both: auc(w.risk_brain_body, y), body: auc(w.risk_body, y) }; });
+    // per-worm AUCs come from the analysis (results/summary.json), so this page shows exactly the README's numbers
+    const per = d.worms.map((w) => ({ both: w.auc.brain_body, body: w.auc.body }));
     const gains = per.map((p) => p.both - p.body);
     const improved = gains.filter((g) => g > 0).length;
     $("stats").innerHTML = `

@@ -27,6 +27,10 @@ def main():
     classes = common_classes(worms)
     uids = list(worms)
     per_worm = [samples(w, classes, HORIZON) for w in worms.values()]
+    # per-worm AUCs from the analysis itself, so the page can't drift from the README
+    summary = json.loads(Path("results/summary.json").read_text())
+    assert summary["worms"] == uids, "results/summary.json is from a different set of worms: re-run worms.run"
+    head = summary["curve"][str(HORIZON)]
     out = []
     for i, uid in enumerate(uids):
         w = worms[uid]
@@ -40,6 +44,7 @@ def main():
         brain = sets["brain"]
         out.append({
             "uid": uid,
+            "auc": {"body": head["body"]["auc"][i], "brain_body": head["brain+body"]["auc"][i]},
             "seconds_per_frame": round(float(np.median(np.diff(w.time_s))), 4),
             "heat_frame": w.heat_frame,
             "reversals": runs(w.reversing),
