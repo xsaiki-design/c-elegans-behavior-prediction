@@ -1,12 +1,15 @@
 # 0004 — Evaluation: leave one worm out, beat a behaviour-only baseline
 
-**Status:** proposed — review before the analysis is built
+**Status:** decided (2026-11-08), before any results were looked at
 
 ## Decision
 
 - **Test on unseen worms.** Train on 39 labelled worms, test on the 40th, repeat for every worm
   (scikit-learn `LeaveOneGroupOut`, group = worm). Report the spread over 40 worms, not one pooled number.
-- **Model:** logistic regression with regularisation. Simple, fast, and its weights say which neurons it relies on.
+- **Model:** logistic regression with scikit-learn's default regularisation, for the headline. Simple, and its weights
+  say which neurons it relies on. Anything fancier is labelled exploratory.
+- **Headline comparison: brain + body vs body alone.** The question is whether the brain adds anything beyond what the
+  body already shows. Brain alone is reported too.
 - **Metric:** ROC-AUC per held-out worm (0.5 = guessing, 1.0 = perfect), plus average precision, because
   "reversal starts soon" is the rarer class.
 - **Baselines the brain model must beat:**

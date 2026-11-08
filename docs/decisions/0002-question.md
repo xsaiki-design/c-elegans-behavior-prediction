@@ -1,6 +1,6 @@
 # 0002 — The question: can brain activity predict a reversal before it starts?
 
-**Status:** proposed — review before the analysis is built
+**Status:** decided (2026-11-08), before any results were looked at
 
 ## Decision
 
@@ -39,10 +39,16 @@ Repeat the prediction with different horizons (1, 2, 4, 8, 16 frames ahead) and 
 - **"Same neurons, same job across animals?":** good, but becomes part of this project anyway when we look at which
   neurons the model relies on.
 
-## Open choices (decide before running, not after)
+## Settled details
 
-- Horizon for the headline number: 8 frames (≈ 5 s) proposed.
-- Whether to also skip a short gap after each reversal ends (the worm often turns, then goes forward).
+- **Headline horizon: 8 frames (≈ 5 s).** The curve uses 2, 4, 8, 12, 16 frames; the headline number is fixed here so it
+  can't be picked afterwards.
+- **No gap after reversals.** Reversals come in runs; "time since last reversal" is in the body baseline, so skipping
+  frames would only hide the pattern the baseline should get credit for.
+- **Heat-stimulated recordings (18 of 40 worms): only frames before the heat are used.** Keeps all 40 animals; heat
+  changes behaviour for minutes and would mix two situations. Whether prediction holds after heat is a possible extension.
+- **Decoding ("is it reversing now?") is reported only as a pipeline sanity check**, never as the finding.
+- **A negative result is published as-is.**
 
 ## Interview questions you might get
 

@@ -1,6 +1,6 @@
 # 0003 — Features: named neuron classes, scaled per worm
 
-**Status:** proposed — review before the analysis is built
+**Status:** decided (2026-11-08), before any results were looked at
 
 ## Decision
 
@@ -21,12 +21,19 @@
   Without it the model can learn "worm 7 is brighter", which doesn't transfer.
 - **History** matters because a decision builds up: a rising signal says more than its current level.
 
+## Settled details
+
+- Threshold 25 worms gives 46 neuron classes (92 features with the "change" columns). RIM (28 worms) is in, AVB (11) and
+  RIB (19) are out.
+- "Change" = difference from 5 frames (≈ 3 s) earlier.
+
 ## The honest caveat
 
 Z-scoring a held-out worm uses that worm's whole recording to compute its mean, so a little information from later
 frames leaks into earlier ones. It doesn't use any labels, and the model never sees the test worm during training, so
-the effect is small. A stricter version scales using only the first few minutes. **Mention this in the write-up**; it
-is exactly the kind of detail an interviewer probes.
+the effect is small. A stricter version scales using only the first few minutes. **Decided:** the main result uses whole-recording
+scaling; the strict version (first 3 minutes only) is run once as a robustness check and reported. It is
+exactly the kind of detail an interviewer probes.
 
 ## Alternatives considered
 
