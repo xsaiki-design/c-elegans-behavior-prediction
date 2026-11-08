@@ -43,8 +43,9 @@ Repeat the prediction with different horizons (1, 2, 4, 8, 16 frames ahead) and 
 
 - **Headline horizon: 8 frames (≈ 5 s).** The curve uses 2, 4, 8, 12, 16 frames; the headline number is fixed here so it
   can't be picked afterwards.
-- **No gap after reversals.** Reversals come in runs; "time since last reversal" is in the body baseline, so skipping
-  frames would only hide the pattern the baseline should get credit for.
+- **No gap after reversals.** Reversal timing isn't random; "time since last reversal" is in the body baseline, so skipping
+  frames would only hide the pattern the baseline should get credit for. *(Results note: in this data a reversal is
+  less likely right after another, a cool-down rather than bursts; the original wording said "runs".)*
 - **Heat-stimulated recordings (18 of 40 worms): only frames before the heat are used.** Keeps all 40 animals; heat
   changes behaviour for minutes and would mix two situations. Whether prediction holds after heat is a possible extension.
 - **Decoding ("is it reversing now?") is reported only as a pipeline sanity check**, never as the finding.

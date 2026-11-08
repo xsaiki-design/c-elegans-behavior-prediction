@@ -5,7 +5,7 @@
 ## Decision
 
 - **Test on unseen worms.** Train on 39 labelled worms, test on the 40th, repeat for every worm
-  (scikit-learn `LeaveOneGroupOut`, group = worm). Report the spread over 40 worms, not one pooled number.
+  (the same as scikit-learn's `LeaveOneGroupOut` with group = worm). Report the spread over 40 worms, not one pooled number.
 - **Model:** logistic regression with scikit-learn's default regularisation, for the headline. Simple, and its weights
   say which neurons it relies on. Anything fancier is labelled exploratory.
 - **Headline comparison: brain + body vs body alone.** The question is whether the brain adds anything beyond what the
@@ -14,8 +14,9 @@
   "reversal starts soon" is the rarer class.
 - **Baselines the brain model must beat:**
   1. *Chance:* AUC 0.5.
-  2. *Behaviour only:* the same model given only what the body shows — current velocity, head angle, and time since the
-     last reversal. **This is the real bar.** Reversals come in bursts, so timing alone predicts some of them.
+  2. *Behaviour only:* the same model given only what the body shows — current velocity and time since the last
+     reversal. (Head angle was left out: its sign convention differs between recordings, a per-file correction the
+     authors document; not worth the risk for a baseline.) **This is the real bar.** Reversal timing isn't random, so timing alone predicts some of them. *(Results note: it's a cool-down, a reversal is less likely right after another; time since the last one alone scores AUC 0.63.)*
 - **Compare fairly:** for each worm, brain model AUC vs behaviour-only AUC; test the 40 paired differences
   (Wilcoxon signed-rank).
 - **Fix settings in advance.** Horizon, features and model settings are chosen in these documents before looking at
