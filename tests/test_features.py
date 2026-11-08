@@ -53,3 +53,12 @@ def test_frames_since_reversal_counts_from_last_backward_frame():
     reversing = np.array([0, 1, 1, 0, 0, 0], bool)
 
     assert frames_since_reversal(reversing).tolist() == [0, 0, 0, 1, 2, 3]
+
+
+def test_class_activity_can_scale_using_only_early_frames():
+    worm = Worm(np.array([[1.0], [2.0], [3.0]]), None, None, None, labels=None, classes=["AVA"])
+
+    x = class_activity(worm, ["AVA"], scale_frames=2)
+
+    # mean and spread from frames 0-1 only (1.5 and 0.5): later frames don't affect the scaling
+    assert x[:, 0].tolist() == [-1.0, 1.0, 3.0]

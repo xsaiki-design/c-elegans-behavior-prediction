@@ -16,11 +16,15 @@ def reversal_soon(reversing: np.ndarray, horizon: int):
     return usable, ahead > 0
 
 
-def class_activity(worm, classes: list) -> np.ndarray:
-    """(frames, classes): each neuron z-scored within this worm, left/right averaged; a class not found here is 0."""
+def class_activity(worm, classes: list, scale_frames: int | None = None) -> np.ndarray:
+    """(frames, classes): each neuron z-scored within this worm, left/right averaged; a class not found here is 0.
+
+    scale_frames: compute the scaling from only the first N frames (strict check, 0003); default uses the whole recording.
+    """
     x = worm.traces
-    std = x.std(axis=0)
-    z = (x - x.mean(axis=0)) / np.where(std > 0, std, 1)  # shortcut: whole-recording stats, see 0003 caveat
+    ref = x[:scale_frames]
+    std = ref.std(axis=0)
+    z = (x - ref.mean(axis=0)) / np.where(std > 0, std, 1)
     out = np.zeros((len(x), len(classes)))
     for j, c in enumerate(classes):
         cols = [i for i, k in enumerate(worm.classes) if k == c]
