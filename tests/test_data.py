@@ -10,6 +10,7 @@ def make_worm_file(path):
         f["gcamp/trace_array"] = np.array([[0.0, 10, 20, 30]] * 3)
         f["behavior/reversal_vec"] = np.array([0, 1, 1])
         f["behavior/velocity"] = np.array([0.02, -0.03, -0.04])
+        f["behavior/head_angle"] = np.array([0.1, 0.2, -0.1])
         f["timing/timestamp_confocal"] = np.array([100.0, 100.6, 101.2])
 
 
@@ -36,6 +37,7 @@ def test_reversals_and_time(tmp_path):
 
     assert worm.reversing.tolist() == [False, True, True]
     assert worm.velocity.tolist() == [0.02, -0.03, -0.04]
+    assert worm.head_angle.tolist() == [0.1, 0.2, -0.1]
     assert np.allclose(worm.time_s, [0.0, 0.6, 1.2])
     assert worm.labels == [None] * 4
     assert worm.heat_frame is None

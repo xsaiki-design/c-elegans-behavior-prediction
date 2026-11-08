@@ -16,6 +16,7 @@ class Worm:
     labels: list  # one entry per trace column: NeuroPAL name like "AVAL", or None if unidentified
     classes: list  # same, but the neuron class like "AVA" (taken from the file: "AVL" is its own class, not "AV" + L)
     heat_frame: int | None = None  # frame a heat stimulus began, if this recording had one
+    head_angle: np.ndarray | None = None  # (frames,) raw; its sign convention differs by recording (see run.py)
 
 
 def load_worm(path: Path, neuropal: dict | None = None) -> Worm:
@@ -23,6 +24,7 @@ def load_worm(path: Path, neuropal: dict | None = None) -> Worm:
         traces = f["gcamp/trace_array"][:]
         reversing = f["behavior/reversal_vec"][:].astype(bool)
         velocity = f["behavior/velocity"][:]
+        head_angle = f["behavior/head_angle"][:]
         t = f["timing/timestamp_confocal"][:]
         heat = f["timing/stim_begin_confocal"][()] if "timing/stim_begin_confocal" in f else None
 
@@ -32,4 +34,4 @@ def load_worm(path: Path, neuropal: dict | None = None) -> Worm:
         col = int(idx) - 1  # the source files were written in Julia, which counts from 1
         labels[col], classes[col] = info["label"], info.get("neuron_class")
     heat_frame = None if heat is None else int(np.ravel(heat)[0]) - 1  # 1-based in the file, like the labels
-    return Worm(traces, reversing, velocity, t - t[0], labels, classes, heat_frame)
+    return Worm(traces, reversing, velocity, t - t[0], labels, classes, heat_frame, head_angle)

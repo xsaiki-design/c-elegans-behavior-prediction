@@ -4,7 +4,7 @@
 already shows, in a worm the model has never seen?
 
 **Answer: yes, modestly.** Predicting a reversal ~5 s ahead, brain + body signals score a median ROC-AUC of **0.68** in
-held-out worms vs **0.61** for body signals alone, better in **32 of 40** worms (p = 0.0002). The body's warning fades
+held-out worms vs **0.61** for body signals alone, better in **32 of 40** worms (p = 0.0001). The body's warning fades
 within seconds; the brain's lasts at least 10 s.
 
 ![How far ahead](figures/horizon_curve.png)
@@ -15,15 +15,18 @@ Full write-up: [`docs/writeup.md`](docs/writeup.md) (2–3 pages: method, result
 
 | Signals used | Median AUC, 5 s ahead, unseen worms |
 |---|---|
-| Body only (speed, time since last reversal) | 0.61 |
+| Body only (speed, head angle, time since last reversal) | 0.61 |
 | Brain only (46 named neuron classes) | 0.64 |
-| **Brain + body** | **0.68** (better than body in 32/40 worms, p = 0.0002) |
+| **Brain + body** | **0.68** (better than body in 32/40 worms, p = 0.0001) |
 
 - **Checks:** stricter scaling gives the same result (0.68, 33/40). Decoding the *current* behaviour is easy (0.89),
   which confirms the pipeline lines up.
 - **Which neurons:** AIB rising is the clearest build-up signal. AVA/AVE/RIM look *lower* before reversals, but that
   turns out to be leftover activity from the previous reversal. [Details](docs/writeup.md#results)
-- **All choices were fixed before any results** were computed, and are committed in git: [`docs/decisions/`](docs/decisions).
+- **A stronger model agrees** (exploratory): boosted trees 0.70 vs 0.65, better in 33/40 worms.
+- **All choices were fixed before any results** and committed in git: [`docs/decisions/`](docs/decisions). One slip
+  (head angle missing from the body baseline) was caught in review, fixed and re-run; it's
+  [logged](docs/decisions/0004-evaluation.md#correction-log).
 
 <p>
 <img src="figures/per_worm.png" width="45%">

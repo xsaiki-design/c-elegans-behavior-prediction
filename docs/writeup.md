@@ -11,7 +11,7 @@ body already shows, in an animal the model has never seen?
 
 **Yes, modestly.** Predicting whether a reversal starts in the next ~5 s, a model using brain activity plus body signals
 scored a median ROC-AUC of **0.68** in held-out worms, against **0.61** for body signals alone. It did better in
-**32 of 40** worms (median gain +0.06, Wilcoxon signed-rank p = 0.0002). The early warning from the body fades within a
+**32 of 40** worms (median gain +0.06, Wilcoxon signed-rank p = 0.0001). The early warning from the body fades within a
 few seconds; the brain's stays above chance at least 10 s ahead.
 
 ![How far ahead](../figures/horizon_curve.png)
@@ -21,7 +21,7 @@ few seconds; the brain's stays above chance at least 10 s ahead.
 Whole-brain GCaMP imaging of freely moving worms ([Atanas & Kim et al. 2023](https://doi.org/10.1016/j.cell.2023.07.035)),
 processed traces from [Zenodo](https://zenodo.org/records/19388374). 40 recordings have NeuroPAL neuron identities; those
 are the ones used. ~16 min each at ~1.6 frames/s, ~140 neurons per worm. 18 of the 40 received a heat stimulus partway;
-only frames before it are used. Details and caveats: [decision 0001](decisions/0001-dataset.md).
+only frames whose 5-second window ends before it are used. Details and caveats: [decision 0001](decisions/0001-dataset.md).
 
 ## Method
 
@@ -33,22 +33,26 @@ All choices below were written down and committed before any results were comput
   worms).
 - **Brain features:** the 46 neuron classes named in at least 25 of 40 worms, each neuron z-scored within its worm,
   left/right averaged; plus each class's change over the last ~3 s. Classes not found in a worm are set to its average (0).
-- **Body features:** current velocity and time since the last reversal.
+- **Body features:** current velocity, head angle (sign made consistent across recordings using the authors' dataset
+  list) and time since the last reversal.
 - **Model:** logistic regression, scikit-learn defaults.
 - **Test:** leave one worm out: train on 39, score the 40th, for every worm. ROC-AUC and average precision per worm.
 - **Headline comparison:** brain + body vs body alone, paired over worms.
 
 ## Results
 
-| Signals used | Median AUC, 5 s ahead | Notes |
-|---|---|---|
-| Body only | 0.61 | velocity, time since last reversal |
-| Brain only | 0.64 | not significantly better than body alone (25 of 40 worms, p = 0.26) |
-| **Brain + body** | **0.68** | better than body in 32 of 40 worms, p = 0.0002 |
+| Signals used | Median AUC, 5 s ahead | Median average precision | Notes |
+|---|---|---|---|
+| Body only | 0.61 | 0.50 | velocity, head angle, time since last reversal |
+| Brain only | 0.64 | 0.48 | not significantly better than body alone (25 of 40 worms, p = 0.22) |
+| **Brain + body** | **0.68** | **0.53** | AUC better than body in 32 of 40 worms, p = 0.0001 |
+
+Average precision (chance ≈ 0.34, the share of "reversal coming" frames) shows a smaller gain: better in 26 of 40 worms.
+The brain helps most with *ranking* moments by risk, less with picking out the highest-risk moments cleanly.
 
 ![Per worm](../figures/per_worm.png)
 
-**How far ahead (figure above).** At 1 s ahead the body is already a strong predictor (AUC 0.82): the worm slows
+**How far ahead (figure above).** At 1 s ahead the body is already a strong predictor (AUC 0.81): the worm slows
 before it reverses (slowing alone scores 0.82). Its value drops fast, to near chance (0.52) at ~10 s. Brain-only accuracy falls much less, from
 0.70 to 0.63. Brain information about an upcoming reversal seems to build up over several seconds, ahead of anything
 visible in the body.
@@ -57,7 +61,7 @@ visible in the body.
 
 - **AIB rising** (AUC 0.57) is the clearest build-up signal: AIB is an interneuron known to promote reversals
   ([Gray et al. 2005](https://doi.org/10.1073/pnas.0409009101)), and its activity climbs in the seconds before a reversal.
-  RME, I3, RID and AUA are also slightly higher (0.56–0.58).
+  RME, I3 and AUA are also slightly higher (0.57–0.58).
 - **AVA, AVE and RIM are *lower* before a reversal** (0.42), which looks backwards for "reversal neurons". The data
   explains it: their level mostly tracks time since the *previous* reversal (rank correlation −0.67 for AVA). They're
   still winding down after one, and another reversal is unlikely that soon. Away from recent reversals (≥ 9 s), AVA
@@ -71,6 +75,8 @@ visible in the body.
   expected it's easy, which shows the features and labels line up. It isn't the finding.
 - *Stricter scaling:* scaling each neuron with only the first 3 minutes (no information from later frames) gives the same
   answer: AUC 0.68, better in 33 of 40 worms, p < 0.0001.
+- *Stronger model (exploratory, not pre-planned):* gradient-boosted trees reach 0.70 with brain + body vs 0.65 with
+  body alone, better in 33 of 40 worms (`worms/explore.py`). The finding doesn't depend on the simple model.
 - *Label alignment:* AVA correlates with reversing (+0.36) and the forward neurons AVB and RIB against it (−0.50, −0.60);
   shifting labels by one column removes this (−0.06).
 
@@ -86,7 +92,13 @@ visible in the body.
 - **Single-signal scores show association, not cause.** A neuron that rises before reversals may be reacting to the
   same inputs rather than driving the decision.
 - **Heat-stimulated worms contribute fewer frames** (before the stimulus only), so they weigh less.
-- **One simple model.** Nonlinear models might do better; that would be exploratory and is not tried here.
+- **Labels come from the authors' pipeline.** Their reversal labels contain some 1–2-frame forward gaps inside reversals,
+  which count here as new reversal starts (118 across all worms). These are easy for the body baseline, so if anything
+  they shrink the brain's advantage.
+- **One pre-planned model.** A stronger model was tried only as an exploratory extra (above).
+- **One correction after the first results run:** head angle had been left out of the body baseline, against the plan.
+  It was restored and everything re-run; the numbers here use the planned baseline
+  ([correction log](decisions/0004-evaluation.md#correction-log)).
 
 ## How this relates to the dataset paper
 
@@ -101,4 +113,5 @@ paper's summary; check its decoding analyses before claiming that nobody has don
 ## How this was built
 
 Code written with help from Claude Code (an AI coding assistant). Every design decision, with its reasoning and the
-alternatives, is in [`docs/decisions/`](decisions); the plan was committed to git before results were computed.
+alternatives, is in [`docs/decisions/`](decisions); the plan was committed to git before results were computed, and
+the one deviation is logged.

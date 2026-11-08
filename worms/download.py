@@ -12,6 +12,9 @@ FILES = {
     "neuropal_label.json.bz2": None,  # small; checksum not published, file pinned by the record version
 }
 DATA = Path("data")
+# Official per-recording list (heat events, head-angle sign), linked from the Zenodo record
+DATASET_LIST = "https://raw.githubusercontent.com/flavell-lab/WormWideWeb-data/main/activity/raw/atanas_kim_2023.csv"
+DATASET_LIST_SHA = "2376e4d5a6a45e35393689ea573f64da0cd5d8e0423ab5a75c1649b0949ecbba"
 
 
 def sha256(path: Path) -> str:
@@ -31,6 +34,12 @@ def main():
             urllib.request.urlretrieve(f"{RECORD}/{name}/content", dest)
         if expected and sha256(dest) != expected:
             raise SystemExit(f"{name}: checksum mismatch, delete it and re-run")
+
+    csv = DATA / "atanas_kim_2023.csv"
+    if not csv.exists():
+        urllib.request.urlretrieve(DATASET_LIST, csv)
+    if sha256(csv) != DATASET_LIST_SHA:
+        raise SystemExit(f"{csv.name}: checksum mismatch (the list may have been updated upstream)")
 
     with tarfile.open(DATA / "processed_h5.tar.bz2") as tar:
         tar.extractall(DATA / "atanas2023", filter="data")  # "data" filter blocks unsafe paths in the archive

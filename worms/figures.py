@@ -53,7 +53,7 @@ def top_neurons(s, n=12):
     items = list(s["neuron_scores"].items())[:n][::-1]
     fig, ax = plt.subplots(figsize=(5.5, 4.5))
     vals = np.array([v for _, v in items])
-    ax.barh([k for k, _ in items], vals - 0.5, left=0.5, color=np.where(vals > 0.5, COLORS["brain+body"], COLORS["brain"]))
+    ax.barh([k for k, _ in items], vals - 0.5, left=0.5, color=np.where(vals > 0.5, "#CC79A7", "#009E73"))  # own colours: not the model series
     ax.axvline(0.5, color="black", lw=0.8)
     ax.set(xlabel="AUC of this signal alone (median over worms)\n< 0.5: lower before a reversal   > 0.5: higher",
            title="Signals that differ most before a reversal (5 s ahead)")
