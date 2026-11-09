@@ -31,6 +31,7 @@
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html, body { background: var(--bg); }
 body {
   margin: 0; color: var(--ink); font: 14px/1.5 var(--text);
@@ -74,6 +75,20 @@ button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-c
 button:focus-visible, select:focus-visible { outline: 2px solid var(--neuron); outline-offset: 2px; }
 .check { font: 12px var(--data); color: var(--muted); }
 .check b { color: var(--ok); font-weight: 500; }
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); }
+.tabs button { border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: none; padding: 6px 10px; color: var(--muted); }
+.tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--risk); }
+.tabpanel { display: grid; gap: 12px; align-content: start; }
+canvas.duel { width: 100%; height: 150px; display: block; }
+.board { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.side { border: 1px solid var(--line); border-radius: 6px; padding: 10px; display: grid; gap: 6px; min-width: 0; }
+.side h3 { margin: 0; font: 600 14px var(--display); display: flex; align-items: center; gap: 6px; }
+.side h3 i { width: 12px; height: 3px; border-radius: 2px; display: inline-block; }
+.side dl { margin: 0; display: grid; grid-template-columns: 1fr auto; gap: 3px 8px; font-size: 12.5px; }
+.side dt { color: var(--muted); }
+.side dd { margin: 0; font: 500 13px var(--data); font-variant-numeric: tabular-nums; text-align: right; }
+.side.lead { border-color: var(--risk); }
+.note { color: var(--muted); font-size: 12.5px; margin: 0; }
 footer { color: var(--muted); font-size: 12.5px; display: flex; flex-wrap: wrap; gap: 4px 16px; justify-content: space-between; }
 footer a { color: var(--neuron); }
 </style>
@@ -105,6 +120,11 @@ footer a { color: var(--neuron); }
     </div>
 
     <section class="panel" aria-label="Model readout">
+      <div class="tabs" role="tablist" aria-label="View">
+        <button type="button" role="tab" id="tab-live" aria-controls="panel-live" aria-selected="true">Live</button>
+        <button type="button" role="tab" id="tab-compare" aria-controls="panel-compare" aria-selected="false" tabindex="-1">Compare models</button>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="panel-live" aria-labelledby="tab-live">
       <div class="label">Reversal risk, next 5 s</div>
       <div class="risk"><b id="risk">–</b><span id="riskNote">from brain + body</span></div>
       <div class="meter" aria-hidden="true"><i id="meter"></i><u id="thr"></u></div>
@@ -117,6 +137,22 @@ footer a { color: var(--neuron); }
       <canvas class="spark" id="spark" aria-label="Risk over the last 40 seconds, with reversals in violet"></canvas>
       <div class="label">Neuron activity (46 named classes)</div>
       <div class="neurons" id="neurons"></div>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="panel-compare" aria-labelledby="tab-compare" hidden>
+        <p class="note">Both models watch the same real worm. Each raises the same number of alarms (its riskiest 20% of
+          moments). The scoreboards fill in as the recording plays and the worm actually reverses, or doesn't.</p>
+        <label class="label" for="lead">Counts as warned if the alarm came</label>
+        <select id="lead">
+          <option value="1">any time in the 5 s before</option>
+          <option value="3" selected>at least 1.8 s before</option>
+          <option value="5">at least 3 s before</option>
+        </select>
+        <canvas class="duel" id="duel" aria-label="Both models' risk over the last 60 seconds; ticks show each reversal warned of or missed"></canvas>
+        <div class="board" id="board"></div>
+        <p class="note">Ticks above each reversal: filled = warned of in time, hollow = missed. Top row brain + body, bottom row body only.
+          With last-second warnings allowed, the body model usually wins (the worm visibly slows first); ask for more
+          warning and the brain model usually pulls ahead.</p>
+      </div>
       <p class="check" id="check">Checking the live model…</p>
     </section>
   </div>
@@ -133,7 +169,7 @@ footer a { color: var(--neuron); }
   const KEY = ["AIB", "AVA", "AVE", "RIM", "RME", "AIY", "RIA", "SMD"];
   const MM_PER_POINT = 0.0385; // spacing of the drawn body points (about 1 mm worm)
   const VIEW_MM = 1.6; // field of view width
-  let D, worm, n, spf, fsr, risks, thr, t = 0, speed = 4, playing = true, last = 0, modelName = "brain+body";
+  let D, worm, n, spf, fsr, starts, risksBy = {}, thrBy = {}, risks, thr, outcomes, t = 0, speed = 4, playing = true, last = 0, modelName = "brain+body";
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const cssVar = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 
@@ -156,6 +192,8 @@ footer a { color: var(--neuron); }
     worm = D.worms[i]; n = worm.velocity.length; spf = worm.seconds_per_frame;
     fsr = new Array(n); let lastRev = 0;
     for (let f = 0; f < n; f++) { if (worm.reversing[f]) lastRev = f; fsr[f] = f - lastRev; }
+    starts = [];
+    for (let f = 1; f < n; f++) if (worm.reversing[f] && !worm.reversing[f - 1]) starts.push(f);
     computeRisks();
     // self-check: the browser's numbers against the offline analysis
     let maxDiff = 0, k = 0;
@@ -166,10 +204,43 @@ footer a { color: var(--neuron); }
     t = Math.max(D.change_frames, (worm.reversing.indexOf(1) || 0) - 20);
   }
   function computeRisks() {
-    risks = Array.from({ length: n }, (_, f) => risk(f, modelName));
-    const s = risks.filter((v) => v !== null).sort((a, b) => a - b);
-    thr = s[Math.floor(0.8 * s.length)]; // alarm on this worm's riskiest 20% of moments, as in the analysis
+    for (const m of ["brain+body", "body"]) {
+      risksBy[m] = Array.from({ length: n }, (_, f) => risk(f, m));
+      const s = risksBy[m].filter((v) => v !== null).sort((a, b) => a - b);
+      thrBy[m] = s[Math.floor(0.8 * s.length)]; // alarm on this worm's riskiest 20% of moments, as in the analysis
+    }
+    selectModel();
+    scoreOutcomes();
+  }
+  function selectModel() {
+    risks = risksBy[modelName]; thr = thrBy[modelName];
     $("thr").style.left = `${thr * 100}%`;
+  }
+
+  // Every reversal and every alarm episode, judged once against what the real worm did, with the frame the verdict is known.
+  function scoreOutcomes() {
+    const H = D.horizon_frames, minLead = +$("lead").value;
+    outcomes = {};
+    for (const m of ["brain+body", "body"]) {
+      const r = risksBy[m], th = thrBy[m], revs = [], alarms = [];
+      for (const s of starts) {
+        let any = false, first = null;
+        for (let f = Math.max(0, s - H); f <= s - minLead; f++) {
+          if (r[f] === null) continue;
+          any = true;
+          if (r[f] > th && first === null) first = f;
+        }
+        if (any) revs.push({ at: s, warned: first !== null, lead: first === null ? null : (s - first) * spf });
+      }
+      for (let f = 0; f < n; f++) {
+        if (r[f] === null || r[f] <= th) continue;
+        let e = f;
+        while (e + 1 < n && r[e + 1] !== null && r[e + 1] > th) e++;
+        alarms.push({ at: Math.min(n - 1, e + H), false: !starts.some((s) => s > f && s <= e + H) });
+        f = e;
+      }
+      outcomes[m] = { revs, alarms };
+    }
   }
 
   // --- drawing ---
@@ -254,6 +325,50 @@ footer a { color: var(--neuron); }
     kctx.stroke();
   }
 
+  const duel = $("duel"), dctx = duel.getContext("2d");
+  function drawDuel(tf) {
+    const [w, h] = fit(duel, dctx), win = Math.round(60 / spf), f1 = Math.floor(tf), f0 = Math.max(0, f1 - win);
+    const top = 26, x = (f) => ((f - (f1 - win)) / win) * w, y = (v) => h - 4 - v * (h - top - 6);
+    dctx.clearRect(0, 0, w, h);
+    dctx.fillStyle = cssVar("--reversal"); dctx.globalAlpha = 0.25;
+    for (let f = f0; f <= f1; f++) if (worm.reversing[f]) dctx.fillRect(x(f), top - 4, Math.max(1, w / win + 0.5), h);
+    dctx.globalAlpha = 1;
+    for (const [m, color, row] of [["brain+body", "--risk", 6], ["body", "--body", 16]]) {
+      const c = cssVar(color);
+      dctx.strokeStyle = c; dctx.globalAlpha = 0.5; dctx.setLineDash([3, 3]); dctx.lineWidth = 1;
+      dctx.beginPath(); dctx.moveTo(0, y(thrBy[m])); dctx.lineTo(w, y(thrBy[m])); dctx.stroke(); dctx.setLineDash([]); dctx.globalAlpha = 1;
+      dctx.lineWidth = m === "body" ? 1.5 : 2; dctx.beginPath();
+      let pen = false;
+      for (let f = f0; f <= f1; f++) {
+        const v = risksBy[m][f];
+        if (v === null) { pen = false; continue; }
+        pen ? dctx.lineTo(x(f), y(v)) : dctx.moveTo(x(f), y(v)); pen = true;
+      }
+      dctx.stroke();
+      // verdict ticks above each reversal start: filled = warned in time, hollow = missed
+      for (const o of outcomes[m].revs) {
+        if (o.at < f0 || o.at > f1) continue;
+        dctx.beginPath(); dctx.arc(x(o.at), row, 4, 0, 7);
+        dctx.fillStyle = c; dctx.strokeStyle = c; dctx.lineWidth = 1.5;
+        o.warned ? dctx.fill() : dctx.stroke();
+      }
+    }
+  }
+  function drawBoard(f) {
+    const rows = [["brain+body", "Brain + body", "--risk"], ["body", "Body only", "--body"]].map(([m, name, color]) => {
+      const revs = outcomes[m].revs.filter((o) => o.at <= f), alarms = outcomes[m].alarms.filter((o) => o.at <= f);
+      const warned = revs.filter((o) => o.warned), leads = warned.map((o) => o.lead).sort((a, b) => a - b);
+      return { m, name, color, warned: warned.length, total: revs.length, falseA: alarms.filter((o) => o.false).length, nA: alarms.length,
+        lead: leads.length ? leads[leads.length >> 1] : null };
+    });
+    const lead = rows[0].warned === rows[1].warned ? null : rows[0].warned > rows[1].warned ? "brain+body" : "body";
+    $("board").innerHTML = rows.map((r) => `<div class="side${lead === r.m ? " lead" : ""}"><h3><i style="background:var(${r.color})"></i>${r.name}</h3><dl>
+      <dt>Warned of in time</dt><dd>${r.warned} / ${r.total}</dd>
+      <dt>Missed</dt><dd>${r.total - r.warned}</dd>
+      <dt>False alarms</dt><dd>${r.falseA} / ${r.nA}</dd>
+      <dt>Median warning</dt><dd>${r.lead === null ? "–" : r.lead.toFixed(1) + " s"}</dd></dl></div>`).join("");
+  }
+
   let dots = [];
   function buildNeurons() {
     const box = $("neurons"); box.replaceChildren();
@@ -273,7 +388,8 @@ footer a { color: var(--neuron); }
     const dt = last ? Math.min(0.1, (now - last) / 1000) : 0; last = now;
     if (playing) { t += (dt * speed) / spf; if (t >= n - 2) t = D.change_frames; }
     const f = Math.floor(t), r = risks[f];
-    drawScope(t, r); drawSpark(t); drawNeurons(f);
+    drawScope(t, r);
+    if ($("panel-compare").hidden) { drawSpark(t); drawNeurons(f); } else { drawDuel(t); drawBoard(f); }
     $("clock").textContent = `${Math.floor(f * spf / 60)}:${String(Math.floor(f * spf % 60)).padStart(2, "0")}`;
     const rev = !!worm.reversing[f];
     $("state").textContent = rev ? "reversing" : "forward"; $("state").className = "state" + (rev ? " rev" : "");
@@ -298,11 +414,28 @@ footer a { color: var(--neuron); }
       speed = +b.dataset.speed; document.querySelectorAll("[data-speed]").forEach((x) => x.setAttribute("aria-pressed", x === b));
     }));
     document.querySelectorAll("[data-model]").forEach((b) => b.addEventListener("click", () => {
-      modelName = b.dataset.model; computeRisks();
+      modelName = b.dataset.model; selectModel();
       $("riskNote").textContent = modelName === "body" ? "from body only" : "from brain + body";
       document.querySelectorAll("[data-model]").forEach((x) => x.setAttribute("aria-pressed", x === b)); redraw();
     }));
     addEventListener("resize", redraw);
+    $("lead").addEventListener("change", () => { scoreOutcomes(); redraw(); });
+    const tabs = [$("tab-live"), $("tab-compare")];
+    const show = (tab) => {
+      for (const b of tabs) {
+        const on = b === tab;
+        b.setAttribute("aria-selected", on); b.tabIndex = on ? 0 : -1;
+        $(b.getAttribute("aria-controls")).hidden = !on;
+      }
+      redraw();
+    };
+    tabs.forEach((b, i) => {
+      b.addEventListener("click", () => show(b));
+      b.addEventListener("keydown", (e) => {
+        if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+        const next = tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length]; next.focus(); show(next);
+      });
+    });
   }).catch((err) => { $("check").textContent = `Couldn't load the recording (showcase.json): ${err.message}. Reload to try again.`; });
 })();
 </script>

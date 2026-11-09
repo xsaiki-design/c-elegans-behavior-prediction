@@ -14,7 +14,10 @@ within seconds; the brain's lasts at least 10 s.
 ![How far ahead](figures/horizon_curve.png)
 
 **[Live version](https://xsaiki-design.github.io/c-elegans-behavior-prediction/live/)**: the real worm crawling, its
-neurons, and the model running in your browser frame by frame (it checks itself against the offline analysis).
+neurons, and the model running in your browser frame by frame (it checks itself against the offline analysis). A
+**Compare** tab races brain + body against body only on the same worm, scored live against its real reversals. The
+animation uses worms with clean posture tracking in ≥ 90 % of frames; the remaining glitch frames are blended from the
+good frames either side (`worms/showcase_data.py`, display only, the analysis doesn't use posture).
 
 Full write-up: [`docs/writeup.md`](docs/writeup.md) (2–3 pages: method, results, checks, limitations).
 Short Q&A: [`docs/faq.md`](docs/faq.md).
@@ -72,7 +75,7 @@ uv run python -m worms.run         # analysis -> results/summary.json
 uv run python -m worms.figures     # figures/ from the results
 uv run python -m worms.demo_data   # held-out predictions for the interactive page -> docs/demo-data.json
 uv run python -m worms.alarms      # alarm analysis -> results/alarms.json
-uv run python -m worms.showcase_data  # 3 typical worms + their held-out models for the live page -> docs/live/
+uv run python -m worms.showcase_data  # typical worms + their held-out models for the live page -> docs/live/
 ```
 
 To view the interactive page locally: `python -m http.server -d docs`, then open http://localhost:8000.
