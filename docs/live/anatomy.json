@@ -3,6 +3,7 @@
 {
 "name": "ADAL",
 "class": "ADA",
+"role": "layer 3 interneuron",
 "ap": -239.2,
 "dv": 31.1,
 "lr": 8.7
@@ -10,6 +11,7 @@
 {
 "name": "ADAR",
 "class": "ADA",
+"role": "layer 3 interneuron",
 "ap": -239.2,
 "dv": 31.1,
 "lr": -12.9
@@ -17,6 +19,7 @@
 {
 "name": "ADEL",
 "class": "ADE",
+"role": "mechanosensory",
 "ap": -242.4,
 "dv": 32.5,
 "lr": 11.0
@@ -24,6 +27,7 @@
 {
 "name": "ADER",
 "class": "ADE",
+"role": "mechanosensory",
 "ap": -242.4,
 "dv": 32.5,
 "lr": -15.3
@@ -31,6 +35,7 @@
 {
 "name": "AIBL",
 "class": "AIB",
+"role": "layer 2 interneuron",
 "ap": -266.2,
 "dv": 37.0,
 "lr": 2.7
@@ -38,6 +43,7 @@
 {
 "name": "AIBR",
 "class": "AIB",
+"role": "layer 2 interneuron",
 "ap": -266.2,
 "dv": 37.0,
 "lr": -6.9
@@ -45,6 +51,7 @@
 {
 "name": "AIML",
 "class": "AIM",
+"role": "category 4 interneuron",
 "ap": -253.4,
 "dv": 28.4,
 "lr": 9.2
@@ -52,6 +59,7 @@
 {
 "name": "AIMR",
 "class": "AIM",
+"role": "category 4 interneuron",
 "ap": -253.4,
 "dv": 28.4,
 "lr": -13.5
@@ -59,6 +67,7 @@
 {
 "name": "AINL",
 "class": "AIN",
+"role": "category 4 interneuron",
 "ap": -269.5,
 "dv": 39.4,
 "lr": -1.4
@@ -66,6 +75,7 @@
 {
 "name": "AINR",
 "class": "AIN",
+"role": "category 4 interneuron",
 "ap": -269.5,
 "dv": 39.4,
 "lr": -3.1
@@ -73,6 +83,7 @@
 {
 "name": "AIYL",
 "class": "AIY",
+"role": "layer 3 interneuron",
 "ap": -252.5,
 "dv": 28.9,
 "lr": 7.5
@@ -80,6 +91,7 @@
 {
 "name": "AIYR",
 "class": "AIY",
+"role": "layer 3 interneuron",
 "ap": -252.5,
 "dv": 28.9,
 "lr": -11.7
@@ -87,6 +99,7 @@
 {
 "name": "AIZL",
 "class": "AIZ",
+"role": "layer 3 interneuron",
 "ap": -258.8,
 "dv": 37.5,
 "lr": 5.6
@@ -94,6 +107,7 @@
 {
 "name": "AIZR",
 "class": "AIZ",
+"role": "layer 3 interneuron",
 "ap": -258.8,
 "dv": 37.5,
 "lr": -9.9
@@ -101,6 +115,7 @@
 {
 "name": "ASEL",
 "class": "ASE",
+"role": "amphid",
 "ap": -263.7,
 "dv": 40.0,
 "lr": 4.1
@@ -108,6 +123,7 @@
 {
 "name": "ASER",
 "class": "ASE",
+"role": "amphid",
 "ap": -263.7,
 "dv": 40.0,
 "lr": -8.4
@@ -115,6 +131,7 @@
 {
 "name": "ASGL",
 "class": "ASG",
+"role": "amphid",
 "ap": -265.4,
 "dv": 45.4,
 "lr": 3.7
@@ -122,6 +139,7 @@
 {
 "name": "ASGR",
 "class": "ASG",
+"role": "amphid",
 "ap": -265.4,
 "dv": 45.4,
 "lr": -8.0
@@ -129,6 +147,7 @@
 {
 "name": "AUAL",
 "class": "AUA",
+"role": "layer 3 interneuron",
 "ap": -264.0,
 "dv": 37.5,
 "lr": 4.5
@@ -136,6 +155,7 @@
 {
 "name": "AUAR",
 "class": "AUA",
+"role": "layer 3 interneuron",
 "ap": -264.0,
 "dv": 37.5,
 "lr": -8.8
@@ -143,6 +163,7 @@
 {
 "name": "AVAL",
 "class": "AVA",
+"role": "layer 1 interneuron",
 "ap": -271.5,
 "dv": 38.0,
 "lr": -0.6
@@ -150,6 +171,7 @@
 {
 "name": "AVAR",
 "class": "AVA",
+"role": "layer 1 interneuron",
 "ap": -271.5,
 "dv": 38.0,
 "lr": -3.5
@@ -157,6 +179,7 @@
 {
 "name": "AVDL",
 "class": "AVD",
+"role": "layer 2 interneuron",
 "ap": -268.7,
 "dv": 37.3,
 "lr": -0.2
@@ -164,6 +187,7 @@
 {
 "name": "AVDR",
 "class": "AVD",
+"role": "layer 2 interneuron",
 "ap": -268.7,
 "dv": 37.3,
 "lr": -4.0
@@ -171,6 +195,7 @@
 {
 "name": "AVEL",
 "class": "AVE",
+"role": "layer 1 interneuron",
 "ap": -269.4,
 "dv": 40.6,
 "lr": 2.8
@@ -178,6 +203,7 @@
 {
 "name": "AVER",
 "class": "AVE",
+"role": "layer 1 interneuron",
 "ap": -269.4,
 "dv": 40.6,
 "lr": -8.4
@@ -185,6 +211,7 @@
 {
 "name": "AVJL",
 "class": "AVJ",
+"role": "layer 2 interneuron",
 "ap": -264.9,
 "dv": 47.5,
 "lr": 0.2
@@ -192,6 +219,7 @@
 {
 "name": "AVJR",
 "class": "AVJ",
+"role": "layer 2 interneuron",
 "ap": -264.9,
 "dv": 47.5,
 "lr": -4.8
@@ -199,6 +227,7 @@
 {
 "name": "AWAL",
 "class": "AWA",
+"role": "amphid",
 "ap": -265.9,
 "dv": 42.8,
 "lr": 3.9
@@ -206,6 +235,7 @@
 {
 "name": "AWAR",
 "class": "AWA",
+"role": "amphid",
 "ap": -265.9,
 "dv": 42.8,
 "lr": -8.2
@@ -213,6 +243,7 @@
 {
 "name": "AWBL",
 "class": "AWB",
+"role": "amphid",
 "ap": -266.2,
 "dv": 43.1,
 "lr": 5.5
@@ -220,6 +251,7 @@
 {
 "name": "AWBR",
 "class": "AWB",
+"role": "amphid",
 "ap": -266.2,
 "dv": 43.1,
 "lr": -9.8
@@ -227,6 +259,7 @@
 {
 "name": "AWCL",
 "class": "AWC",
+"role": "amphid",
 "ap": -267.9,
 "dv": 39.0,
 "lr": 3.8
@@ -234,6 +267,7 @@
 {
 "name": "AWCR",
 "class": "AWC",
+"role": "amphid",
 "ap": -267.9,
 "dv": 39.0,
 "lr": -8.1
@@ -241,6 +275,7 @@
 {
 "name": "CEPDL",
 "class": "CEP",
+"role": "cephalic",
 "ap": -275.0,
 "dv": 54.1,
 "lr": 1.4
@@ -248,6 +283,7 @@
 {
 "name": "CEPDR",
 "class": "CEP",
+"role": "cephalic",
 "ap": -275.0,
 "dv": 54.1,
 "lr": -5.6
@@ -255,6 +291,7 @@
 {
 "name": "CEPVL",
 "class": "CEP",
+"role": "cephalic",
 "ap": -277.1,
 "dv": 39.9,
 "lr": 0.7
@@ -262,6 +299,7 @@
 {
 "name": "CEPVR",
 "class": "CEP",
+"role": "cephalic",
 "ap": -277.1,
 "dv": 39.9,
 "lr": -5.0
@@ -269,6 +307,7 @@
 {
 "name": "FLPL",
 "class": "FLP",
+"role": "mechanosensory",
 "ap": -246.3,
 "dv": 31.1,
 "lr": 10.9
@@ -276,6 +315,7 @@
 {
 "name": "FLPR",
 "class": "FLP",
+"role": "mechanosensory",
 "ap": -246.3,
 "dv": 31.1,
 "lr": -15.1
@@ -283,6 +323,7 @@
 {
 "name": "I1L",
 "class": "I1",
+"role": "pharyngeal interneuron",
 "ap": -300.4,
 "dv": 53.1,
 "lr": 2.9
@@ -290,6 +331,7 @@
 {
 "name": "I1R",
 "class": "I1",
+"role": "pharyngeal interneuron",
 "ap": -300.4,
 "dv": 53.1,
 "lr": -7.2
@@ -297,6 +339,7 @@
 {
 "name": "I2L",
 "class": "I2",
+"role": "pharyngeal interneuron",
 "ap": -311.6,
 "dv": 54.5,
 "lr": 1.6
@@ -304,6 +347,7 @@
 {
 "name": "I2R",
 "class": "I2",
+"role": "pharyngeal interneuron",
 "ap": -311.6,
 "dv": 54.5,
 "lr": -5.8
@@ -311,6 +355,7 @@
 {
 "name": "I3",
 "class": "I3",
+"role": "pharyngeal interneuron",
 "ap": -296.6,
 "dv": 58.2,
 "lr": -2.0
@@ -318,6 +363,7 @@
 {
 "name": "IL1DL",
 "class": "IL1",
+"role": "cephalic",
 "ap": -282.8,
 "dv": 52.8,
 "lr": 2.8
@@ -325,6 +371,7 @@
 {
 "name": "IL1DR",
 "class": "IL1",
+"role": "cephalic",
 "ap": -282.8,
 "dv": 52.8,
 "lr": -7.1
@@ -332,6 +379,7 @@
 {
 "name": "IL1L",
 "class": "IL1",
+"role": "cephalic",
 "ap": -282.7,
 "dv": 47.9,
 "lr": 3.8
@@ -339,6 +387,7 @@
 {
 "name": "IL1R",
 "class": "IL1",
+"role": "cephalic",
 "ap": -282.7,
 "dv": 47.9,
 "lr": -8.1
@@ -346,6 +395,7 @@
 {
 "name": "IL1VL",
 "class": "IL1",
+"role": "cephalic",
 "ap": -279.5,
 "dv": 41.0,
 "lr": 2.2
@@ -353,6 +403,7 @@
 {
 "name": "IL1VR",
 "class": "IL1",
+"role": "cephalic",
 "ap": -279.5,
 "dv": 41.0,
 "lr": -6.5
@@ -360,6 +411,7 @@
 {
 "name": "IL2DL",
 "class": "IL2",
+"role": "cephalic",
 "ap": -287.5,
 "dv": 57.1,
 "lr": 7.1
@@ -367,6 +419,7 @@
 {
 "name": "IL2DR",
 "class": "IL2",
+"role": "cephalic",
 "ap": -287.5,
 "dv": 57.1,
 "lr": -11.3
@@ -374,6 +427,7 @@
 {
 "name": "IL2L",
 "class": "IL2",
+"role": "cephalic",
 "ap": -285.0,
 "dv": 49.4,
 "lr": 6.8
@@ -381,6 +435,7 @@
 {
 "name": "IL2R",
 "class": "IL2",
+"role": "cephalic",
 "ap": -285.0,
 "dv": 49.4,
 "lr": -11.0
@@ -388,6 +443,7 @@
 {
 "name": "IL2VL",
 "class": "IL2",
+"role": "cephalic",
 "ap": -288.9,
 "dv": 43.0,
 "lr": 3.3
@@ -395,6 +451,7 @@
 {
 "name": "IL2VR",
 "class": "IL2",
+"role": "cephalic",
 "ap": -288.9,
 "dv": 43.0,
 "lr": -7.6
@@ -402,6 +459,7 @@
 {
 "name": "M3L",
 "class": "M3",
+"role": "pharyngeal motor neuron",
 "ap": -295.4,
 "dv": 48.1,
 "lr": 3.8
@@ -409,6 +467,7 @@
 {
 "name": "M3R",
 "class": "M3",
+"role": "pharyngeal motor neuron",
 "ap": -295.4,
 "dv": 48.1,
 "lr": -8.1
@@ -416,6 +475,7 @@
 {
 "name": "M4",
 "class": "M4",
+"role": "pharyngeal motor neuron",
 "ap": -288.9,
 "dv": 57.6,
 "lr": -2.0
@@ -423,6 +483,7 @@
 {
 "name": "MCL",
 "class": "MC",
+"role": "pharyngeal polymodal neuron",
 "ap": -296.1,
 "dv": 52.3,
 "lr": 3.2
@@ -430,6 +491,7 @@
 {
 "name": "MCR",
 "class": "MC",
+"role": "pharyngeal polymodal neuron",
 "ap": -296.1,
 "dv": 52.3,
 "lr": -7.2
@@ -437,6 +499,7 @@
 {
 "name": "MI",
 "class": "MI",
+"role": "pharyngeal polymodal neuron",
 "ap": -293.5,
 "dv": 56.7,
 "lr": -2.2
@@ -444,6 +507,7 @@
 {
 "name": "NSML",
 "class": "NSM",
+"role": "pharyngeal polymodal neuron",
 "ap": -292.2,
 "dv": 51.8,
 "lr": 2.6
@@ -451,6 +515,7 @@
 {
 "name": "NSMR",
 "class": "NSM",
+"role": "pharyngeal polymodal neuron",
 "ap": -292.2,
 "dv": 51.8,
 "lr": -6.4
@@ -458,6 +523,7 @@
 {
 "name": "OLLL",
 "class": "OLL",
+"role": "cephalic",
 "ap": -283.9,
 "dv": 50.0,
 "lr": 4.4
@@ -465,6 +531,7 @@
 {
 "name": "OLLR",
 "class": "OLL",
+"role": "cephalic",
 "ap": -283.9,
 "dv": 50.0,
 "lr": -8.7
@@ -472,6 +539,7 @@
 {
 "name": "OLQDL",
 "class": "OLQ",
+"role": "cephalic",
 "ap": -280.0,
 "dv": 53.4,
 "lr": 2.8
@@ -479,6 +547,7 @@
 {
 "name": "OLQDR",
 "class": "OLQ",
+"role": "cephalic",
 "ap": -280.0,
 "dv": 53.4,
 "lr": -7.0
@@ -486,6 +555,7 @@
 {
 "name": "OLQVL",
 "class": "OLQ",
+"role": "cephalic",
 "ap": -279.2,
 "dv": 43.9,
 "lr": 4.2
@@ -493,6 +563,7 @@
 {
 "name": "OLQVR",
 "class": "OLQ",
+"role": "cephalic",
 "ap": -279.2,
 "dv": 43.9,
 "lr": -8.5
@@ -500,6 +571,7 @@
 {
 "name": "RIAL",
 "class": "RIA",
+"role": "layer 1 interneuron",
 "ap": -270.2,
 "dv": 45.0,
 "lr": 4.0
@@ -507,6 +579,7 @@
 {
 "name": "RIAR",
 "class": "RIA",
+"role": "layer 1 interneuron",
 "ap": -270.2,
 "dv": 45.0,
 "lr": -8.2
@@ -514,6 +587,7 @@
 {
 "name": "RICL",
 "class": "RIC",
+"role": "layer 2 interneuron",
 "ap": -267.1,
 "dv": 38.1,
 "lr": -0.7
@@ -521,6 +595,7 @@
 {
 "name": "RICR",
 "class": "RIC",
+"role": "layer 2 interneuron",
 "ap": -267.1,
 "dv": 38.1,
 "lr": -3.6
@@ -528,6 +603,7 @@
 {
 "name": "RID",
 "class": "RID",
+"role": "layer 1 interneuron",
 "ap": -272.4,
 "dv": 54.9,
 "lr": -1.2
@@ -535,6 +611,7 @@
 {
 "name": "RIH",
 "class": "RIH",
+"role": "category 4 interneuron",
 "ap": -267.4,
 "dv": 36.0,
 "lr": -2.0
@@ -542,6 +619,7 @@
 {
 "name": "RIML",
 "class": "RIM",
+"role": "layer 1 interneuron",
 "ap": -260.9,
 "dv": 39.0,
 "lr": 3.5
@@ -549,6 +627,7 @@
 {
 "name": "RIMR",
 "class": "RIM",
+"role": "layer 1 interneuron",
 "ap": -260.9,
 "dv": 39.0,
 "lr": -7.8
@@ -556,6 +635,7 @@
 {
 "name": "RIVL",
 "class": "RIV",
+"role": "head motor neuron",
 "ap": -265.3,
 "dv": 50.4,
 "lr": 4.5
@@ -563,6 +643,7 @@
 {
 "name": "RIVR",
 "class": "RIV",
+"role": "head motor neuron",
 "ap": -265.3,
 "dv": 50.4,
 "lr": -8.8
@@ -570,6 +651,7 @@
 {
 "name": "RMDDL",
 "class": "RMD",
+"role": "head motor neuron",
 "ap": -269.1,
 "dv": 37.6,
 "lr": 3.6
@@ -577,6 +659,7 @@
 {
 "name": "RMDDR",
 "class": "RMD",
+"role": "head motor neuron",
 "ap": -269.1,
 "dv": 37.6,
 "lr": -7.8
@@ -584,6 +667,7 @@
 {
 "name": "RMDL",
 "class": "RMD",
+"role": "head motor neuron",
 "ap": -271.0,
 "dv": 41.2,
 "lr": 3.1
@@ -591,6 +675,7 @@
 {
 "name": "RMDR",
 "class": "RMD",
+"role": "head motor neuron",
 "ap": -271.0,
 "dv": 41.2,
 "lr": -7.4
@@ -598,6 +683,7 @@
 {
 "name": "RMDVL",
 "class": "RMD",
+"role": "head motor neuron",
 "ap": -271.2,
 "dv": 44.4,
 "lr": 4.9
@@ -605,6 +691,7 @@
 {
 "name": "RMDVR",
 "class": "RMD",
+"role": "head motor neuron",
 "ap": -271.2,
 "dv": 44.4,
 "lr": -9.0
@@ -612,6 +699,7 @@
 {
 "name": "RMED",
 "class": "RME",
+"role": "head motor neuron",
 "ap": -275.8,
 "dv": 58.5,
 "lr": -1.5
@@ -619,6 +707,7 @@
 {
 "name": "RMEL",
 "class": "RME",
+"role": "head motor neuron",
 "ap": -274.4,
 "dv": 47.0,
 "lr": 4.7
@@ -626,6 +715,7 @@
 {
 "name": "RMER",
 "class": "RME",
+"role": "head motor neuron",
 "ap": -274.4,
 "dv": 47.0,
 "lr": -8.9
@@ -633,6 +723,7 @@
 {
 "name": "RMEV",
 "class": "RME",
+"role": "head motor neuron",
 "ap": -273.0,
 "dv": 35.7,
 "lr": -2.0
@@ -640,6 +731,7 @@
 {
 "name": "SAADL",
 "class": "SAA",
+"role": "layer 2 interneuron",
 "ap": -270.2,
 "dv": 42.1,
 "lr": -4.7
@@ -647,6 +739,7 @@
 {
 "name": "SAADR",
 "class": "SAA",
+"role": "layer 2 interneuron",
 "ap": -270.2,
 "dv": 42.1,
 "lr": 0.5
@@ -654,6 +747,7 @@
 {
 "name": "SAAVL",
 "class": "SAA",
+"role": "layer 2 interneuron",
 "ap": -270.9,
 "dv": 45.4,
 "lr": 3.9
@@ -661,6 +755,7 @@
 {
 "name": "SAAVR",
 "class": "SAA",
+"role": "layer 2 interneuron",
 "ap": -270.9,
 "dv": 45.4,
 "lr": -8.2
@@ -668,6 +763,7 @@
 {
 "name": "SMBDL",
 "class": "SMB",
+"role": "sublateral motor neuron",
 "ap": -264.3,
 "dv": 33.1,
 "lr": 3.1
@@ -675,6 +771,7 @@
 {
 "name": "SMBDR",
 "class": "SMB",
+"role": "sublateral motor neuron",
 "ap": -264.3,
 "dv": 33.1,
 "lr": -7.0
@@ -682,6 +779,7 @@
 {
 "name": "SMBVL",
 "class": "SMB",
+"role": "sublateral motor neuron",
 "ap": -263.4,
 "dv": 33.0,
 "lr": 0.4
@@ -689,6 +787,7 @@
 {
 "name": "SMBVR",
 "class": "SMB",
+"role": "sublateral motor neuron",
 "ap": -263.4,
 "dv": 33.0,
 "lr": -4.6
@@ -696,6 +795,7 @@
 {
 "name": "SMDDL",
 "class": "SMD",
+"role": "sublateral motor neuron",
 "ap": -266.2,
 "dv": 34.1,
 "lr": 3.2
@@ -703,6 +803,7 @@
 {
 "name": "SMDDR",
 "class": "SMD",
+"role": "sublateral motor neuron",
 "ap": -266.2,
 "dv": 34.1,
 "lr": -7.5
@@ -710,6 +811,7 @@
 {
 "name": "SMDVL",
 "class": "SMD",
+"role": "sublateral motor neuron",
 "ap": -270.9,
 "dv": 46.6,
 "lr": 4.7
@@ -717,6 +819,7 @@
 {
 "name": "SMDVR",
 "class": "SMD",
+"role": "sublateral motor neuron",
 "ap": -270.9,
 "dv": 46.6,
 "lr": -8.9
@@ -724,6 +827,7 @@
 {
 "name": "URADL",
 "class": "URA",
+"role": "head motor neuron",
 "ap": -284.6,
 "dv": 52.2,
 "lr": 5.0
@@ -731,6 +835,7 @@
 {
 "name": "URADR",
 "class": "URA",
+"role": "head motor neuron",
 "ap": -284.6,
 "dv": 52.2,
 "lr": -9.3
@@ -738,6 +843,7 @@
 {
 "name": "URAVL",
 "class": "URA",
+"role": "head motor neuron",
 "ap": -279.6,
 "dv": 41.4,
 "lr": 0.3
@@ -745,6 +851,7 @@
 {
 "name": "URAVR",
 "class": "URA",
+"role": "head motor neuron",
 "ap": -279.6,
 "dv": 41.4,
 "lr": -4.6
@@ -752,6 +859,7 @@
 {
 "name": "URBL",
 "class": "URB",
+"role": "category 4 interneuron",
 "ap": -279.9,
 "dv": 47.5,
 "lr": 5.0
@@ -759,6 +867,7 @@
 {
 "name": "URBR",
 "class": "URB",
+"role": "category 4 interneuron",
 "ap": -279.9,
 "dv": 47.5,
 "lr": -9.3
@@ -766,6 +875,7 @@
 {
 "name": "URXL",
 "class": "URX",
+"role": "O2, CO2, social signals, touch",
 "ap": -269.9,
 "dv": 48.3,
 "lr": 3.0
@@ -773,6 +883,7 @@
 {
 "name": "URXR",
 "class": "URX",
+"role": "O2, CO2, social signals, touch",
 "ap": -269.9,
 "dv": 48.3,
 "lr": -7.3
@@ -780,6 +891,7 @@
 {
 "name": "URYDL",
 "class": "URY",
+"role": "cephalic",
 "ap": -281.4,
 "dv": 51.9,
 "lr": 4.1
@@ -787,6 +899,7 @@
 {
 "name": "URYDR",
 "class": "URY",
+"role": "cephalic",
 "ap": -281.4,
 "dv": 51.9,
 "lr": -8.4
@@ -794,6 +907,7 @@
 {
 "name": "URYVL",
 "class": "URY",
+"role": "cephalic",
 "ap": -280.9,
 "dv": 45.4,
 "lr": 3.4
@@ -801,6 +915,7 @@
 {
 "name": "URYVR",
 "class": "URY",
+"role": "cephalic",
 "ap": -280.9,
 "dv": 45.4,
 "lr": -7.7
@@ -809,316 +924,379 @@
 "others": [
 {
 "name": "ADFL",
+"role": "amphid",
 "ap": -267.9,
 "dv": 41.6
 },
 {
 "name": "ADFR",
+"role": "amphid",
 "ap": -267.9,
 "dv": 41.6
 },
 {
 "name": "ADLL",
+"role": "amphid, nociceptive",
 "ap": -265.8,
 "dv": 47.5
 },
 {
 "name": "ADLR",
+"role": "amphid, nociceptive",
 "ap": -265.8,
 "dv": 47.5
 },
 {
 "name": "AFDL",
+"role": "amphid",
 "ap": -268.4,
 "dv": 43.5
 },
 {
 "name": "AFDR",
+"role": "amphid",
 "ap": -268.4,
 "dv": 43.5
 },
 {
 "name": "AIAL",
+"role": "layer 3 interneuron",
 "ap": -264.1,
 "dv": 35.6
 },
 {
 "name": "AIAR",
+"role": "layer 3 interneuron",
 "ap": -264.1,
 "dv": 35.6
 },
 {
 "name": "ALA",
+"role": "layer 3 interneuron",
 "ap": -271.0,
 "dv": 50.9
 },
 {
 "name": "AQR",
+"role": "",
 "ap": -243.1,
 "dv": 34.0
 },
 {
 "name": "ASHL",
+"role": "amphid, nociceptive",
 "ap": -265.6,
 "dv": 41.0
 },
 {
 "name": "ASHR",
+"role": "amphid, nociceptive",
 "ap": -265.6,
 "dv": 41.0
 },
 {
 "name": "ASIL",
+"role": "amphid",
 "ap": -263.7,
 "dv": 46.9
 },
 {
 "name": "ASIR",
+"role": "amphid",
 "ap": -263.7,
 "dv": 46.9
 },
 {
 "name": "ASJL",
+"role": "amphid",
 "ap": -263.0,
 "dv": 37.5
 },
 {
 "name": "ASJR",
+"role": "amphid",
 "ap": -263.0,
 "dv": 37.5
 },
 {
 "name": "ASKL",
+"role": "amphid",
 "ap": -268.0,
 "dv": 46.4
 },
 {
 "name": "ASKR",
+"role": "amphid",
 "ap": -268.0,
 "dv": 46.4
 },
 {
 "name": "AVBL",
+"role": "layer 1 interneuron",
 "ap": -269.8,
 "dv": 37.9
 },
 {
 "name": "AVBR",
+"role": "layer 1 interneuron",
 "ap": -269.8,
 "dv": 37.9
 },
 {
 "name": "AVFL",
+"role": "layer 3 interneuron",
 "ap": -246.4,
 "dv": 18.6
 },
 {
 "name": "AVFR",
+"role": "layer 3 interneuron",
 "ap": -246.4,
 "dv": 18.6
 },
 {
 "name": "AVG",
+"role": "layer 3 interneuron",
 "ap": -237.1,
 "dv": 12.8
 },
 {
 "name": "AVHL",
+"role": "layer 3 interneuron",
 "ap": -264.4,
 "dv": 45.0
 },
 {
 "name": "AVHR",
+"role": "layer 3 interneuron",
 "ap": -264.4,
 "dv": 45.0
 },
 {
 "name": "AVKL",
+"role": "layer 2 interneuron",
 "ap": -255.0,
 "dv": 22.6
 },
 {
 "name": "AVKR",
+"role": "layer 2 interneuron",
 "ap": -247.0,
 "dv": 19.0
 },
 {
 "name": "AVL",
+"role": "layer 2 interneuron",
 "ap": -263.4,
 "dv": 36.4
 },
 {
 "name": "BAGL",
+"role": "O2, CO2, social signals, touch",
 "ap": -277.1,
 "dv": 45.0
 },
 {
 "name": "BAGR",
+"role": "O2, CO2, social signals, touch",
 "ap": -277.1,
 "dv": 45.0
 },
 {
 "name": "I4",
+"role": "pharyngeal interneuron",
 "ap": -253.9,
 "dv": 43.1
 },
 {
 "name": "I5",
+"role": "pharyngeal interneuron",
 "ap": -247.8,
 "dv": 30.7
 },
 {
 "name": "I6",
+"role": "pharyngeal interneuron",
 "ap": -251.7,
 "dv": 43.0
 },
 {
 "name": "M1",
+"role": "pharyngeal motor neuron",
 "ap": -252.1,
 "dv": 44.4
 },
 {
 "name": "M2L",
+"role": "pharyngeal motor neuron",
 "ap": -254.3,
 "dv": 38.6
 },
 {
 "name": "M2R",
+"role": "pharyngeal motor neuron",
 "ap": -254.3,
 "dv": 38.6
 },
 {
 "name": "M5",
+"role": "pharyngeal motor neuron",
 "ap": -241.4,
 "dv": 41.8
 },
 {
 "name": "RIBL",
+"role": "layer 2 interneuron",
 "ap": -264.4,
 "dv": 38.0
 },
 {
 "name": "RIBR",
+"role": "layer 2 interneuron",
 "ap": -264.4,
 "dv": 38.0
 },
 {
 "name": "RIFL",
+"role": "layer 3 interneuron",
 "ap": -239.8,
 "dv": 18.4
 },
 {
 "name": "RIFR",
+"role": "layer 3 interneuron",
 "ap": -245.5,
 "dv": 23.9
 },
 {
 "name": "RIGR",
+"role": "layer 2 interneuron",
 "ap": -242.0,
 "dv": 20.6
 },
 {
 "name": "RIPL",
+"role": "linker to pharynx",
 "ap": -278.6,
 "dv": 48.8
 },
 {
 "name": "RIPR",
+"role": "linker to pharynx",
 "ap": -278.6,
 "dv": 48.8
 },
 {
 "name": "RIR",
+"role": "category 4 interneuron",
 "ap": -265.9,
 "dv": 36.6
 },
 {
 "name": "RIS",
+"role": "layer 3 interneuron",
 "ap": -262.2,
 "dv": 33.6
 },
 {
 "name": "RMFL",
+"role": "layer 2 interneuron",
 "ap": -265.1,
 "dv": 34.1
 },
 {
 "name": "RMFR",
+"role": "layer 2 interneuron",
 "ap": -265.1,
 "dv": 34.1
 },
 {
 "name": "RMGL",
+"role": "layer 2 interneuron",
 "ap": -238.3,
 "dv": 32.7
 },
 {
 "name": "RMGR",
+"role": "layer 2 interneuron",
 "ap": -238.3,
 "dv": 32.7
 },
 {
 "name": "RMHL",
+"role": "head motor neuron",
 "ap": -265.9,
 "dv": 35.7
 },
 {
 "name": "RMHR",
+"role": "head motor neuron",
 "ap": -265.9,
 "dv": 35.7
 },
 {
 "name": "SABD",
+"role": "sublateral motor neuron",
 "ap": -234.8,
 "dv": 14.9
 },
 {
 "name": "SABVL",
+"role": "sublateral motor neuron",
 "ap": -249.2,
 "dv": 24.3
 },
 {
 "name": "SABVR",
+"role": "sublateral motor neuron",
 "ap": -249.2,
 "dv": 24.3
 },
 {
 "name": "SIADL",
+"role": "sublateral motor neuron",
 "ap": -267.7,
 "dv": 44.0
 },
 {
 "name": "SIADR",
+"role": "sublateral motor neuron",
 "ap": -269.2,
 "dv": 43.6
 },
 {
 "name": "SIAVL",
+"role": "sublateral motor neuron",
 "ap": -259.8,
 "dv": 32.2
 },
 {
 "name": "SIAVR",
+"role": "sublateral motor neuron",
 "ap": -259.8,
 "dv": 32.2
 },
 {
 "name": "SIBDL",
+"role": "sublateral motor neuron",
 "ap": -269.1,
 "dv": 45.8
 },
 {
 "name": "SIBDR",
+"role": "sublateral motor neuron",
 "ap": -269.1,
 "dv": 45.8
 },
 {
 "name": "SIBVL",
+"role": "sublateral motor neuron",
 "ap": -269.9,
 "dv": 35.4
 },
 {
 "name": "SIBVR",
+"role": "sublateral motor neuron",
 "ap": -269.9,
 "dv": 35.4
 }
@@ -2991,8 +3169,4566 @@
 "electrical": 0
 }
 ],
+"links": [
+[
+"ADAL",
+"ADAR",
+3
+],
+[
+"ADAL",
+"ADEL",
+1
+],
+[
+"ADAL",
+"AIBL",
+2
+],
+[
+"ADAL",
+"AIBR",
+2
+],
+[
+"ADAL",
+"AVAL",
+3
+],
+[
+"ADAL",
+"AVAR",
+7
+],
+[
+"ADAL",
+"AVDL",
+1
+],
+[
+"ADAL",
+"AVDR",
+4
+],
+[
+"ADAL",
+"AVEL",
+3
+],
+[
+"ADAL",
+"AVJR",
+11
+],
+[
+"ADAL",
+"AWAL",
+2
+],
+[
+"ADAL",
+"FLPR",
+1
+],
+[
+"ADAL",
+"OLQVL",
+4
+],
+[
+"ADAL",
+"RICL",
+4
+],
+[
+"ADAL",
+"RICR",
+1
+],
+[
+"ADAL",
+"RIML",
+9
+],
+[
+"ADAL",
+"SMDVR",
+3
+],
+[
+"ADAL",
+"URAVL",
+1
+],
+[
+"ADAL",
+"URBL",
+3
+],
+[
+"ADAL",
+"URXL",
+8
+],
+[
+"ADAL",
+"URYVL",
+1
+],
+[
+"ADAR",
+"ADER",
+1
+],
+[
+"ADAR",
+"AIBL",
+1
+],
+[
+"ADAR",
+"AIBR",
+3
+],
+[
+"ADAR",
+"AVAR",
+8
+],
+[
+"ADAR",
+"AVDL",
+5
+],
+[
+"ADAR",
+"AVDR",
+3
+],
+[
+"ADAR",
+"AVEL",
+1
+],
+[
+"ADAR",
+"AVJL",
+13
+],
+[
+"ADAR",
+"FLPR",
+1
+],
+[
+"ADAR",
+"RICL",
+7
+],
+[
+"ADAR",
+"RICR",
+2
+],
+[
+"ADAR",
+"RIMR",
+24
+],
+[
+"ADAR",
+"RIVR",
+5
+],
+[
+"ADAR",
+"SMDVL",
+1
+],
+[
+"ADAR",
+"URAVR",
+1
+],
+[
+"ADAR",
+"URBR",
+5
+],
+[
+"ADAR",
+"URXR",
+3
+],
+[
+"ADAR",
+"URYDR",
+2
+],
+[
+"ADAR",
+"URYVR",
+1
+],
+[
+"ADEL",
+"ADER",
+8
+],
+[
+"ADEL",
+"AINL",
+2
+],
+[
+"ADEL",
+"AVAL",
+7
+],
+[
+"ADEL",
+"AVAR",
+9
+],
+[
+"ADEL",
+"AVDL",
+2
+],
+[
+"ADEL",
+"AVEL",
+3
+],
+[
+"ADEL",
+"CEPDL",
+1
+],
+[
+"ADEL",
+"CEPVL",
+1
+],
+[
+"ADEL",
+"FLPL",
+26
+],
+[
+"ADEL",
+"IL1L",
+6
+],
+[
+"ADEL",
+"IL2L",
+13
+],
+[
+"ADEL",
+"OLLL",
+11
+],
+[
+"ADEL",
+"RIAL",
+2
+],
+[
+"ADEL",
+"RIH",
+3
+],
+[
+"ADEL",
+"RIVL",
+2
+],
+[
+"ADEL",
+"RIVR",
+2
+],
+[
+"ADEL",
+"RMDDR",
+1
+],
+[
+"ADEL",
+"RMDL",
+11
+],
+[
+"ADEL",
+"RMER",
+2
+],
+[
+"ADEL",
+"SAADR",
+1
+],
+[
+"ADEL",
+"SMBDR",
+1
+],
+[
+"ADEL",
+"SMBVL",
+2
+],
+[
+"ADEL",
+"URBL",
+2
+],
+[
+"ADER",
+"AINR",
+4
+],
+[
+"ADER",
+"AVAL",
+9
+],
+[
+"ADER",
+"AVAR",
+4
+],
+[
+"ADER",
+"AVDR",
+5
+],
+[
+"ADER",
+"AVER",
+4
+],
+[
+"ADER",
+"AVJR",
+2
+],
+[
+"ADER",
+"CEPDR",
+5
+],
+[
+"ADER",
+"CEPVR",
+1
+],
+[
+"ADER",
+"FLPL",
+4
+],
+[
+"ADER",
+"FLPR",
+14
+],
+[
+"ADER",
+"IL1R",
+1
+],
+[
+"ADER",
+"IL2R",
+6
+],
+[
+"ADER",
+"OLLR",
+5
+],
+[
+"ADER",
+"RIAR",
+1
+],
+[
+"ADER",
+"RMDL",
+4
+],
+[
+"ADER",
+"RMDR",
+6
+],
+[
+"ADER",
+"SMDVR",
+1
+],
+[
+"ADER",
+"URBR",
+2
+],
+[
+"ADER",
+"URXR",
+2
+],
+[
+"AIBL",
+"AINR",
+2
+],
+[
+"AIBL",
+"AIYL",
+3
+],
+[
+"AIBL",
+"AIZL",
+10
+],
+[
+"AIBL",
+"AIZR",
+61
+],
+[
+"AIBL",
+"ASEL",
+16
+],
+[
+"AIBL",
+"ASER",
+4
+],
+[
+"AIBL",
+"ASGL",
+17
+],
+[
+"AIBL",
+"AVAL",
+5
+],
+[
+"AIBL",
+"AVEL",
+1
+],
+[
+"AIBL",
+"AWCL",
+12
+],
+[
+"AIBL",
+"AWCR",
+3
+],
+[
+"AIBL",
+"FLPL",
+5
+],
+[
+"AIBL",
+"RICR",
+2
+],
+[
+"AIBL",
+"RIML",
+2
+],
+[
+"AIBL",
+"RIMR",
+72
+],
+[
+"AIBL",
+"RIVL",
+1
+],
+[
+"AIBL",
+"RMED",
+2
+],
+[
+"AIBL",
+"SAADL",
+7
+],
+[
+"AIBL",
+"SAADR",
+11
+],
+[
+"AIBL",
+"SAAVL",
+4
+],
+[
+"AIBL",
+"SAAVR",
+1
+],
+[
+"AIBL",
+"SMDDR",
+17
+],
+[
+"AIBL",
+"SMDVR",
+4
+],
+[
+"AIBR",
+"AIYR",
+1
+],
+[
+"AIBR",
+"AIZL",
+56
+],
+[
+"AIBR",
+"AIZR",
+3
+],
+[
+"AIBR",
+"ASEL",
+13
+],
+[
+"AIBR",
+"ASER",
+32
+],
+[
+"AIBR",
+"ASGR",
+20
+],
+[
+"AIBR",
+"AUAL",
+2
+],
+[
+"AIBR",
+"AVAR",
+2
+],
+[
+"AIBR",
+"AVEL",
+4
+],
+[
+"AIBR",
+"AWBL",
+1
+],
+[
+"AIBR",
+"AWCL",
+2
+],
+[
+"AIBR",
+"AWCR",
+19
+],
+[
+"AIBR",
+"FLPL",
+3
+],
+[
+"AIBR",
+"RIAL",
+2
+],
+[
+"AIBR",
+"RICR",
+4
+],
+[
+"AIBR",
+"RIML",
+71
+],
+[
+"AIBR",
+"RIMR",
+5
+],
+[
+"AIBR",
+"RIVR",
+3
+],
+[
+"AIBR",
+"SAADL",
+2
+],
+[
+"AIBR",
+"SAADR",
+3
+],
+[
+"AIBR",
+"SAAVR",
+2
+],
+[
+"AIBR",
+"SMDDL",
+19
+],
+[
+"AIBR",
+"SMDVL",
+7
+],
+[
+"AIBR",
+"SMDVR",
+1
+],
+[
+"AIML",
+"ASGL",
+9
+],
+[
+"AIML",
+"AVDL",
+1
+],
+[
+"AIML",
+"AVJL",
+1
+],
+[
+"AIML",
+"CEPDL",
+3
+],
+[
+"AIML",
+"RID",
+2
+],
+[
+"AIML",
+"SMBVL",
+5
+],
+[
+"AIML",
+"URXL",
+3
+],
+[
+"AIMR",
+"ASGR",
+6
+],
+[
+"AIMR",
+"AVAR",
+1
+],
+[
+"AIMR",
+"AVDR",
+2
+],
+[
+"AIMR",
+"AVJR",
+1
+],
+[
+"AIMR",
+"AWBR",
+1
+],
+[
+"AIMR",
+"CEPVR",
+2
+],
+[
+"AIMR",
+"OLQDR",
+1
+],
+[
+"AIMR",
+"RMDR",
+1
+],
+[
+"AIMR",
+"SMBVR",
+1
+],
+[
+"AIMR",
+"URXR",
+8
+],
+[
+"AINL",
+"AINR",
+2
+],
+[
+"AINL",
+"AIYR",
+1
+],
+[
+"AINL",
+"ASEL",
+1
+],
+[
+"AINL",
+"ASGR",
+2
+],
+[
+"AINL",
+"AUAR",
+4
+],
+[
+"AINL",
+"AVJL",
+1
+],
+[
+"AINL",
+"CEPDL",
+2
+],
+[
+"AINL",
+"RID",
+2
+],
+[
+"AINL",
+"RMDVL",
+3
+],
+[
+"AINL",
+"SAAVL",
+3
+],
+[
+"AINR",
+"ASEL",
+1
+],
+[
+"AINR",
+"ASER",
+3
+],
+[
+"AINR",
+"ASGL",
+4
+],
+[
+"AINR",
+"AUAL",
+4
+],
+[
+"AINR",
+"AUAR",
+3
+],
+[
+"AINR",
+"AWCL",
+2
+],
+[
+"AINR",
+"CEPDL",
+2
+],
+[
+"AINR",
+"RIAL",
+2
+],
+[
+"AINR",
+"RID",
+2
+],
+[
+"AINR",
+"URXL",
+2
+],
+[
+"AINR",
+"URXR",
+2
+],
+[
+"AIYL",
+"AIYR",
+11
+],
+[
+"AIYL",
+"AIZL",
+67
+],
+[
+"AIYL",
+"ASEL",
+32
+],
+[
+"AIYL",
+"ASER",
+10
+],
+[
+"AIYL",
+"AUAL",
+1
+],
+[
+"AIYL",
+"AWAL",
+17
+],
+[
+"AIYL",
+"AWBL",
+1
+],
+[
+"AIYL",
+"AWCL",
+27
+],
+[
+"AIYL",
+"AWCR",
+15
+],
+[
+"AIYL",
+"RIAL",
+51
+],
+[
+"AIYL",
+"RIH",
+4
+],
+[
+"AIYL",
+"RIML",
+5
+],
+[
+"AIYR",
+"AIZR",
+70
+],
+[
+"AIYR",
+"ASEL",
+23
+],
+[
+"AIYR",
+"ASER",
+42
+],
+[
+"AIYR",
+"ASGR",
+3
+],
+[
+"AIYR",
+"AUAR",
+2
+],
+[
+"AIYR",
+"AWAR",
+9
+],
+[
+"AIYR",
+"AWBR",
+2
+],
+[
+"AIYR",
+"AWCR",
+22
+],
+[
+"AIYR",
+"RIAR",
+50
+],
+[
+"AIYR",
+"RIH",
+4
+],
+[
+"AIYR",
+"RIMR",
+3
+],
+[
+"AIYR",
+"RIVR",
+1
+],
+[
+"AIZL",
+"AIZR",
+18
+],
+[
+"AIZL",
+"ASEL",
+5
+],
+[
+"AIZL",
+"ASER",
+1
+],
+[
+"AIZL",
+"ASGL",
+3
+],
+[
+"AIZL",
+"AUAL",
+2
+],
+[
+"AIZL",
+"AVEL",
+3
+],
+[
+"AIZL",
+"AVER",
+26
+],
+[
+"AIZL",
+"AWAL",
+26
+],
+[
+"AIZL",
+"AWBL",
+15
+],
+[
+"AIZL",
+"AWCL",
+1
+],
+[
+"AIZL",
+"AWCR",
+2
+],
+[
+"AIZL",
+"RIAL",
+30
+],
+[
+"AIZL",
+"RICR",
+17
+],
+[
+"AIZL",
+"RIH",
+13
+],
+[
+"AIZL",
+"RIML",
+35
+],
+[
+"AIZL",
+"SMBDL",
+25
+],
+[
+"AIZL",
+"SMBVL",
+21
+],
+[
+"AIZL",
+"SMDVL",
+3
+],
+[
+"AIZL",
+"URXL",
+1
+],
+[
+"AIZL",
+"URYDL",
+4
+],
+[
+"AIZR",
+"ASER",
+2
+],
+[
+"AIZR",
+"ASGR",
+1
+],
+[
+"AIZR",
+"AUAR",
+2
+],
+[
+"AIZR",
+"AVEL",
+28
+],
+[
+"AIZR",
+"AVER",
+2
+],
+[
+"AIZR",
+"AWAR",
+29
+],
+[
+"AIZR",
+"AWBR",
+8
+],
+[
+"AIZR",
+"AWCR",
+2
+],
+[
+"AIZR",
+"RIAR",
+25
+],
+[
+"AIZR",
+"RIH",
+19
+],
+[
+"AIZR",
+"RIMR",
+34
+],
+[
+"AIZR",
+"SMBDR",
+17
+],
+[
+"AIZR",
+"SMBVR",
+10
+],
+[
+"AIZR",
+"SMDDR",
+6
+],
+[
+"ASEL",
+"ASER",
+5
+],
+[
+"ASEL",
+"ASGL",
+3
+],
+[
+"ASEL",
+"AWAL",
+7
+],
+[
+"ASEL",
+"AWBL",
+2
+],
+[
+"ASEL",
+"AWCL",
+17
+],
+[
+"ASEL",
+"AWCR",
+21
+],
+[
+"ASEL",
+"IL2R",
+1
+],
+[
+"ASEL",
+"OLLR",
+1
+],
+[
+"ASEL",
+"RIAR",
+2
+],
+[
+"ASER",
+"ASGR",
+6
+],
+[
+"ASER",
+"AWAR",
+6
+],
+[
+"ASER",
+"AWBR",
+2
+],
+[
+"ASER",
+"AWCL",
+2
+],
+[
+"ASER",
+"AWCR",
+6
+],
+[
+"ASGL",
+"AWAL",
+1
+],
+[
+"ASGL",
+"AWBL",
+1
+],
+[
+"ASGL",
+"SMDDR",
+3
+],
+[
+"ASGR",
+"AWAR",
+1
+],
+[
+"ASGR",
+"AWBR",
+1
+],
+[
+"ASGR",
+"AWCL",
+1
+],
+[
+"ASGR",
+"AWCR",
+5
+],
+[
+"ASGR",
+"CEPVR",
+2
+],
+[
+"AUAL",
+"AUAR",
+2
+],
+[
+"AUAL",
+"AVAL",
+11
+],
+[
+"AUAL",
+"AVDR",
+2
+],
+[
+"AUAL",
+"AVEL",
+9
+],
+[
+"AUAL",
+"AWBL",
+4
+],
+[
+"AUAL",
+"AWCL",
+1
+],
+[
+"AUAL",
+"IL2DL",
+2
+],
+[
+"AUAL",
+"RIAL",
+21
+],
+[
+"AUAL",
+"RMDVL",
+2
+],
+[
+"AUAL",
+"URXL",
+15
+],
+[
+"AUAR",
+"AVAR",
+3
+],
+[
+"AUAR",
+"AVER",
+13
+],
+[
+"AUAR",
+"AWAR",
+1
+],
+[
+"AUAR",
+"AWBR",
+3
+],
+[
+"AUAR",
+"RIAR",
+24
+],
+[
+"AUAR",
+"RIH",
+2
+],
+[
+"AUAR",
+"URXR",
+29
+],
+[
+"AVAL",
+"AVAR",
+37
+],
+[
+"AVAL",
+"AVDL",
+47
+],
+[
+"AVAL",
+"AVDR",
+52
+],
+[
+"AVAL",
+"AVEL",
+20
+],
+[
+"AVAL",
+"AVER",
+16
+],
+[
+"AVAL",
+"AVJL",
+7
+],
+[
+"AVAL",
+"AVJR",
+8
+],
+[
+"AVAL",
+"AWCL",
+1
+],
+[
+"AVAL",
+"FLPL",
+33
+],
+[
+"AVAL",
+"FLPR",
+23
+],
+[
+"AVAL",
+"IL2VR",
+1
+],
+[
+"AVAL",
+"OLQVL",
+1
+],
+[
+"AVAL",
+"RIAL",
+5
+],
+[
+"AVAL",
+"RICL",
+15
+],
+[
+"AVAL",
+"RICR",
+15
+],
+[
+"AVAL",
+"RIML",
+5
+],
+[
+"AVAL",
+"RIMR",
+20
+],
+[
+"AVAL",
+"SAADL",
+17
+],
+[
+"AVAL",
+"SAADR",
+1
+],
+[
+"AVAL",
+"SAAVL",
+56
+],
+[
+"AVAL",
+"SMBDR",
+1
+],
+[
+"AVAL",
+"URXL",
+1
+],
+[
+"AVAL",
+"URYDL",
+2
+],
+[
+"AVAL",
+"URYVR",
+4
+],
+[
+"AVAR",
+"AVDL",
+42
+],
+[
+"AVAR",
+"AVDR",
+73
+],
+[
+"AVAR",
+"AVEL",
+5
+],
+[
+"AVAR",
+"AVER",
+38
+],
+[
+"AVAR",
+"AVJL",
+1
+],
+[
+"AVAR",
+"AVJR",
+8
+],
+[
+"AVAR",
+"FLPL",
+48
+],
+[
+"AVAR",
+"FLPR",
+10
+],
+[
+"AVAR",
+"RIAR",
+2
+],
+[
+"AVAR",
+"RICL",
+18
+],
+[
+"AVAR",
+"RICR",
+13
+],
+[
+"AVAR",
+"RIML",
+10
+],
+[
+"AVAR",
+"RIMR",
+2
+],
+[
+"AVAR",
+"RMDR",
+2
+],
+[
+"AVAR",
+"RMDVR",
+2
+],
+[
+"AVAR",
+"SAADR",
+26
+],
+[
+"AVAR",
+"SAAVR",
+46
+],
+[
+"AVAR",
+"SMDVR",
+2
+],
+[
+"AVAR",
+"URXR",
+2
+],
+[
+"AVAR",
+"URYDR",
+5
+],
+[
+"AVAR",
+"URYVL",
+1
+],
+[
+"AVDL",
+"AVDR",
+14
+],
+[
+"AVDL",
+"AVEL",
+10
+],
+[
+"AVDL",
+"AVER",
+4
+],
+[
+"AVDL",
+"AVJL",
+2
+],
+[
+"AVDL",
+"AVJR",
+2
+],
+[
+"AVDL",
+"FLPL",
+35
+],
+[
+"AVDL",
+"FLPR",
+34
+],
+[
+"AVDL",
+"URBR",
+1
+],
+[
+"AVDR",
+"AVER",
+6
+],
+[
+"AVDR",
+"AVJL",
+6
+],
+[
+"AVDR",
+"AVJR",
+8
+],
+[
+"AVDR",
+"FLPL",
+34
+],
+[
+"AVDR",
+"FLPR",
+10
+],
+[
+"AVDR",
+"OLQVL",
+1
+],
+[
+"AVDR",
+"URXL",
+1
+],
+[
+"AVDR",
+"URYVL",
+2
+],
+[
+"AVEL",
+"AVER",
+8
+],
+[
+"AVEL",
+"AVJL",
+1
+],
+[
+"AVEL",
+"CEPDR",
+9
+],
+[
+"AVEL",
+"CEPVR",
+13
+],
+[
+"AVEL",
+"FLPR",
+21
+],
+[
+"AVEL",
+"IL1R",
+2
+],
+[
+"AVEL",
+"IL2L",
+2
+],
+[
+"AVEL",
+"OLLR",
+39
+],
+[
+"AVEL",
+"RIML",
+10
+],
+[
+"AVEL",
+"RIMR",
+7
+],
+[
+"AVEL",
+"RMDVR",
+2
+],
+[
+"AVEL",
+"RMEV",
+1
+],
+[
+"AVEL",
+"SMDDL",
+1
+],
+[
+"AVEL",
+"SMDVR",
+1
+],
+[
+"AVEL",
+"URXL",
+9
+],
+[
+"AVEL",
+"URYDL",
+1
+],
+[
+"AVEL",
+"URYDR",
+5
+],
+[
+"AVEL",
+"URYVR",
+26
+],
+[
+"AVER",
+"AVJR",
+3
+],
+[
+"AVER",
+"CEPDL",
+14
+],
+[
+"AVER",
+"CEPVL",
+5
+],
+[
+"AVER",
+"FLPR",
+7
+],
+[
+"AVER",
+"IL1L",
+5
+],
+[
+"AVER",
+"IL1R",
+5
+],
+[
+"AVER",
+"IL2R",
+2
+],
+[
+"AVER",
+"OLLL",
+54
+],
+[
+"AVER",
+"RIML",
+14
+],
+[
+"AVER",
+"RIMR",
+12
+],
+[
+"AVER",
+"RMDDL",
+3
+],
+[
+"AVER",
+"RMDR",
+5
+],
+[
+"AVER",
+"RMDVL",
+3
+],
+[
+"AVER",
+"RMDVR",
+7
+],
+[
+"AVER",
+"RMEV",
+1
+],
+[
+"AVER",
+"SMDDL",
+1
+],
+[
+"AVER",
+"SMDDR",
+2
+],
+[
+"AVER",
+"SMDVR",
+1
+],
+[
+"AVER",
+"URAVL",
+1
+],
+[
+"AVER",
+"URXR",
+3
+],
+[
+"AVER",
+"URYDL",
+9
+],
+[
+"AVER",
+"URYDR",
+2
+],
+[
+"AVER",
+"URYVL",
+23
+],
+[
+"AVJL",
+"AVJR",
+12
+],
+[
+"AVJL",
+"FLPR",
+2
+],
+[
+"AVJL",
+"RIMR",
+4
+],
+[
+"AVJR",
+"FLPR",
+4
+],
+[
+"AVJR",
+"RID",
+2
+],
+[
+"AVJR",
+"SMBVL",
+1
+],
+[
+"AVJR",
+"URXL",
+4
+],
+[
+"AVJR",
+"URYVL",
+1
+],
+[
+"AWAL",
+"AWAR",
+2
+],
+[
+"AWAL",
+"AWBL",
+11
+],
+[
+"AWAR",
+"AWBR",
+3
+],
+[
+"AWBL",
+"AWBR",
+3
+],
+[
+"AWBL",
+"AWCL",
+1
+],
+[
+"AWBL",
+"RIAL",
+10
+],
+[
+"AWBL",
+"SMBDL",
+2
+],
+[
+"AWBL",
+"SMBVL",
+3
+],
+[
+"AWBR",
+"OLQVR",
+1
+],
+[
+"AWBR",
+"RIAR",
+3
+],
+[
+"AWBR",
+"RICL",
+4
+],
+[
+"AWBR",
+"URXR",
+2
+],
+[
+"AWBR",
+"URYVR",
+1
+],
+[
+"AWCL",
+"AWCR",
+28
+],
+[
+"AWCL",
+"RIAL",
+6
+],
+[
+"AWCL",
+"SMDVL",
+1
+],
+[
+"AWCL",
+"URYDR",
+1
+],
+[
+"AWCR",
+"IL2L",
+2
+],
+[
+"AWCR",
+"RIAL",
+3
+],
+[
+"AWCR",
+"RIVL",
+3
+],
+[
+"CEPDL",
+"CEPDR",
+1
+],
+[
+"CEPDL",
+"IL1DL",
+18
+],
+[
+"CEPDL",
+"IL2DL",
+1
+],
+[
+"CEPDL",
+"OLLL",
+13
+],
+[
+"CEPDL",
+"OLQDL",
+32
+],
+[
+"CEPDL",
+"RIAL",
+1
+],
+[
+"CEPDL",
+"RICL",
+12
+],
+[
+"CEPDL",
+"RICR",
+9
+],
+[
+"CEPDL",
+"RIH",
+7
+],
+[
+"CEPDL",
+"RMDDL",
+2
+],
+[
+"CEPDL",
+"RMDVL",
+15
+],
+[
+"CEPDL",
+"SMBDR",
+5
+],
+[
+"CEPDL",
+"URADL",
+8
+],
+[
+"CEPDL",
+"URBL",
+13
+],
+[
+"CEPDL",
+"URXL",
+1
+],
+[
+"CEPDL",
+"URYDL",
+7
+],
+[
+"CEPDR",
+"CEPVR",
+1
+],
+[
+"CEPDR",
+"IL1DR",
+15
+],
+[
+"CEPDR",
+"IL1R",
+1
+],
+[
+"CEPDR",
+"IL2DR",
+2
+],
+[
+"CEPDR",
+"OLLR",
+17
+],
+[
+"CEPDR",
+"OLQDR",
+28
+],
+[
+"CEPDR",
+"RICL",
+13
+],
+[
+"CEPDR",
+"RICR",
+20
+],
+[
+"CEPDR",
+"RIH",
+4
+],
+[
+"CEPDR",
+"RMDR",
+1
+],
+[
+"CEPDR",
+"RMDVR",
+5
+],
+[
+"CEPDR",
+"SMBDL",
+1
+],
+[
+"CEPDR",
+"URADR",
+3
+],
+[
+"CEPDR",
+"URBR",
+15
+],
+[
+"CEPDR",
+"URXR",
+3
+],
+[
+"CEPDR",
+"URYDR",
+6
+],
+[
+"CEPVL",
+"IL1VL",
+9
+],
+[
+"CEPVL",
+"OLLL",
+18
+],
+[
+"CEPVL",
+"OLQVL",
+23
+],
+[
+"CEPVL",
+"RIAL",
+1
+],
+[
+"CEPVL",
+"RIAR",
+1
+],
+[
+"CEPVL",
+"RICL",
+22
+],
+[
+"CEPVL",
+"RICR",
+17
+],
+[
+"CEPVL",
+"RIH",
+4
+],
+[
+"CEPVL",
+"RMDDL",
+9
+],
+[
+"CEPVL",
+"RMDVR",
+8
+],
+[
+"CEPVL",
+"SMBVL",
+1
+],
+[
+"CEPVL",
+"SMDVR",
+2
+],
+[
+"CEPVL",
+"URAVL",
+10
+],
+[
+"CEPVL",
+"URXL",
+2
+],
+[
+"CEPVL",
+"URYVL",
+8
+],
+[
+"CEPVR",
+"IL1VR",
+8
+],
+[
+"CEPVR",
+"IL2VR",
+4
+],
+[
+"CEPVR",
+"OLLR",
+30
+],
+[
+"CEPVR",
+"OLQVR",
+12
+],
+[
+"CEPVR",
+"RIAL",
+1
+],
+[
+"CEPVR",
+"RIAR",
+2
+],
+[
+"CEPVR",
+"RICL",
+13
+],
+[
+"CEPVR",
+"RICR",
+12
+],
+[
+"CEPVR",
+"RIH",
+6
+],
+[
+"CEPVR",
+"RIVL",
+2
+],
+[
+"CEPVR",
+"RMDDR",
+4
+],
+[
+"CEPVR",
+"SMBVR",
+10
+],
+[
+"CEPVR",
+"SMDDR",
+2
+],
+[
+"CEPVR",
+"SMDVL",
+1
+],
+[
+"CEPVR",
+"URAVR",
+3
+],
+[
+"CEPVR",
+"URBR",
+4
+],
+[
+"CEPVR",
+"URYVR",
+3
+],
+[
+"FLPL",
+"FLPR",
+22
+],
+[
+"FLPL",
+"RID",
+1
+],
+[
+"FLPL",
+"RIH",
+1
+],
+[
+"I1L",
+"I2L",
+14
+],
+[
+"I1L",
+"I3",
+4
+],
+[
+"I1L",
+"M3L",
+10
+],
+[
+"I1L",
+"M3R",
+2
+],
+[
+"I1L",
+"MCL",
+2
+],
+[
+"I1L",
+"MCR",
+3
+],
+[
+"I1L",
+"MI",
+3
+],
+[
+"I1L",
+"NSML",
+6
+],
+[
+"I1R",
+"I2R",
+8
+],
+[
+"I1R",
+"I3",
+3
+],
+[
+"I1R",
+"M3L",
+1
+],
+[
+"I1R",
+"M3R",
+6
+],
+[
+"I1R",
+"MCL",
+3
+],
+[
+"I1R",
+"MCR",
+8
+],
+[
+"I1R",
+"MI",
+1
+],
+[
+"I1R",
+"NSML",
+1
+],
+[
+"I1R",
+"NSMR",
+4
+],
+[
+"I2L",
+"I2R",
+6
+],
+[
+"I2L",
+"M3R",
+3
+],
+[
+"I2L",
+"M4",
+4
+],
+[
+"I2L",
+"NSML",
+14
+],
+[
+"I2L",
+"NSMR",
+25
+],
+[
+"I2R",
+"M3R",
+2
+],
+[
+"I2R",
+"M4",
+3
+],
+[
+"I2R",
+"MCL",
+1
+],
+[
+"I2R",
+"MCR",
+1
+],
+[
+"I2R",
+"NSML",
+34
+],
+[
+"I2R",
+"NSMR",
+10
+],
+[
+"I3",
+"M3L",
+2
+],
+[
+"I3",
+"M3R",
+2
+],
+[
+"I3",
+"M4",
+2
+],
+[
+"I3",
+"MCL",
+1
+],
+[
+"I3",
+"MCR",
+2
+],
+[
+"I3",
+"MI",
+4
+],
+[
+"I3",
+"NSMR",
+2
+],
+[
+"IL1DL",
+"IL1DR",
+3
+],
+[
+"IL1DL",
+"IL1L",
+2
+],
+[
+"IL1DL",
+"IL2DL",
+18
+],
+[
+"IL1DL",
+"RMDDR",
+3
+],
+[
+"IL1DL",
+"RMDVL",
+3
+],
+[
+"IL1DL",
+"RMEL",
+1
+],
+[
+"IL1DL",
+"RMEV",
+1
+],
+[
+"IL1DL",
+"SAAVR",
+12
+],
+[
+"IL1DL",
+"URADL",
+14
+],
+[
+"IL1DL",
+"URXL",
+2
+],
+[
+"IL1DL",
+"URYDL",
+3
+],
+[
+"IL1DR",
+"IL1R",
+10
+],
+[
+"IL1DR",
+"IL2DR",
+33
+],
+[
+"IL1DR",
+"OLLR",
+2
+],
+[
+"IL1DR",
+"OLQDR",
+1
+],
+[
+"IL1DR",
+"RMDDL",
+13
+],
+[
+"IL1DR",
+"RMDVR",
+34
+],
+[
+"IL1DR",
+"RMEV",
+4
+],
+[
+"IL1DR",
+"URADR",
+11
+],
+[
+"IL1DR",
+"URBR",
+2
+],
+[
+"IL1DR",
+"URYDR",
+7
+],
+[
+"IL1L",
+"IL1VL",
+11
+],
+[
+"IL1L",
+"IL2L",
+7
+],
+[
+"IL1L",
+"OLLL",
+1
+],
+[
+"IL1L",
+"RMDDL",
+20
+],
+[
+"IL1L",
+"RMDL",
+1
+],
+[
+"IL1L",
+"RMDR",
+11
+],
+[
+"IL1L",
+"RMDVL",
+22
+],
+[
+"IL1L",
+"RMDVR",
+6
+],
+[
+"IL1L",
+"RMER",
+9
+],
+[
+"IL1L",
+"URAVL",
+7
+],
+[
+"IL1L",
+"URBL",
+13
+],
+[
+"IL1R",
+"IL1VR",
+12
+],
+[
+"IL1R",
+"IL2R",
+2
+],
+[
+"IL1R",
+"OLLR",
+1
+],
+[
+"IL1R",
+"RIAR",
+2
+],
+[
+"IL1R",
+"RMDDL",
+17
+],
+[
+"IL1R",
+"RMDDR",
+12
+],
+[
+"IL1R",
+"RMDL",
+12
+],
+[
+"IL1R",
+"RMDR",
+4
+],
+[
+"IL1R",
+"RMDVL",
+10
+],
+[
+"IL1R",
+"RMDVR",
+17
+],
+[
+"IL1R",
+"RMEL",
+7
+],
+[
+"IL1R",
+"URAVR",
+2
+],
+[
+"IL1R",
+"URBR",
+5
+],
+[
+"IL1R",
+"URXR",
+1
+],
+[
+"IL1VL",
+"IL1VR",
+11
+],
+[
+"IL1VL",
+"IL2VL",
+27
+],
+[
+"IL1VL",
+"OLLL",
+3
+],
+[
+"IL1VL",
+"OLQVL",
+2
+],
+[
+"IL1VL",
+"RMDDL",
+31
+],
+[
+"IL1VL",
+"RMDVR",
+3
+],
+[
+"IL1VL",
+"RMED",
+3
+],
+[
+"IL1VL",
+"URAVL",
+10
+],
+[
+"IL1VL",
+"URYVL",
+5
+],
+[
+"IL1VR",
+"IL2VR",
+32
+],
+[
+"IL1VR",
+"OLLR",
+3
+],
+[
+"IL1VR",
+"OLQVR",
+7
+],
+[
+"IL1VR",
+"RMDDR",
+40
+],
+[
+"IL1VR",
+"RMDVL",
+5
+],
+[
+"IL1VR",
+"URAVR",
+17
+],
+[
+"IL1VR",
+"URYVR",
+3
+],
+[
+"IL2DL",
+"OLQDL",
+2
+],
+[
+"IL2DL",
+"RIH",
+2
+],
+[
+"IL2DL",
+"RMED",
+2
+],
+[
+"IL2DL",
+"RMEL",
+11
+],
+[
+"IL2DL",
+"RMER",
+8
+],
+[
+"IL2DL",
+"RMEV",
+1
+],
+[
+"IL2DL",
+"URADL",
+9
+],
+[
+"IL2DR",
+"OLQDR",
+2
+],
+[
+"IL2DR",
+"RICL",
+1
+],
+[
+"IL2DR",
+"RICR",
+2
+],
+[
+"IL2DR",
+"RMED",
+4
+],
+[
+"IL2DR",
+"RMEL",
+12
+],
+[
+"IL2DR",
+"RMER",
+11
+],
+[
+"IL2DR",
+"RMEV",
+5
+],
+[
+"IL2DR",
+"URADR",
+6
+],
+[
+"IL2L",
+"IL2VL",
+1
+],
+[
+"IL2L",
+"OLLL",
+2
+],
+[
+"IL2L",
+"OLQDL",
+20
+],
+[
+"IL2L",
+"OLQVL",
+20
+],
+[
+"IL2L",
+"RICL",
+1
+],
+[
+"IL2L",
+"RIH",
+27
+],
+[
+"IL2L",
+"RMDL",
+2
+],
+[
+"IL2L",
+"RMDR",
+3
+],
+[
+"IL2L",
+"RMER",
+12
+],
+[
+"IL2L",
+"RMEV",
+5
+],
+[
+"IL2L",
+"SMDVL",
+1
+],
+[
+"IL2L",
+"URAVL",
+3
+],
+[
+"IL2L",
+"URBL",
+4
+],
+[
+"IL2L",
+"URXL",
+5
+],
+[
+"IL2R",
+"OLLR",
+6
+],
+[
+"IL2R",
+"OLQDR",
+10
+],
+[
+"IL2R",
+"OLQVR",
+26
+],
+[
+"IL2R",
+"RIH",
+22
+],
+[
+"IL2R",
+"RMDL",
+3
+],
+[
+"IL2R",
+"RMEL",
+5
+],
+[
+"IL2R",
+"RMEV",
+2
+],
+[
+"IL2R",
+"URADR",
+2
+],
+[
+"IL2R",
+"URAVR",
+1
+],
+[
+"IL2R",
+"URBR",
+10
+],
+[
+"IL2R",
+"URXR",
+5
+],
+[
+"IL2VL",
+"OLQVL",
+6
+],
+[
+"IL2VL",
+"RIAL",
+4
+],
+[
+"IL2VL",
+"RIH",
+9
+],
+[
+"IL2VL",
+"RMEL",
+7
+],
+[
+"IL2VL",
+"RMER",
+6
+],
+[
+"IL2VL",
+"RMEV",
+2
+],
+[
+"IL2VL",
+"URAVL",
+10
+],
+[
+"IL2VR",
+"OLQVR",
+9
+],
+[
+"IL2VR",
+"RIAR",
+2
+],
+[
+"IL2VR",
+"RIH",
+10
+],
+[
+"IL2VR",
+"RMDVL",
+1
+],
+[
+"IL2VR",
+"RMED",
+2
+],
+[
+"IL2VR",
+"RMEL",
+8
+],
+[
+"IL2VR",
+"RMER",
+17
+],
+[
+"IL2VR",
+"RMEV",
+15
+],
+[
+"IL2VR",
+"URAVR",
+19
+],
+[
+"IL2VR",
+"URXR",
+1
+],
+[
+"M3L",
+"M4",
+1
+],
+[
+"M3L",
+"MI",
+2
+],
+[
+"M3L",
+"NSML",
+22
+],
+[
+"M3L",
+"NSMR",
+1
+],
+[
+"M3R",
+"M4",
+2
+],
+[
+"M3R",
+"MI",
+2
+],
+[
+"M3R",
+"NSML",
+1
+],
+[
+"M3R",
+"NSMR",
+26
+],
+[
+"M4",
+"MCL",
+1
+],
+[
+"M4",
+"NSML",
+13
+],
+[
+"MCL",
+"MI",
+3
+],
+[
+"MI",
+"NSML",
+1
+],
+[
+"MI",
+"NSMR",
+2
+],
+[
+"NSML",
+"NSMR",
+9
+],
+[
+"OLLL",
+"OLLR",
+11
+],
+[
+"OLLL",
+"RMDDL",
+22
+],
+[
+"OLLL",
+"RMDL",
+6
+],
+[
+"OLLL",
+"RMDVL",
+3
+],
+[
+"OLLL",
+"RMEL",
+5
+],
+[
+"OLLL",
+"SAADR",
+3
+],
+[
+"OLLL",
+"SMDDL",
+8
+],
+[
+"OLLL",
+"SMDDR",
+9
+],
+[
+"OLLL",
+"SMDVR",
+10
+],
+[
+"OLLL",
+"URBL",
+1
+],
+[
+"OLLL",
+"URYDL",
+5
+],
+[
+"OLLL",
+"URYVL",
+10
+],
+[
+"OLLR",
+"OLQDR",
+1
+],
+[
+"OLLR",
+"RMDDR",
+26
+],
+[
+"OLLR",
+"RMDL",
+12
+],
+[
+"OLLR",
+"RMDR",
+4
+],
+[
+"OLLR",
+"RMDVR",
+6
+],
+[
+"OLLR",
+"RMED",
+1
+],
+[
+"OLLR",
+"RMEL",
+1
+],
+[
+"OLLR",
+"RMER",
+3
+],
+[
+"OLLR",
+"SAADL",
+4
+],
+[
+"OLLR",
+"SAAVL",
+1
+],
+[
+"OLLR",
+"SMDDL",
+3
+],
+[
+"OLLR",
+"SMDDR",
+1
+],
+[
+"OLLR",
+"SMDVL",
+11
+],
+[
+"OLLR",
+"SMDVR",
+4
+],
+[
+"OLLR",
+"URBR",
+1
+],
+[
+"OLQDL",
+"RICR",
+6
+],
+[
+"OLQDL",
+"RIH",
+14
+],
+[
+"OLQDL",
+"RMDDL",
+1
+],
+[
+"OLQDL",
+"RMDDR",
+10
+],
+[
+"OLQDL",
+"RMDVL",
+1
+],
+[
+"OLQDL",
+"RMED",
+1
+],
+[
+"OLQDL",
+"RMEL",
+2
+],
+[
+"OLQDL",
+"URBL",
+3
+],
+[
+"OLQDL",
+"URYDL",
+5
+],
+[
+"OLQDR",
+"RICL",
+2
+],
+[
+"OLQDR",
+"RICR",
+2
+],
+[
+"OLQDR",
+"RIH",
+11
+],
+[
+"OLQDR",
+"RMDDL",
+11
+],
+[
+"OLQDR",
+"RMDVR",
+1
+],
+[
+"OLQDR",
+"RMER",
+1
+],
+[
+"OLQDR",
+"URBR",
+9
+],
+[
+"OLQDR",
+"URYDR",
+1
+],
+[
+"OLQVL",
+"RICL",
+5
+],
+[
+"OLQVL",
+"RIH",
+13
+],
+[
+"OLQVL",
+"RMDDL",
+3
+],
+[
+"OLQVL",
+"RMDVR",
+16
+],
+[
+"OLQVL",
+"URXL",
+2
+],
+[
+"OLQVL",
+"URYVL",
+9
+],
+[
+"OLQVR",
+"RICR",
+3
+],
+[
+"OLQVR",
+"RIH",
+25
+],
+[
+"OLQVR",
+"RMDDR",
+1
+],
+[
+"OLQVR",
+"RMDVL",
+23
+],
+[
+"OLQVR",
+"RMER",
+2
+],
+[
+"OLQVR",
+"URBR",
+5
+],
+[
+"OLQVR",
+"URXR",
+2
+],
+[
+"RIAL",
+"RIAR",
+61
+],
+[
+"RIAL",
+"RIH",
+34
+],
+[
+"RIAL",
+"RIML",
+5
+],
+[
+"RIAL",
+"RIMR",
+2
+],
+[
+"RIAL",
+"RIVL",
+13
+],
+[
+"RIAL",
+"RIVR",
+18
+],
+[
+"RIAL",
+"RMDDL",
+49
+],
+[
+"RIAL",
+"RMDDR",
+35
+],
+[
+"RIAL",
+"RMDL",
+46
+],
+[
+"RIAL",
+"RMDR",
+31
+],
+[
+"RIAL",
+"RMDVL",
+48
+],
+[
+"RIAL",
+"RMDVR",
+48
+],
+[
+"RIAL",
+"SAADL",
+1
+],
+[
+"RIAL",
+"SMBDR",
+7
+],
+[
+"RIAL",
+"SMDDL",
+31
+],
+[
+"RIAL",
+"SMDDR",
+38
+],
+[
+"RIAL",
+"SMDVL",
+37
+],
+[
+"RIAL",
+"SMDVR",
+56
+],
+[
+"RIAL",
+"URXL",
+17
+],
+[
+"RIAL",
+"URYVL",
+2
+],
+[
+"RIAR",
+"RIH",
+36
+],
+[
+"RIAR",
+"RIVL",
+5
+],
+[
+"RIAR",
+"RIVR",
+5
+],
+[
+"RIAR",
+"RMDDL",
+49
+],
+[
+"RIAR",
+"RMDDR",
+54
+],
+[
+"RIAR",
+"RMDL",
+31
+],
+[
+"RIAR",
+"RMDR",
+56
+],
+[
+"RIAR",
+"RMDVL",
+57
+],
+[
+"RIAR",
+"RMDVR",
+48
+],
+[
+"RIAR",
+"SAADR",
+1
+],
+[
+"RIAR",
+"SAAVR",
+2
+],
+[
+"RIAR",
+"SMBDR",
+2
+],
+[
+"RIAR",
+"SMBVR",
+3
+],
+[
+"RIAR",
+"SMDDL",
+47
+],
+[
+"RIAR",
+"SMDDR",
+29
+],
+[
+"RIAR",
+"SMDVL",
+74
+],
+[
+"RIAR",
+"SMDVR",
+43
+],
+[
+"RIAR",
+"URXR",
+20
+],
+[
+"RIAR",
+"URYVR",
+2
+],
+[
+"RICL",
+"RICR",
+5
+],
+[
+"RICL",
+"RIML",
+1
+],
+[
+"RICL",
+"RIMR",
+8
+],
+[
+"RICL",
+"RIVR",
+4
+],
+[
+"RICL",
+"SAAVL",
+2
+],
+[
+"RICL",
+"SMBDL",
+5
+],
+[
+"RICL",
+"SMBDR",
+1
+],
+[
+"RICL",
+"SMDDL",
+11
+],
+[
+"RICL",
+"SMDDR",
+8
+],
+[
+"RICL",
+"SMDVR",
+1
+],
+[
+"RICL",
+"URBL",
+1
+],
+[
+"RICL",
+"URBR",
+3
+],
+[
+"RICL",
+"URXL",
+8
+],
+[
+"RICR",
+"RIML",
+11
+],
+[
+"RICR",
+"RIMR",
+1
+],
+[
+"RICR",
+"RIVL",
+1
+],
+[
+"RICR",
+"SMBDR",
+3
+],
+[
+"RICR",
+"SMDDL",
+9
+],
+[
+"RICR",
+"SMDDR",
+9
+],
+[
+"RICR",
+"SMDVL",
+6
+],
+[
+"RICR",
+"SMDVR",
+3
+],
+[
+"RICR",
+"URBL",
+1
+],
+[
+"RICR",
+"URBR",
+3
+],
+[
+"RICR",
+"URXR",
+4
+],
+[
+"RID",
+"RMED",
+5
+],
+[
+"RID",
+"URXL",
+1
+],
+[
+"RID",
+"URYVL",
+4
+],
+[
+"RIH",
+"RMER",
+6
+],
+[
+"RIH",
+"RMEV",
+12
+],
+[
+"RIH",
+"SMBDL",
+2
+],
+[
+"RIH",
+"URADL",
+3
+],
+[
+"RIH",
+"URAVR",
+2
+],
+[
+"RIH",
+"URYVL",
+2
+],
+[
+"RIH",
+"URYVR",
+4
+],
+[
+"RIML",
+"RIMR",
+6
+],
+[
+"RIML",
+"RMDL",
+13
+],
+[
+"RIML",
+"RMDR",
+21
+],
+[
+"RIML",
+"SAADL",
+12
+],
+[
+"RIML",
+"SAADR",
+18
+],
+[
+"RIML",
+"SAAVL",
+15
+],
+[
+"RIML",
+"SAAVR",
+22
+],
+[
+"RIML",
+"SMDDL",
+13
+],
+[
+"RIML",
+"SMDDR",
+14
+],
+[
+"RIML",
+"SMDVL",
+11
+],
+[
+"RIML",
+"SMDVR",
+1
+],
+[
+"RIMR",
+"RMDL",
+15
+],
+[
+"RIMR",
+"RMDR",
+13
+],
+[
+"RIMR",
+"SAADL",
+16
+],
+[
+"RIMR",
+"SAADR",
+23
+],
+[
+"RIMR",
+"SAAVL",
+44
+],
+[
+"RIMR",
+"SAAVR",
+15
+],
+[
+"RIMR",
+"SMDDL",
+10
+],
+[
+"RIMR",
+"SMDDR",
+17
+],
+[
+"RIMR",
+"SMDVL",
+2
+],
+[
+"RIMR",
+"SMDVR",
+3
+],
+[
+"RIVL",
+"RIVR",
+37
+],
+[
+"RIVL",
+"RMDL",
+5
+],
+[
+"RIVL",
+"RMDVL",
+5
+],
+[
+"RIVL",
+"SAADR",
+13
+],
+[
+"RIVL",
+"SMBDR",
+1
+],
+[
+"RIVL",
+"SMDDR",
+9
+],
+[
+"RIVL",
+"SMDVL",
+10
+],
+[
+"RIVR",
+"RMDDL",
+1
+],
+[
+"RIVR",
+"RMDR",
+4
+],
+[
+"RIVR",
+"RMDVR",
+1
+],
+[
+"RIVR",
+"SAADL",
+14
+],
+[
+"RIVR",
+"SMBVL",
+1
+],
+[
+"RIVR",
+"SMDDL",
+7
+],
+[
+"RIVR",
+"SMDVR",
+12
+],
+[
+"RMDDL",
+"RMDDR",
+1
+],
+[
+"RMDDL",
+"RMDL",
+1
+],
+[
+"RMDDL",
+"RMDR",
+6
+],
+[
+"RMDDL",
+"RMDVL",
+3
+],
+[
+"RMDDL",
+"RMDVR",
+65
+],
+[
+"RMDDL",
+"RMEV",
+3
+],
+[
+"RMDDL",
+"SMDDL",
+3
+],
+[
+"RMDDL",
+"SMDVR",
+3
+],
+[
+"RMDDL",
+"URAVL",
+7
+],
+[
+"RMDDL",
+"URXR",
+2
+],
+[
+"RMDDL",
+"URYDR",
+9
+],
+[
+"RMDDL",
+"URYVL",
+23
+],
+[
+"RMDDR",
+"RMDL",
+8
+],
+[
+"RMDDR",
+"RMDVL",
+67
+],
+[
+"RMDDR",
+"RMDVR",
+8
+],
+[
+"RMDDR",
+"RMEV",
+1
+],
+[
+"RMDDR",
+"SAADR",
+1
+],
+[
+"RMDDR",
+"SMDDR",
+1
+],
+[
+"RMDDR",
+"SMDVL",
+3
+],
+[
+"RMDDR",
+"URAVR",
+1
+],
+[
+"RMDDR",
+"URBL",
+2
+],
+[
+"RMDDR",
+"URYDL",
+15
+],
+[
+"RMDDR",
+"URYVR",
+32
+],
+[
+"RMDL",
+"RMDR",
+19
+],
+[
+"RMDL",
+"RMDVL",
+3
+],
+[
+"RMDL",
+"RMDVR",
+3
+],
+[
+"RMDL",
+"RMER",
+1
+],
+[
+"RMDL",
+"SMBVR",
+4
+],
+[
+"RMDL",
+"SMDDL",
+5
+],
+[
+"RMDL",
+"SMDDR",
+1
+],
+[
+"RMDL",
+"URBR",
+1
+],
+[
+"RMDL",
+"URXR",
+1
+],
+[
+"RMDL",
+"URYVR",
+2
+],
+[
+"RMDR",
+"RMDVL",
+11
+],
+[
+"RMDR",
+"RMDVR",
+1
+],
+[
+"RMDR",
+"SMBVR",
+3
+],
+[
+"RMDR",
+"SMDDL",
+1
+],
+[
+"RMDR",
+"SMDDR",
+2
+],
+[
+"RMDR",
+"URBR",
+1
+],
+[
+"RMDR",
+"URXR",
+8
+],
+[
+"RMDVL",
+"RMDVR",
+1
+],
+[
+"RMDVL",
+"SAAVL",
+3
+],
+[
+"RMDVL",
+"SMDVL",
+5
+],
+[
+"RMDVL",
+"URAVR",
+1
+],
+[
+"RMDVL",
+"URYDL",
+18
+],
+[
+"RMDVL",
+"URYVR",
+20
+],
+[
+"RMDVR",
+"SAADL",
+2
+],
+[
+"RMDVR",
+"SAAVR",
+9
+],
+[
+"RMDVR",
+"SMBDR",
+1
+],
+[
+"RMDVR",
+"SMBVL",
+1
+],
+[
+"RMDVR",
+"SMDVR",
+8
+],
+[
+"RMDVR",
+"URAVL",
+9
+],
+[
+"RMDVR",
+"URYDR",
+12
+],
+[
+"RMDVR",
+"URYVL",
+17
+],
+[
+"RMED",
+"RMEV",
+7
+],
+[
+"RMED",
+"SMBDL",
+4
+],
+[
+"RMED",
+"SMBDR",
+25
+],
+[
+"RMED",
+"SMDDL",
+1
+],
+[
+"RMED",
+"SMDDR",
+4
+],
+[
+"RMED",
+"SMDVR",
+9
+],
+[
+"RMED",
+"URYDR",
+7
+],
+[
+"RMEL",
+"RMEV",
+5
+],
+[
+"RMEL",
+"URADL",
+8
+],
+[
+"RMEL",
+"URAVL",
+8
+],
+[
+"RMEL",
+"URAVR",
+1
+],
+[
+"RMER",
+"RMEV",
+1
+],
+[
+"RMER",
+"URADR",
+1
+],
+[
+"RMER",
+"URAVL",
+3
+],
+[
+"RMER",
+"URAVR",
+4
+],
+[
+"RMEV",
+"SAAVR",
+1
+],
+[
+"RMEV",
+"SMBVL",
+20
+],
+[
+"RMEV",
+"SMBVR",
+8
+],
+[
+"RMEV",
+"SMDDR",
+1
+],
+[
+"RMEV",
+"SMDVL",
+2
+],
+[
+"RMEV",
+"URAVL",
+10
+],
+[
+"RMEV",
+"URAVR",
+2
+],
+[
+"SAADL",
+"SMBDL",
+3
+],
+[
+"SAADL",
+"SMBVL",
+16
+],
+[
+"SAADR",
+"SMBDR",
+2
+],
+[
+"SAADR",
+"SMBVR",
+13
+],
+[
+"SAADR",
+"SMDVL",
+5
+],
+[
+"SAAVL",
+"SAAVR",
+1
+],
+[
+"SAAVL",
+"SMBDR",
+12
+],
+[
+"SAAVL",
+"SMBVR",
+17
+],
+[
+"SAAVL",
+"SMDDR",
+18
+],
+[
+"SAAVL",
+"SMDVL",
+9
+],
+[
+"SAAVR",
+"SMBDL",
+11
+],
+[
+"SAAVR",
+"SMBVL",
+16
+],
+[
+"SAAVR",
+"SMDDL",
+22
+],
+[
+"SMBDL",
+"SMBDR",
+3
+],
+[
+"SMBDL",
+"SMBVL",
+4
+],
+[
+"SMBDL",
+"SMDDL",
+10
+],
+[
+"SMBDL",
+"URBR",
+4
+],
+[
+"SMBDR",
+"SMBVR",
+4
+],
+[
+"SMBDR",
+"SMDDR",
+8
+],
+[
+"SMBDR",
+"URBL",
+3
+],
+[
+"SMBDR",
+"URYVR",
+1
+],
+[
+"SMBVR",
+"URBR",
+2
+],
+[
+"SMBVR",
+"URXR",
+7
+],
+[
+"SMDDL",
+"SMDDR",
+5
+],
+[
+"SMDDL",
+"SMDVL",
+2
+],
+[
+"SMDDL",
+"SMDVR",
+31
+],
+[
+"SMDDL",
+"URYDL",
+3
+],
+[
+"SMDDL",
+"URYDR",
+11
+],
+[
+"SMDDR",
+"SMDVL",
+28
+],
+[
+"SMDDR",
+"URYDL",
+3
+],
+[
+"SMDVL",
+"SMDVR",
+3
+],
+[
+"SMDVL",
+"URYVR",
+11
+],
+[
+"SMDVR",
+"URYDR",
+3
+],
+[
+"SMDVR",
+"URYVL",
+13
+],
+[
+"URADR",
+"URYDR",
+2
+],
+[
+"URAVR",
+"URYVR",
+1
+],
+[
+"URBL",
+"URXL",
+26
+],
+[
+"URBL",
+"URYDL",
+1
+],
+[
+"URBR",
+"URXR",
+24
+],
+[
+"URXL",
+"URYVL",
+2
+],
+[
+"URXR",
+"URYDR",
+1
+]
+],
 "sources": {
 "positions": "OpenWorm CElegansNeuroML (from the WormBase Virtual Worm), github.com/openworm/CElegansNeuroML",
+"roles": "Cook et al. 2019 cell categories as listed in OpenWorm ConnectomeToolbox cect/Cells.py",
 "wiring": "Cook et al. 2019, Nature 571:63-71, doi:10.1038/s41586-019-1352-7 (SI 5, corrected July 2020), via OpenWorm ConnectomeToolbox"
 }
 }
