@@ -33,6 +33,30 @@ every one of them, including those that don't help.
 - If nothing passes, that is the result: the headline model is already about as good as these data allow with these
   methods.
 
+## Results (2026-11-09)
+
+| Candidate | Median AUC, unseen worms | Better than M0 in | Holm-corrected p | Counts as an improvement |
+|---|---|---|---|---|
+| M0 headline | 0.677 | – | – | reference |
+| C1 tuned regularisation | 0.678 | 29 of 40 | 0.010 | yes, but negligible (+0.0006) |
+| C2 longer history | 0.683 | 18 of 40 | 0.51 | no |
+| C3 body history (both models) | 0.682 | 23 of 40 | 0.15 | no |
+| **C4 gradient-boosted trees** | **0.697** | **30 of 40** | **0.0006** | **yes (+0.03)** |
+| C5 combination of passing (C1 + C4) | 0.697 | 30 of 40 | 0.0006 | same as C4 (tuning C doesn't apply to trees) |
+
+- **The one meaningful gain is nonlinearity:** boosted trees add about 0.03 AUC, so neurons carry some information in
+  combination that a straight weighted sum misses. With boosted trees on both sides, the brain still beats the body
+  alone (0.70 vs 0.65, 33 of 40 worms; `results/explore.json`).
+- **The brain's advantage survives a stronger body baseline** (C3: brain + body beats the improved body model in
+  29 of 40 worms).
+- **Caveat:** tuning picked the strongest regularisation offered (0.01) for every worm, the edge of the list. Stronger
+  regularisation might help a little more; testing it now would be choosing after seeing results, so it's left as a
+  next step.
+- **The live page keeps the linear model on purpose:** it runs exactly in the browser and its "why" breakdown is exact.
+  Boosted trees would be +0.03 AUC but neither.
+- The throwaway experiment code is on the [`prototype/accuracy`](https://github.com/xsaiki-design/c-elegans-behavior-prediction/tree/prototype/accuracy)
+  branch (`worms/prototype_accuracy.py`); its sanity check reproduces the headline exactly before testing anything.
+
 ## Interview questions you might get
 
 - *Why not just report the best model?* Picking the best of several on the same test data inflates it; the rule and the
