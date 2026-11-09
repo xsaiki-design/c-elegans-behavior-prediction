@@ -9,6 +9,10 @@ from pathlib import Path
 import h5py
 import numpy as np
 
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+
 from worms.evaluate import fit_without
 from worms.features import class_activity
 from worms.run import CHANGE_FRAMES, DATA, HORIZON, common_classes, frames, load_labelled_worms, samples
@@ -111,7 +115,9 @@ def main():
     out = []
     for i in picked:
         uid, w = uids[i], worms[uids[i]]
-        models = {name: fit_without([s[name] for s in per_worm], i) for name in ["body", "brain+body"]}
+        # live model: linear with the regularisation that follow-up 0006 tuned (0.001, chosen for 38 of 40 worms)
+        live = lambda: make_pipeline(StandardScaler(), LogisticRegression(C=0.001, max_iter=2000))  # noqa: E731
+        models = {name: fit_without([s[name] for s in per_worm], i, live) for name in ["body", "brain+body"]}
         sets, _, usable = frames(w, classes, HORIZON)
         reference = np.full(len(usable), np.nan)
         reference[usable] = models["brain+body"].predict_proba(sets["brain+body"][usable])[:, 1]
