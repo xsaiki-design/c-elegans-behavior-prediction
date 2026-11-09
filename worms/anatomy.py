@@ -7,6 +7,7 @@
 import hashlib
 import json
 import re
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -73,19 +74,31 @@ def main():
     if hashlib.sha256(xlsx.read_bytes()).hexdigest() != COOK_SHA:
         raise SystemExit(f"{xlsx}: checksum mismatch")
     wb = load_workbook(xlsx, read_only=True, data_only=True)
-    edges = class_edges(read_matrix(wb["hermaphrodite chemical"]), read_matrix(wb["hermaphrodite gap jn symmetric"]), cls)
+    chemical = read_matrix(wb["hermaphrodite chemical"])
+    edges = class_edges(chemical, read_matrix(wb["hermaphrodite gap jn symmetric"]), cls)
     neurons = []
     for name in sorted(cls):
         lr, ap, dv = soma_position(name)
         neurons.append({"name": name, "class": cls[name], "ap": round(ap, 1), "dv": round(dv, 1), "lr": round(lr, 1)})
+    # every other neuron in the head, so the map shows the model's neurons in context (non-neurons have no model file)
+    head_end = max(n["ap"] for n in neurons) + 5
+    others = []
+    for name in sorted({c for pair in chemical for c in pair} - set(cls)):
+        try:
+            lr, ap, dv = soma_position(name)
+        except urllib.error.HTTPError:
+            continue
+        if ap <= head_end:
+            others.append({"name": name, "ap": round(ap, 1), "dv": round(dv, 1)})
     OUT.write_text(json.dumps({
-        "neurons": neurons, "edges": edges,
+        "neurons": neurons, "others": others, "edges": edges,
         "sources": {
             "positions": "OpenWorm CElegansNeuroML (from the WormBase Virtual Worm), github.com/openworm/CElegansNeuroML",
             "wiring": "Cook et al. 2019, Nature 571:63-71, doi:10.1038/s41586-019-1352-7 (SI 5, corrected July 2020), via OpenWorm ConnectomeToolbox",
         },
     }, indent=0))
-    print(f"wrote {OUT}: {len(neurons)} neurons in {len(set(cls.values()))} classes, {len(edges)} class-to-class connections")
+    print(f"wrote {OUT}: {len(neurons)} model neurons in {len(set(cls.values()))} classes, {len(others)} other head neurons, "
+          f"{len(edges)} class-to-class connections")
 
 
 if __name__ == "__main__":
