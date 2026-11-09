@@ -45,6 +45,11 @@ Short Q&A: [`docs/faq.md`](docs/faq.md). One-page summary: [`docs/summary.pdf`](
 - **A stronger model agrees** (exploratory): boosted trees 0.70 vs 0.65, better in 33/40 worms.
 - **Accuracy follow-up** (pre-registered, [0005](docs/decisions/0005-accuracy-follow-up.md)): of five fixed candidates,
   only a nonlinear model helps meaningfully (0.70, +0.03, 30/40 worms); longer history and extra body signals don't.
+- **Best model, honestly measured** ([0007](docs/decisions/0007-honest-best-model.md)): with every modelling choice made
+  without the held-out worm, AUC 0.71 and average precision 0.59 (vs 0.68 / 0.53), better in 32 of 40 worms. Accuracy
+  has plateaued there; this was the last accuracy round on these worms.
+- **Accuracy follow-up 2** ([0006](docs/decisions/0006-accuracy-follow-up-2.md)): tuned boosted trees reach AUC 0.71
+  and average precision 0.59 (vs 0.68 / 0.53), better in 31 of 40 worms.
 - **All choices were fixed before any results** and committed in git: [`docs/decisions/`](docs/decisions). One slip
   (head angle missing from the body baseline) was caught in review, fixed and re-run; it's
   [logged](docs/decisions/0004-evaluation.md#correction-log).

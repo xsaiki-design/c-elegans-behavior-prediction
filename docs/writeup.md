@@ -121,6 +121,38 @@ the linear model barely moves it. With the stronger model on both sides, the bra
 (0.70 vs 0.65, 33 of 40 worms). Picking the best of several candidates on the same worms makes its number slightly
 optimistic, which is why the pre-registered model stays the headline.
 
+## Accuracy follow-up 2
+
+*Pre-registered before running ([decision 0006](decisions/0006-accuracy-follow-up-2.md)).* Alarm precision is the
+share of a model's riskiest 20 % of moments really followed by a reversal within 5 s.
+
+| Candidate | Median AUC | Avg precision | Alarm precision | vs headline (AUC) |
+|---|---|---|---|---|
+| M0 headline | 0.677 | 0.528 | 0.563 | reference |
+| D1 linear, wider tuning | 0.677 | 0.531 | 0.553 | +0.004, 25/40, Holm p 0.014: passes, negligible |
+| **D2 tuned boosted trees** | **0.711** | **0.589** | 0.601 | **+0.033, 31/40, Holm p < 0.0001** |
+| D3 average of D1 and D2 | 0.710 | 0.568 | **0.607** | +0.027, 34/40, Holm p < 0.0001 |
+
+Tuned boosted trees are the most accurate model so far (AUC 0.71, average precision 0.59). As planned, the live page now
+uses the tuned linear model (D1): its gain is negligible, but it stays linear, so it runs exactly in the browser and its
+"why" breakdown stays exact.
+
+## Final accuracy round: an honest best-model number
+
+*Pre-registered ([decision 0007](decisions/0007-honest-best-model.md)).* Earlier rounds picked winners by looking at
+the held-out worms, which can turn luck into apparent gains. Here every choice (settings, and linear vs trees vs their
+average) is made inside the 39 training worms; the held-out worm only scores the final pick.
+
+| Model | Median AUC | Avg precision | Alarm precision | vs headline (AUC) |
+|---|---|---|---|---|
+| M0 headline | 0.677 | 0.528 | 0.563 | reference |
+| E1 trees, extended settings | 0.710 | 0.583 | 0.604 | +0.029, 32/40, Holm p = 0.00002 |
+| **E2 selection-aware best model** | **0.707** | **0.589** | **0.602** | **+0.029, 32/40, Holm p = 0.00002** |
+
+**The follow-up result to quote is AUC 0.71 (0.707) and average precision 0.59**, against 0.68 and 0.53 for the
+pre-registered headline. Extending the search further changed nothing, so accuracy has plateaued for these features and
+animals; this was the last accuracy round on these 40 worms. A bigger gain now needs new animals, not more rounds.
+
 ## Limitations
 
 - **The effect is modest.** AUC 0.68 means the model ranks a "reversal coming" moment above a "no reversal" moment 68 %
