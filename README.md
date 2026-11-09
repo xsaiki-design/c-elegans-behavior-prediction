@@ -1,6 +1,8 @@
 # Predicting C. elegans reversals from whole-brain activity
 
 [![tests](https://github.com/xsaiki-design/c-elegans-behavior-prediction/actions/workflows/tests.yml/badge.svg)](https://github.com/xsaiki-design/c-elegans-behavior-prediction/actions/workflows/tests.yml)
+[![The live page: a real worm crawling, its reversal risk, and its neurons](docs/live-demo.gif)](https://xsaiki-design.github.io/c-elegans-behavior-prediction/live/)
+
 **[Try the interactive page](https://xsaiki-design.github.io/c-elegans-behavior-prediction/)**: pick an unseen worm,
 watch the model's risk rise before real reversals, and set your own alarm.
 

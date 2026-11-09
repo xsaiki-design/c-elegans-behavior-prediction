@@ -235,7 +235,9 @@ footer a { color: var(--neuron); }
     $("check").innerHTML = maxDiff < 0.001
       ? `Live model check: <b>matches the offline analysis</b> on ${k} frames (largest difference ${maxDiff.toExponential(1)}). Recording ${worm.uid}, a different animal from the other worm; both sit near the typical result across all 40 worms (+0.06). This worm's AUC (how well the model ranks moments by risk: 0.5 = guessing, 1 = perfect): ${worm.auc.brain_body.toFixed(2)} brain + body vs ${worm.auc.body.toFixed(2)} body only.`
       : `Live model check: differs from the offline analysis by up to ${maxDiff.toFixed(3)}.`;
-    t = Math.max(D.change_frames, (worm.reversing.indexOf(1) || 0) - 20);
+    // open on the build-up: ~25 s of forward crawling just before a reversal
+    const s0 = starts.find((s) => s > 60 && worm.reversing.slice(s - 40, s).every((v) => !v));
+    t = s0 ? s0 - 40 : D.change_frames;
   }
   function computeRisks() {
     for (const m of ["brain+body", "body"]) {
