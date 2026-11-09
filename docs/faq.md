@@ -43,6 +43,9 @@ stricter scaling and a stronger model give the same answer; shifting neuron labe
 caught it; I restored it, re-ran, and logged it. The result held. Also, the "alarm" analysis showed the brain model loses
 at last-second detection, which I report rather than hide.
 
+**What's the best honest accuracy?** AUC 0.71 with boosted trees, measured with every modelling choice made without the
+held-out worm (decision 0007), so the number isn't inflated by picking a winner. Further search changed nothing.
+
 **Can it be made more accurate?** I pre-registered five candidates and a correction for testing them all. Only a
 nonlinear model (boosted trees) helps meaningfully: 0.70 vs 0.68. The live page keeps the linear model so it can run
 exactly in the browser and explain every prediction.
