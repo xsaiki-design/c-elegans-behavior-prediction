@@ -101,6 +101,26 @@ real advance warning is required, the brain model catches more. This is the same
 told as an alarm, and it is the honest answer to "is the brain model better?": for early warning, yes; for
 last-moment detection, no. The interactive page lets you change both settings.
 
+## Accuracy follow-up
+
+*Pre-registered separately before running ([decision 0005](decisions/0005-accuracy-follow-up.md)); the headline above is
+unchanged.* Five fixed candidates, each tested on unseen worms, with tuning only inside the training worms and a
+Holm correction for testing five things at once:
+
+| Candidate | Median AUC, unseen worms | Better than M0 in | Holm-corrected p | Counts as an improvement |
+|---|---|---|---|---|
+| M0 headline | 0.677 | – | – | reference |
+| C1 tuned regularisation | 0.678 | 29 of 40 | 0.010 | yes, but negligible (+0.0006) |
+| C2 longer history | 0.683 | 18 of 40 | 0.51 | no |
+| C3 body history (both models) | 0.682 | 23 of 40 | 0.15 | no |
+| **C4 gradient-boosted trees** | **0.697** | **30 of 40** | **0.0006** | **yes (+0.03)** |
+| C5 combination of passing (C1 + C4) | 0.697 | 30 of 40 | 0.0006 | same as C4 (tuning C doesn't apply to trees) |
+
+Only a nonlinear model gives a meaningful gain (+0.03). Longer neural history and extra body history don't help; tuning
+the linear model barely moves it. With the stronger model on both sides, the brain still beats the body alone
+(0.70 vs 0.65, 33 of 40 worms). Picking the best of several candidates on the same worms makes its number slightly
+optimistic, which is why the pre-registered model stays the headline.
+
 ## Limitations
 
 - **The effect is modest.** AUC 0.68 means the model ranks a "reversal coming" moment above a "no reversal" moment 68 %
