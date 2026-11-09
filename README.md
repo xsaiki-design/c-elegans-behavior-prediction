@@ -22,7 +22,7 @@ animation uses worms with clean posture tracking in ≥ 90 % of frames; the rema
 good frames either side (`worms/showcase_data.py`, display only, the analysis doesn't use posture).
 
 Full write-up: [`docs/writeup.md`](docs/writeup.md) (2–3 pages: method, results, checks, limitations).
-Short Q&A: [`docs/faq.md`](docs/faq.md).
+Short Q&A: [`docs/faq.md`](docs/faq.md). One-page summary: [`docs/summary.pdf`](docs/summary.pdf).
 
 ## Key results
 
