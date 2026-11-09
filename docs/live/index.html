@@ -79,6 +79,19 @@ svg.map { width: 100%; height: auto; display: block; background: var(--bg); bord
 svg.map text { font: 9px var(--data); fill: var(--muted); }
 svg.map text.key { fill: var(--ink); font-weight: 500; }
 svg.map .edge { stroke: var(--muted); stroke-opacity: 0.18; }
+svg.map:not(.all) .edge.weak { display: none; }
+svg.map circle.other { fill: var(--muted); fill-opacity: 0.3; cursor: default; }
+.allconn { display: inline-flex; gap: 5px; align-items: center; font-size: 12px; color: var(--muted); cursor: pointer; }
+svg.map .link { stroke: var(--ink); stroke-opacity: 0.8; }
+svg.map line, svg.map text { pointer-events: none; }
+svg.map circle.hl { stroke: var(--ink); stroke-width: 1.5; }
+details.names { font-size: 12.5px; color: var(--muted); }
+details.names summary { cursor: pointer; color: var(--ink); }
+details.names dl { display: grid; grid-template-columns: 4.2em 1fr; gap: 3px 8px; margin: 8px 0 0; }
+details.names dt { font: 500 12px var(--data); color: var(--ink); }
+details.names dd { margin: 0; }
+.duel-key { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--muted); }
+.duel-key i { display: inline-block; width: 14px; height: 3px; vertical-align: middle; margin-right: 5px; border-radius: 2px; }
 svg.map .edge.on { stroke: var(--ink); stroke-opacity: 0.75; }
 svg.map circle { stroke: var(--bg); stroke-width: 0.8; cursor: pointer; }
 .why { display: grid; gap: 4px; font: 12px var(--data); }
@@ -97,7 +110,7 @@ button:focus-visible, select:focus-visible { outline: 2px solid var(--neuron); o
 .tabs button { border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: none; padding: 6px 10px; color: var(--muted); }
 .tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--risk); }
 .tabpanel { display: grid; gap: 12px; align-content: start; }
-canvas.duel { width: 100%; height: 150px; display: block; }
+canvas.duel { width: 100%; height: 180px; display: block; }
 .board { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .side { border: 1px solid var(--line); border-radius: 6px; padding: 10px; display: grid; gap: 6px; min-width: 0; }
 .side h3 { margin: 0; font: 600 14px var(--display); display: flex; align-items: center; gap: 6px; }
@@ -159,11 +172,23 @@ footer a { color: var(--neuron); }
           <button type="button" data-view="activity" aria-pressed="true">Activity</button>
           <button type="button" data-view="why" aria-pressed="false">Why this risk?</button>
         </div>
+        <label class="allconn"><input type="checkbox" id="allconn"> Show all connections</label>
       </div>
       <svg class="map" id="map" viewBox="0 0 420 196" role="img" aria-label="Side view of the worm's head: each dot is a neuron at its real position, lines are its real connections"></svg>
-      <p class="note" id="mapnote">Side view of the head (nose left, back of the worm up), turned so the head lies level. Each dot is one
-        neuron at its real cell-body position; lines join neuron types with at least 10 synapses between them. Brightness is the recorded
+      <p class="note" id="mapnote">Side view of the head (nose left, back of the worm up), turned so the head lies level, with every
+        neuron at its real cell-body position. Coloured dots are the 115 neurons (46 types) the model reads; grey dots are the
+        other head neurons, recorded in too few worms to use. Lines join the model's neuron types: those with 10 or more
+        synapses, or all 311 links with "Show all connections" (links to grey neurons aren't drawn). Hover a neuron to see its
+        own connections to the other coloured neurons. Brightness is the recorded
         activity (left/right partners share their type's average). Hover a neuron to see its connections.</p>
+      <details class="names" id="names">
+        <summary>What do the names mean?</summary>
+        <p>Names like AVA or RME aren't abbreviations: they're labels given to each neuron type when the worm's nervous system
+          was first mapped (White et al. 1986). A final L or R means the left or right cell of a pair; D or V means dorsal
+          (back) or ventral (belly). Roles below: the highlighted types in plain words, then every type's category from the
+          Cook et al. 2019 wiring study.</p>
+        <dl id="namelist"></dl>
+      </details>
       <div class="why" id="why" hidden></div>
       </div>
       <div class="tabpanel" role="tabpanel" id="panel-compare" aria-labelledby="tab-compare" hidden>
@@ -179,6 +204,10 @@ footer a { color: var(--neuron); }
           <option value="3" selected>at least 1.8 s before</option>
           <option value="5">at least 3 s before</option>
         </select>
+        <div class="duel-key"><span><i style="background:var(--risk)"></i>predicted risk, brain + body</span>
+          <label><input type="checkbox" id="showbody" checked> <i style="background:var(--body)"></i>predicted risk, body only</label>
+          <span><i style="background:var(--neuron)"></i>real worm: recorded speed (forward up, backward down)</span>
+          <span><i style="background:var(--reversal)"></i>real reversals</span></div>
         <canvas class="duel" id="duel" aria-label="Both models' risk over the last 60 seconds; ticks show each reversal warned of or missed"></canvas>
         <div class="board" id="board"></div>
         <p class="note">Ticks above each reversal: filled = warned of in time, hollow = missed. Top row brain + body, bottom row body only.
@@ -369,7 +398,15 @@ footer a { color: var(--neuron); }
     dctx.fillStyle = cssVar("--reversal"); dctx.globalAlpha = 0.25;
     for (let f = f0; f <= f1; f++) if (worm.reversing[f]) dctx.fillRect(x(f), top - 4, Math.max(1, w / win + 0.5), h);
     dctx.globalAlpha = 1;
+    // the real worm: its recorded speed, scaled to the chart (dotted zero line = standing still)
+    const vmax = Math.max(...worm.velocity.map(Math.abs)) || 1, ys = (v) => top + (h - top) / 2 - (v / vmax) * (h - top) / 2.2;
+    dctx.strokeStyle = cssVar("--neuron"); dctx.globalAlpha = 0.3; dctx.setLineDash([1, 3]); dctx.lineWidth = 1;
+    dctx.beginPath(); dctx.moveTo(0, ys(0)); dctx.lineTo(w, ys(0)); dctx.stroke(); dctx.setLineDash([]);
+    dctx.globalAlpha = 0.75; dctx.lineWidth = 1.2; dctx.beginPath();
+    for (let f = f0; f <= f1; f++) f === f0 ? dctx.moveTo(x(f), ys(worm.velocity[f])) : dctx.lineTo(x(f), ys(worm.velocity[f]));
+    dctx.stroke(); dctx.globalAlpha = 1;
     for (const [m, color, row] of [["brain+body", "--risk", 6], ["body", "--body", 16]]) {
+      if (m === "body" && !$("showbody").checked) continue;
       const c = cssVar(color);
       dctx.strokeStyle = c; dctx.globalAlpha = 0.5; dctx.setLineDash([3, 3]); dctx.lineWidth = 1;
       dctx.beginPath(); dctx.moveTo(0, y(thrBy[m])); dctx.lineTo(w, y(thrBy[m])); dctx.stroke(); dctx.setLineDash([]); dctx.globalAlpha = 1;
@@ -422,29 +459,50 @@ footer a { color: var(--neuron); }
     let flipX = 1, flipY = 1;
     if (byName.I1L && byName.AVAL && byName.I1L[0] > byName.AVAL[0]) flipX = -1;   // pharynx (front) must be left of AVA
     if (byName.RMED && byName.RMEV && byName.RMED[1] < byName.RMEV[1]) flipY = -1;  // RME dorsal must sit above RME ventral
-    const pts = A.neurons.map((d) => { const [u, v] = rot(d); return [u * flipX, v * flipY]; });
-    const u0 = Math.min(...pts.map((p) => p[0])) - 3, u1 = Math.max(...pts.map((p) => p[0])) + 3;
-    const v0 = Math.min(...pts.map((p) => p[1])) - 3, v1 = Math.max(...pts.map((p) => p[1])) + 3;
+    const place = (d) => { const [u, v] = rot(d); return [u * flipX, v * flipY]; };
+    const pts = A.neurons.map(place), opts = (A.others || []).map(place), all = pts.concat(opts);
+    const u0 = Math.min(...all.map((p) => p[0])) - 3, u1 = Math.max(...all.map((p) => p[0])) + 3;
+    const v0 = Math.min(...all.map((p) => p[1])) - 3, v1 = Math.max(...all.map((p) => p[1])) + 3;
     const k = Math.min(400 / (u1 - u0), 158 / (v1 - v0));
     const X = (u) => 10 + (u - u0) * k, Y = (v) => 20 + (v1 - v) * k;
     const H = Math.ceil(20 + (v1 - v0) * k + 18);
     svg.setAttribute("viewBox", `0 0 420 ${H}`);
-    const centre = {};
+    const centre = {}, pos = {};
+    // hover: this neuron's own connections (neuron to neuron, Cook et al. 2019), drawn from its own dot
+    const hl = mk("g", {}, svg);
+    const showLinks = (name) => {
+      hideLinks();
+      const [x, y, dot] = pos[name]; dot.classList.add("hl");
+      for (const [a, b, n] of A.links) {
+        const other = a === name ? b : b === name ? a : null;
+        if (!other || !pos[other]) continue;
+        mk("line", { x1: x, y1: y, x2: pos[other][0], y2: pos[other][1], class: "link", "stroke-width": (0.5 + Math.log1p(n) / 2).toFixed(2) }, hl);
+        pos[other][2].classList.add("hl");
+      }
+    };
+    const hideLinks = () => { hl.replaceChildren(); svg.querySelectorAll("circle.hl").forEach((d) => d.classList.remove("hl")); };
     A.neurons.forEach((n, i) => (centre[n.class] ??= []).push([X(pts[i][0]), Y(pts[i][1])]));
     for (const c in centre) centre[c] = centre[c].reduce((s, p) => [s[0] + p[0] / centre[c].length, s[1] + p[1] / centre[c].length], [0, 0]);
-    edgeEls = A.edges.filter((e) => e.chemical + e.electrical >= 10).map((e) => {
-      const l = mk("line", { x1: centre[e.a][0], y1: centre[e.a][1], x2: centre[e.b][0], y2: centre[e.b][1], class: "edge",
+    A.others?.forEach((n, i) => { // head neurons the model doesn't read: shown for context, no activity
+      const c = mk("circle", { cx: X(opts[i][0]), cy: Y(opts[i][1]), r: 2.2, class: "other" }, svg);
+      mk("title", {}, c).textContent = `${n.name}: ${n.role || "head neuron"} (not read by the model)`;
+    });
+    edgeEls = A.edges.map((e) => {
+      const l = mk("line", { x1: centre[e.a][0], y1: centre[e.a][1], x2: centre[e.b][0], y2: centre[e.b][1],
+        class: e.chemical + e.electrical >= 10 ? "edge" : "edge weak",
         "stroke-width": (0.4 + Math.log1p(e.chemical + e.electrical) / 2.5).toFixed(2) }, svg);
       return [e.a, e.b, l];
     });
     dotsBy = {};
     A.neurons.forEach((n, i) => {
       const c = mk("circle", { cx: X(pts[i][0]), cy: Y(pts[i][1]), r: 3.6 }, svg);
-      mk("title", {}, c).textContent = `${n.name} (${n.class})`;
-      c.addEventListener("mouseenter", () => edgeEls.forEach(([a, b, l]) => l.classList.toggle("on", a === n.class || b === n.class)));
-      c.addEventListener("mouseleave", () => edgeEls.forEach(([, , l]) => l.classList.remove("on")));
+      mk("title", {}, c).textContent = `${n.name}: ${ROLE[n.class] || n.role}`;
+      pos[n.name] = [X(pts[i][0]), Y(pts[i][1]), c];
+      c.addEventListener("mouseenter", () => showLinks(n.name));
+      c.addEventListener("mouseleave", hideLinks);
       (dotsBy[n.class] ??= []).push(c);
     });
+    svg.appendChild(hl);
     const placed = []; // label the key types, skipping any that would overlap one already placed
     for (const c of KEY) {
       if (!centre[c]) continue;
@@ -462,6 +520,17 @@ footer a { color: var(--neuron); }
 
   // Exact breakdown of the risk at frame f: each signal's push on the log-odds (the model is linear, so they add up).
   const BODY = ["speed", "head angle", "time since reversal"];
+  // Plain-language roles for the highlighted types (Gray et al. 2005; Gordus et al. 2015; links from the wiring data here)
+  const ROLE = {
+    AVA: "command interneuron for backward crawling; active during reversals",
+    AVE: "works with AVA to drive backward crawling",
+    AIB: "interneuron that promotes reversals",
+    RIM: "part of the reversal circuit with AIB and AVA",
+    AIY: "interneuron that promotes forward runs",
+    RIA: "interneuron wired most strongly to the head-bending motor neurons RMD and SMD",
+    RME: "motor neurons for the head muscles",
+    SMD: "motor neurons for bending the head",
+  };
   const MAPNOTE = document.getElementById("mapnote").textContent;
   function contributions(f) {
     if (risks[f] === null) return null;
@@ -520,6 +589,9 @@ footer a { color: var(--neuron); }
   const getJSON = (u) => fetch(u).then((r) => { if (!r.ok) throw new Error(`${u}: ${r.status}`); return r.json(); });
   Promise.all([getJSON("showcase.json"), getJSON("anatomy.json")]).then(([d, anatomy]) => {
     D = d; A = anatomy; buildMap();
+    const roleOf = {}; for (const n of A.neurons) roleOf[n.class] ??= n.role;
+    $("namelist").innerHTML = [...KEY.filter((c) => roleOf[c]), ...Object.keys(roleOf).filter((c) => !KEY.includes(c)).sort()]
+      .map((c) => `<dt>${c}</dt><dd>${ROLE[c] || roleOf[c]}</dd>`).join("");
     d.worms.forEach((w, i) => { const o = document.createElement("option"); o.value = i; o.textContent = `Worm ${i + 1} · AUC ${w.auc.brain_body.toFixed(2)} vs ${w.auc.body.toFixed(2)}`; o.title = `Recording ${w.uid}`; $("worm").appendChild(o); });
     load(0);
     if (reduce) { playing = false; $("play").textContent = "Play"; }
@@ -535,6 +607,7 @@ footer a { color: var(--neuron); }
       document.querySelectorAll("[data-model]").forEach((x) => x.setAttribute("aria-pressed", x === b)); redraw();
     }));
     addEventListener("resize", redraw);
+    $("allconn").addEventListener("change", (e) => $("map").classList.toggle("all", e.target.checked));
     document.querySelectorAll("[data-view]").forEach((b) => b.addEventListener("click", () => {
       view = b.dataset.view; $("why").hidden = view !== "why";
       $("mapnote").textContent = view === "why"
@@ -543,6 +616,7 @@ footer a { color: var(--neuron); }
       document.querySelectorAll("[data-view]").forEach((x) => x.setAttribute("aria-pressed", x === b)); redraw();
     }));
     $("lead").addEventListener("change", () => { scoreOutcomes(); redraw(); });
+    $("showbody").addEventListener("change", redraw);
     const tabs = [$("tab-live"), $("tab-compare")];
     const show = (tab) => {
       for (const b of tabs) {
