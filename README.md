@@ -43,6 +43,8 @@ Short Q&A: [`docs/faq.md`](docs/faq.md). One-page summary: [`docs/summary.pdf`](
 - **Which neurons:** AIB rising is the clearest build-up signal. AVA/AVE/RIM look *lower* before reversals, but that
   turns out to be leftover activity from the previous reversal. [Details](docs/writeup.md#results)
 - **A stronger model agrees** (exploratory): boosted trees 0.70 vs 0.65, better in 33/40 worms.
+- **Accuracy follow-up** (pre-registered, [0005](docs/decisions/0005-accuracy-follow-up.md)): of five fixed candidates,
+  only a nonlinear model helps meaningfully (0.70, +0.03, 30/40 worms); longer history and extra body signals don't.
 - **All choices were fixed before any results** and committed in git: [`docs/decisions/`](docs/decisions). One slip
   (head angle missing from the body baseline) was caught in review, fixed and re-run; it's
   [logged](docs/decisions/0004-evaluation.md#correction-log).
