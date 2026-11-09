@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Worm Reversal Forecast: one-page summary</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@600&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<style>
+/* One US Letter page, printed. Two columns under a headline band. */
+@page { size: Letter; margin: 0.45in; }
+:root { --ink: #17232b; --muted: #55656c; --rule: #d5dddc; --accent: #c4500a; --body: #7d878c; }
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--ink); font: 9.6pt/1.42 "IBM Plex Sans", system-ui, sans-serif; background: #fff; }
+h1 { font: 600 21pt/1.05 "IBM Plex Sans Condensed", "Arial Narrow", sans-serif; margin: 0 0 3pt; }
+h2 { font: 600 10.5pt "IBM Plex Sans Condensed", "Arial Narrow", sans-serif; margin: 0 0 3pt; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+p { margin: 0 0 5pt; }
+.q { font-size: 11pt; }
+.meta { font: 8pt "IBM Plex Mono", monospace; color: var(--muted); margin-bottom: 9pt; }
+.band { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10pt; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--rule); padding: 7pt 0; margin-bottom: 10pt; }
+.band b { display: block; font: 500 20pt/1.1 "IBM Plex Mono", monospace; }
+.band b.hi { color: var(--accent); }
+.band span { color: var(--muted); font-size: 8.5pt; }
+.cols { display: grid; grid-template-columns: 1.15fr 1fr; gap: 16pt; }
+section { margin-bottom: 9pt; }
+img { width: 100%; display: block; }
+ol, ul { margin: 0 0 5pt; padding-left: 14pt; }
+li { margin-bottom: 2pt; }
+table { border-collapse: collapse; width: 100%; font-size: 8.6pt; }
+td, th { text-align: left; padding: 2.5pt 4pt 2.5pt 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { color: var(--muted); font-weight: 500; }
+td.n { font-family: "IBM Plex Mono", monospace; white-space: nowrap; }
+.foot { border-top: 1px solid var(--rule); padding-top: 5pt; font-size: 8pt; color: var(--muted); }
+a { color: var(--ink); }
+</style>
+</head>
+<body>
+<h1>Whole-brain activity gives early warning of reversals in unseen worms</h1>
+<p class="q">While a <i>C. elegans</i> worm crawls forward, does its brain show that it is about to reverse, beyond what its body already shows, in an animal the model has never seen?</p>
+<div class="meta">xsaiki-design · November 2026 · github.com/xsaiki-design/c-elegans-behavior-prediction</div>
+
+<div class="band">
+  <div><b class="hi">0.68</b><span>AUC predicting a reversal 5 s ahead, brain + body signals</span></div>
+  <div><b>0.61</b><span>AUC from body signals alone (speed, head angle, time since last reversal)</span></div>
+  <div><b>32 of 40</b><span>unseen worms where adding the brain helped (Wilcoxon p = 0.0001)</span></div>
+</div>
+
+<div class="cols">
+  <div>
+    <section>
+      <h2>Result</h2>
+      <img src="../figures/horizon_curve.png" alt="Prediction accuracy against how far ahead: the body's warning fades by 10 s, the brain's stays near 0.63">
+      <p>The body predicts well at the last second (the worm slows first), but its warning fades by about 10 s. The brain's lasts: its information about an upcoming reversal builds up before anything shows in the body.</p>
+    </section>
+    <section>
+      <h2>As an alarm</h2>
+      <p>With the same number of alarms, body signals catch more reversals at the last moment; with at least 3 s of warning required, the brain model catches more in 27 of 40 worms.</p>
+    </section>
+    <section>
+      <h2>Worm by worm</h2>
+      <img src="../figures/per_worm.png" alt="Each unseen worm's AUC: brain + body against body only; 32 of 40 above the diagonal" style="width:48%">
+    </section>
+  </div>
+  <div>
+    <section>
+      <h2>Method</h2>
+      <ol>
+        <li><b>Data:</b> 40 freely moving worms with every neuron named (Atanas &amp; Kim et al., <i>Cell</i> 2023), ~16 min each.</li>
+        <li><b>Target:</b> from forward-moving moments, does a reversal start in the next 5 s?</li>
+        <li><b>Features:</b> 46 named neuron types, scaled within each worm, plus whether each is rising.</li>
+        <li><b>Test:</b> train on 39 worms, score the 40th, for every worm; compare against a body-only baseline.</li>
+      </ol>
+      <p>The plan was committed to git before any results; the one deviation is logged.</p>
+    </section>
+    <section>
+      <h2>Checks</h2>
+      <table>
+        <tr><th>Check</th><th>Result</th></tr>
+        <tr><td>Brain recording slid out of sync with behaviour</td><td class="n">effect gone (0.61)</td></tr>
+        <tr><td>Stricter scaling (first 3 min only)</td><td class="n">0.68, 33/40</td></tr>
+        <tr><td>Stronger model (boosted trees)</td><td class="n">0.70 vs 0.65</td></tr>
+        <tr><td>Decoding "reversing now?" (sanity)</td><td class="n">0.89</td></tr>
+        <tr><td>Fresh clone, download and re-run</td><td class="n">identical</td></tr>
+      </table>
+    </section>
+    <section>
+      <h2>Limits</h2>
+      <ul>
+        <li>A modest effect: early warning, not mind reading.</li>
+        <li>One dataset from one lab; only named neurons can be compared across worms.</li>
+        <li>Calcium imaging is a slow proxy for neural activity.</li>
+      </ul>
+    </section>
+  </div>
+</div>
+<div class="foot">Interactive pages: xsaiki-design.github.io/c-elegans-behavior-prediction (explore all 40 worms) and /live (the worm crawling, with the model running in the browser). Logistic regression, leave-one-worm-out, 18 tests, CI. Built with help from Claude Code; every design decision is documented in the repository.</div>
+</body>
+</html>
