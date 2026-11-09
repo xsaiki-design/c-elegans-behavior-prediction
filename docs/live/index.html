@@ -205,8 +205,8 @@ footer a { color: var(--neuron); }
           <option value="5">at least 3 s before</option>
         </select>
         <div class="duel-key"><span><i style="background:var(--risk)"></i>predicted risk, brain + body</span>
-          <span><i style="background:var(--body)"></i>predicted risk, body only</span>
-          <span><i style="background:var(--ink)"></i>real worm: recorded speed (forward up, backward down)</span>
+          <label><input type="checkbox" id="showbody" checked> <i style="background:var(--body)"></i>predicted risk, body only</label>
+          <span><i style="background:var(--neuron)"></i>real worm: recorded speed (forward up, backward down)</span>
           <span><i style="background:var(--reversal)"></i>real reversals</span></div>
         <canvas class="duel" id="duel" aria-label="Both models' risk over the last 60 seconds; ticks show each reversal warned of or missed"></canvas>
         <div class="board" id="board"></div>
@@ -400,12 +400,13 @@ footer a { color: var(--neuron); }
     dctx.globalAlpha = 1;
     // the real worm: its recorded speed, scaled to the chart (dotted zero line = standing still)
     const vmax = Math.max(...worm.velocity.map(Math.abs)) || 1, ys = (v) => top + (h - top) / 2 - (v / vmax) * (h - top) / 2.2;
-    dctx.strokeStyle = cssVar("--ink"); dctx.globalAlpha = 0.3; dctx.setLineDash([1, 3]); dctx.lineWidth = 1;
+    dctx.strokeStyle = cssVar("--neuron"); dctx.globalAlpha = 0.3; dctx.setLineDash([1, 3]); dctx.lineWidth = 1;
     dctx.beginPath(); dctx.moveTo(0, ys(0)); dctx.lineTo(w, ys(0)); dctx.stroke(); dctx.setLineDash([]);
     dctx.globalAlpha = 0.75; dctx.lineWidth = 1.2; dctx.beginPath();
     for (let f = f0; f <= f1; f++) f === f0 ? dctx.moveTo(x(f), ys(worm.velocity[f])) : dctx.lineTo(x(f), ys(worm.velocity[f]));
     dctx.stroke(); dctx.globalAlpha = 1;
     for (const [m, color, row] of [["brain+body", "--risk", 6], ["body", "--body", 16]]) {
+      if (m === "body" && !$("showbody").checked) continue;
       const c = cssVar(color);
       dctx.strokeStyle = c; dctx.globalAlpha = 0.5; dctx.setLineDash([3, 3]); dctx.lineWidth = 1;
       dctx.beginPath(); dctx.moveTo(0, y(thrBy[m])); dctx.lineTo(w, y(thrBy[m])); dctx.stroke(); dctx.setLineDash([]); dctx.globalAlpha = 1;
@@ -615,6 +616,7 @@ footer a { color: var(--neuron); }
       document.querySelectorAll("[data-view]").forEach((x) => x.setAttribute("aria-pressed", x === b)); redraw();
     }));
     $("lead").addEventListener("change", () => { scoreOutcomes(); redraw(); });
+    $("showbody").addEventListener("change", redraw);
     const tabs = [$("tab-live"), $("tab-compare")];
     const show = (tab) => {
       for (const b of tabs) {
