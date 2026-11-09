@@ -1,5 +1,9 @@
 # Predicting C. elegans reversals from whole-brain activity
 
+[![tests](https://github.com/xsaiki-design/c-elegans-behavior-prediction/actions/workflows/tests.yml/badge.svg)](https://github.com/xsaiki-design/c-elegans-behavior-prediction/actions/workflows/tests.yml)
+**[Try the interactive page](https://xsaiki-design.github.io/c-elegans-behavior-prediction/)**: pick an unseen worm,
+watch the model's risk rise before real reversals, and set your own alarm.
+
 **Question:** while a worm crawls forward, can its brain activity tell us it is about to reverse, beyond what its body
 already shows, in a worm the model has never seen?
 
@@ -9,7 +13,11 @@ within seconds; the brain's lasts at least 10 s.
 
 ![How far ahead](figures/horizon_curve.png)
 
+**[Live version](https://xsaiki-design.github.io/c-elegans-behavior-prediction/live/)**: the real worm crawling, its
+neurons, and the model running in your browser frame by frame (it checks itself against the offline analysis).
+
 Full write-up: [`docs/writeup.md`](docs/writeup.md) (2–3 pages: method, results, checks, limitations).
+Short Q&A: [`docs/faq.md`](docs/faq.md).
 
 ## Key results
 
@@ -19,8 +27,12 @@ Full write-up: [`docs/writeup.md`](docs/writeup.md) (2–3 pages: method, result
 | Brain only (46 named neuron classes) | 0.64 |
 | **Brain + body** | **0.68** (better than body in 32/40 worms, p = 0.0001) |
 
-- **Checks:** stricter scaling gives the same result (0.68, 33/40). Decoding the *current* behaviour is easy (0.89),
+- **Checks:** sliding the brain recording out of sync with behaviour removes the effect (brain alone 0.52, brain + body
+  back to 0.61). Stricter scaling gives the same result (0.68, 33/40). Decoding the *current* behaviour is easy (0.89),
   which confirms the pipeline lines up.
+- **As an alarm** (same number of alarms for both models): the body is the better *last-second* detector, because the
+  worm slows down just before it reverses. With at least 3 s of warning required, the brain model catches more reversals
+  in 27 of 40 worms. [Table](docs/writeup.md#as-an-alarm-early-warning-vs-last-second-detection)
 - **Which neurons:** AIB rising is the clearest build-up signal. AVA/AVE/RIM look *lower* before reversals, but that
   turns out to be leftover activity from the previous reversal. [Details](docs/writeup.md#results)
 - **A stronger model agrees** (exploratory): boosted trees 0.70 vs 0.65, better in 33/40 worms.
@@ -49,7 +61,8 @@ Whole-brain calcium imaging of freely moving *C. elegans* from
 
 ## Run it
 
-Needs [uv](https://docs.astral.sh/uv/). About 5 minutes on a laptop.
+Needs [uv](https://docs.astral.sh/uv/). About 5 minutes on a laptop. Checked on 2026-11-08: a fresh clone, download and run reproduced
+`results/summary.json` exactly.
 
 ```bash
 uv sync                            # install the exact package versions
@@ -57,7 +70,12 @@ uv run python -m worms.download    # fetch and checksum the data (~570 MB) into 
 uv run pytest                      # tests
 uv run python -m worms.run         # analysis -> results/summary.json
 uv run python -m worms.figures     # figures/ from the results
+uv run python -m worms.demo_data   # held-out predictions for the interactive page -> docs/demo-data.json
+uv run python -m worms.alarms      # alarm analysis -> results/alarms.json
+uv run python -m worms.showcase_data  # 3 typical worms + their held-out models for the live page -> docs/live/
 ```
+
+To view the interactive page locally: `python -m http.server -d docs`, then open http://localhost:8000.
 
 ## Layout
 
@@ -68,10 +86,32 @@ worms/features.py   prediction target, neuron-class features, body-only baseline
 worms/evaluate.py   leave-one-worm-out scoring
 worms/run.py        the pre-set analysis; settings mirror docs/decisions
 worms/figures.py    README figures
-worms/explore.py    exploratory extras, outside the pre-set plan
+worms/explore.py    exploratory: a stronger model (boosted trees)
+worms/demo_data.py  exports held-out predictions for the interactive page
+worms/alarms.py     exploratory: reversals caught with equal alarms, by warning time
+docs/index.html     the interactive page (GitHub Pages)
+docs/live/          the live page: animation + the model running in the browser
+worms/showcase_data.py  exports worms and model weights for the live page
 tests/              tests
 docs/               write-up, decisions with references, reading list
 ```
+
+## Put it on a website
+
+The pages are static files, so any site can show them. Once GitHub Pages is on (Settings → Pages → Deploy from branch,
+`main`, `/docs`), embed the live version with:
+
+```html
+<iframe src="https://xsaiki-design.github.io/c-elegans-behavior-prediction/live/" title="Live Worm Forecast"
+        width="100%" height="860" style="border:0" loading="lazy"></iframe>
+```
+
+Or copy `docs/live/` (two files, about 2 MB) into your own site.
+
+## Next steps
+
+Test whether prediction survives the heat stimulus (a change of state); repeat on a second dataset; try a sequence
+model as a pre-registered follow-up.
 
 ## Limitations
 
