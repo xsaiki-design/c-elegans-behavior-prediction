@@ -18,6 +18,7 @@ from worms.run import common_classes, load_labelled_worms
 NML = "https://raw.githubusercontent.com/openworm/CElegansNeuroML/master/CElegans/generatedNeuroML2/{}.cell.nml"
 COOK = ("https://raw.githubusercontent.com/openworm/ConnectomeToolbox/main/cect/data/"
         "SI%205%20Connectome%20adjacency%20matrices%2C%20corrected%20July%202020.xlsx")
+CELLS = "https://raw.githubusercontent.com/openworm/ConnectomeToolbox/main/cect/Cells.py"  # read as text, never run
 COOK_SHA = "1f4fdbf84746b69b49a8da0816f52787860ce349b638dce37924ba80f90c70c9"
 CACHE = Path("data/anatomy")
 OUT = Path("docs/live/anatomy.json")
@@ -63,6 +64,30 @@ def class_edges(chemical, electrical, cls):
             for (a, b), c in sorted(tot.items())]
 
 
+def neuron_links(chemical, electrical, names):
+    """[a, b, synapses] between individual neurons in `names`, both directions; gap junctions (listed both ways) once."""
+    tot = {}
+    for table, half in [(chemical, 1), (electrical, 2)]:
+        for (pre, post), v in table.items():
+            if pre in names and post in names and pre != post:
+                key = tuple(sorted((pre, post)))
+                tot[key] = tot.get(key, 0) + v / half
+    return [[a, b, round(v)] for (a, b), v in sorted(tot.items()) if round(v)]
+
+
+def roles(text):
+    """Cell role labels (Cook et al. 2019 categories) from the toolbox's Cells.py, parsed as text."""
+    lists = {m.group(1): re.findall(r'"([^"]+)"', m.group(2)) for m in re.finditer(r"^(\w+)\s*=\s*\[(.*?)\]", text, re.S | re.M)}
+    out = {}
+    for m in re.finditer(r'^\s*if cell in \[(.*?)\]:\n\s+cell_notes\[cell\] = "([^"]+)"', text, re.S | re.M):
+        for c in re.findall(r'"([^"]+)"', m.group(1)):
+            out.setdefault(c, m.group(2))
+    for m in re.finditer(r'^for cell in (\w+):\n\s+cell_notes\[cell\] = "([^"]+)"', text, re.M):
+        for c in lists.get(m.group(1), []):
+            out.setdefault(c, m.group(2))
+    return out
+
+
 def main():
     (CACHE / "nml").mkdir(parents=True, exist_ok=True)
     worms = load_labelled_worms()
@@ -75,11 +100,14 @@ def main():
         raise SystemExit(f"{xlsx}: checksum mismatch")
     wb = load_workbook(xlsx, read_only=True, data_only=True)
     chemical = read_matrix(wb["hermaphrodite chemical"])
-    edges = class_edges(chemical, read_matrix(wb["hermaphrodite gap jn symmetric"]), cls)
+    electrical = read_matrix(wb["hermaphrodite gap jn symmetric"])
+    edges = class_edges(chemical, electrical, cls)
+    role = roles(fetch(CELLS, CACHE / "Cells.py.txt").read_text())
     neurons = []
     for name in sorted(cls):
         lr, ap, dv = soma_position(name)
-        neurons.append({"name": name, "class": cls[name], "ap": round(ap, 1), "dv": round(dv, 1), "lr": round(lr, 1)})
+        neurons.append({"name": name, "class": cls[name], "role": role.get(name, ""),
+                        "ap": round(ap, 1), "dv": round(dv, 1), "lr": round(lr, 1)})
     # every other neuron in the head, so the map shows the model's neurons in context (non-neurons have no model file)
     head_end = max(n["ap"] for n in neurons) + 5
     others = []
@@ -89,11 +117,12 @@ def main():
         except urllib.error.HTTPError:
             continue
         if ap <= head_end:
-            others.append({"name": name, "ap": round(ap, 1), "dv": round(dv, 1)})
+            others.append({"name": name, "role": role.get(name, ""), "ap": round(ap, 1), "dv": round(dv, 1)})
     OUT.write_text(json.dumps({
-        "neurons": neurons, "others": others, "edges": edges,
+        "neurons": neurons, "others": others, "edges": edges, "links": neuron_links(chemical, electrical, set(cls)),
         "sources": {
             "positions": "OpenWorm CElegansNeuroML (from the WormBase Virtual Worm), github.com/openworm/CElegansNeuroML",
+            "roles": "Cook et al. 2019 cell categories as listed in OpenWorm ConnectomeToolbox cect/Cells.py",
             "wiring": "Cook et al. 2019, Nature 571:63-71, doi:10.1038/s41586-019-1352-7 (SI 5, corrected July 2020), via OpenWorm ConnectomeToolbox",
         },
     }, indent=0))
