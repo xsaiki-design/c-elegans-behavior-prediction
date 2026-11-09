@@ -32,6 +32,21 @@ and no untouched animals left, the only honest way to go further is to make the 
 - *Why stop after this?* Each extra round on the same 40 worms costs credibility. A bigger gain now needs new animals
   (another dataset), not more rounds.
 
+## Results (2026-11-09)
+
+| Model | Median AUC | Avg precision | Alarm precision | vs headline (AUC) |
+|---|---|---|---|---|
+| M0 headline | 0.677 | 0.528 | 0.563 | reference |
+| E1 trees, extended settings | 0.710 | 0.583 | 0.604 | +0.029, 32/40, Holm p = 0.00002 |
+| **E2 selection-aware best model** | **0.707** | **0.589** | **0.602** | **+0.029, 32/40, Holm p = 0.00002** |
+
+- **The honest number is AUC 0.707** (average precision 0.589): the best model this search finds, with every choice
+  made without the held-out worm. It picked trees for 32 worms and the tree + linear average for 8.
+- **0006's gain was real, not selection luck:** 0.707 here against 0.711 there. The small drop is the price of honesty.
+- **The edge-of-list lead is closed:** extending tree settings changed nothing meaningful (0.710 vs 0.711). The model
+  has plateaued around 0.71 with these features and these 40 animals.
+- Code: `prototype/accuracy` branch, `worms/prototype_accuracy3.py`; its check reproduces the headline exactly first.
+
 ## Stopping
 
 After this round no more accuracy rounds on these 40 worms. The write-up reports E2 as the follow-up result next to
