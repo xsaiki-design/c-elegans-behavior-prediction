@@ -64,11 +64,21 @@ h1 { margin: 0; font: 600 clamp(22px, 3.4vw, 30px)/1.1 var(--display); letter-sp
 .alarm { font: 600 13px var(--display); letter-spacing: 0.04em; text-transform: uppercase; padding: 6px 10px; border-radius: 6px; border: 1px solid var(--line); color: var(--muted); text-align: center; transition: all 0.15s; }
 .alarm.on { color: var(--bg); background: var(--risk); border-color: var(--risk); }
 canvas.spark { width: 100%; height: 70px; display: block; }
-.neurons { display: grid; grid-template-columns: repeat(auto-fill, minmax(38px, 1fr)); gap: 6px 4px; }
-.n { display: grid; justify-items: center; gap: 2px; font: 9.5px var(--data); color: var(--muted); }
-.n i { width: 16px; height: 16px; border-radius: 50%; background: var(--neuron); opacity: 0.15; transition: opacity 0.12s linear; }
-.n.key { color: var(--ink); }
-.n.key i { outline: 1.5px solid var(--ink); outline-offset: 1px; }
+.maphead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px; }
+.seg { display: flex; gap: 4px; }
+.seg button { padding: 3px 9px; font-size: 12px; }
+svg.map { width: 100%; height: auto; display: block; background: var(--bg); border-radius: 6px; }
+svg.map text { font: 9px var(--data); fill: var(--muted); }
+svg.map text.key { fill: var(--ink); font-weight: 500; }
+svg.map .edge { stroke: var(--muted); stroke-opacity: 0.18; }
+svg.map .edge.on { stroke: var(--ink); stroke-opacity: 0.75; }
+svg.map circle { stroke: var(--bg); stroke-width: 0.8; cursor: pointer; }
+.why { display: grid; gap: 4px; font: 12px var(--data); }
+.why .row { display: grid; grid-template-columns: 9.5em 1fr 4.2em; gap: 8px; align-items: center; }
+.why .bar { height: 8px; position: relative; background: var(--line); border-radius: 2px; }
+.why .bar i { position: absolute; top: 0; bottom: 0; border-radius: 2px; }
+.why .bar u { position: absolute; left: 50%; top: -2px; bottom: -2px; width: 1px; background: var(--muted); }
+.why .val { text-align: right; font-variant-numeric: tabular-nums; }
 .controls { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; }
 button, select { font: 500 13px var(--text); color: var(--ink); background: var(--field); border: 1px solid var(--line); border-radius: 6px; padding: 6px 12px; cursor: pointer; }
 button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
@@ -135,13 +145,27 @@ footer a { color: var(--neuron); }
       </div>
       <div class="label">Last 40 seconds</div>
       <canvas class="spark" id="spark" aria-label="Risk over the last 40 seconds, with reversals in violet"></canvas>
-      <div class="label">Neuron activity (46 named classes)</div>
-      <div class="neurons" id="neurons"></div>
+      <div class="maphead">
+        <span class="label">Head neurons, real positions and wiring</span>
+        <div class="seg" role="group" aria-label="Colour the neurons by">
+          <button type="button" data-view="activity" aria-pressed="true">Activity</button>
+          <button type="button" data-view="why" aria-pressed="false">Why this risk?</button>
+        </div>
+      </div>
+      <svg class="map" id="map" viewBox="0 0 420 196" role="img" aria-label="Side view of the worm's head: each dot is a neuron at its real position, lines are its real connections"></svg>
+      <p class="note" id="mapnote">Side view of the head (nose left, back of the worm up), turned so the head lies level. Each dot is one
+        neuron at its real cell-body position; lines join neuron types with at least 10 synapses between them. Brightness is the recorded
+        activity (left/right partners share their type's average). Hover a neuron to see its connections.</p>
+      <div class="why" id="why" hidden></div>
       </div>
       <div class="tabpanel" role="tabpanel" id="panel-compare" aria-labelledby="tab-compare" hidden>
-        <p class="note">Both models watch the same real worm. Each raises the same number of alarms (its riskiest 20% of
-          moments). The scoreboards fill in as the recording plays and the worm actually reverses, or doesn't.</p>
-        <label class="label" for="lead">Counts as warned if the alarm came</label>
+        <p class="note">Both models watch the same real worm and score every moment for "reversal coming". <b>Alarm:</b> each
+          model sounds an alarm on its own riskiest 20% of moments, so both get the same number of alarms (a fixed cut-off
+          like 50% would be unfair, because the two models score on different scales). <b>Warned:</b> a real reversal counts
+          as warned of if an alarm was on in the 5 seconds before it started, and at least as early as you choose below.
+          <b>False alarm:</b> an alarm with no reversal in the next 5 seconds. Example: the worm reverses at 1:00 and the
+          alarm came on at 0:57. That is a warning 3 s ahead, so it counts under every setting.</p>
+        <label class="label" for="lead">How early must the alarm come to count as a warning?</label>
         <select id="lead">
           <option value="1">any time in the 5 s before</option>
           <option value="3" selected>at least 1.8 s before</option>
@@ -158,7 +182,9 @@ footer a { color: var(--neuron); }
   </div>
 
   <footer>
-    <span>Data: Atanas, Kim et al., <a href="https://doi.org/10.1016/j.cell.2023.07.035">Cell 2023</a>. Leave-one-worm-out logistic regression; across 40 unseen worms, adding brain activity raised AUC from 0.61 to 0.68.</span>
+    <span>Data: Atanas, Kim et al., <a href="https://doi.org/10.1016/j.cell.2023.07.035">Cell 2023</a>. Neuron positions:
+      <a href="https://github.com/openworm/CElegansNeuroML">OpenWorm</a>; wiring: Cook et al.,
+      <a href="https://doi.org/10.1038/s41586-019-1352-7">Nature 2019</a>. Leave-one-worm-out logistic regression; across 40 unseen worms, adding brain activity raised AUC from 0.61 to 0.68.</span>
     <a href="https://github.com/xsaiki-design/c-elegans-behavior-prediction">How it works</a>
   </footer>
 </main>
@@ -199,7 +225,7 @@ footer a { color: var(--neuron); }
     let maxDiff = 0, k = 0;
     worm.reference_risk.forEach((ref, f) => { if (ref !== null) { maxDiff = Math.max(maxDiff, Math.abs(risk(f, "brain+body") - ref)); k++; } });
     $("check").innerHTML = maxDiff < 0.001
-      ? `Live model check: <b>matches the offline analysis</b> on ${k} frames (largest difference ${maxDiff.toExponential(1)}). This worm's AUC: ${worm.auc.brain_body.toFixed(2)} brain + body vs ${worm.auc.body.toFixed(2)} body only.`
+      ? `Live model check: <b>matches the offline analysis</b> on ${k} frames (largest difference ${maxDiff.toExponential(1)}). Recording ${worm.uid}, a different animal from the other worm; both sit near the typical result across all 40 worms (+0.06). This worm's AUC (how well the model ranks moments by risk: 0.5 = guessing, 1 = perfect): ${worm.auc.brain_body.toFixed(2)} brain + body vs ${worm.auc.body.toFixed(2)} body only.`
       : `Live model check: differs from the offline analysis by up to ${maxDiff.toFixed(3)}.`;
     t = Math.max(D.change_frames, (worm.reversing.indexOf(1) || 0) - 20);
   }
@@ -369,19 +395,98 @@ footer a { color: var(--neuron); }
       <dt>Median warning</dt><dd>${r.lead === null ? "–" : r.lead.toFixed(1) + " s"}</dd></dl></div>`).join("");
   }
 
-  let dots = [];
-  function buildNeurons() {
-    const box = $("neurons"); box.replaceChildren();
-    const order = [...KEY.filter((c) => D.classes.includes(c)), ...D.classes.filter((c) => !KEY.includes(c))];
-    dots = order.map((c) => {
-      const d = document.createElement("div"); d.className = "n" + (KEY.includes(c) ? " key" : ""); d.title = c;
-      d.innerHTML = `<i></i>${c}`; box.appendChild(d);
-      return [D.classes.indexOf(c), d.firstChild];
+  // --- neuron map: real cell-body positions (OpenWorm NeuroML) and wiring (Cook et al. 2019) ---
+  let A, view = "activity", dotsBy = {}, edgeEls = [];
+  const SVGNS = "http://www.w3.org/2000/svg";
+  const mk = (tag, attrs, parent) => { const e = document.createElementNS(SVGNS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent.appendChild(e); return e; };
+  function buildMap() {
+    const svg = $("map"); svg.replaceChildren();
+    // Rotate so the head's long axis is horizontal (the model's head is posed slightly bent). Rotation keeps every
+    // distance true; then nose left, dorsal up, same scale on both axes.
+    const N = A.neurons.length, ma = A.neurons.reduce((s, d) => s + d.ap, 0) / N, md = A.neurons.reduce((s, d) => s + d.dv, 0) / N;
+    let saa = 0, sdd = 0, sad = 0;
+    for (const d of A.neurons) { saa += (d.ap - ma) ** 2; sdd += (d.dv - md) ** 2; sad += (d.ap - ma) * (d.dv - md); }
+    const th = 0.5 * Math.atan2(2 * sad, saa - sdd), cs = Math.cos(th), sn = Math.sin(th);
+    const rot = (d) => [(d.ap - ma) * cs + (d.dv - md) * sn, -(d.ap - ma) * sn + (d.dv - md) * cs];
+    const byName = Object.fromEntries(A.neurons.map((d) => [d.name, rot(d)]));
+    let flipX = 1, flipY = 1;
+    if (byName.I1L && byName.AVAL && byName.I1L[0] > byName.AVAL[0]) flipX = -1;   // pharynx (front) must be left of AVA
+    if (byName.RMED && byName.RMEV && byName.RMED[1] < byName.RMEV[1]) flipY = -1;  // RME dorsal must sit above RME ventral
+    const pts = A.neurons.map((d) => { const [u, v] = rot(d); return [u * flipX, v * flipY]; });
+    const u0 = Math.min(...pts.map((p) => p[0])) - 3, u1 = Math.max(...pts.map((p) => p[0])) + 3;
+    const v0 = Math.min(...pts.map((p) => p[1])) - 3, v1 = Math.max(...pts.map((p) => p[1])) + 3;
+    const k = Math.min(400 / (u1 - u0), 158 / (v1 - v0));
+    const X = (u) => 10 + (u - u0) * k, Y = (v) => 20 + (v1 - v) * k;
+    const H = Math.ceil(20 + (v1 - v0) * k + 18);
+    svg.setAttribute("viewBox", `0 0 420 ${H}`);
+    const centre = {};
+    A.neurons.forEach((n, i) => (centre[n.class] ??= []).push([X(pts[i][0]), Y(pts[i][1])]));
+    for (const c in centre) centre[c] = centre[c].reduce((s, p) => [s[0] + p[0] / centre[c].length, s[1] + p[1] / centre[c].length], [0, 0]);
+    edgeEls = A.edges.filter((e) => e.chemical + e.electrical >= 10).map((e) => {
+      const l = mk("line", { x1: centre[e.a][0], y1: centre[e.a][1], x2: centre[e.b][0], y2: centre[e.b][1], class: "edge",
+        "stroke-width": (0.4 + Math.log1p(e.chemical + e.electrical) / 2.5).toFixed(2) }, svg);
+      return [e.a, e.b, l];
     });
+    dotsBy = {};
+    A.neurons.forEach((n, i) => {
+      const c = mk("circle", { cx: X(pts[i][0]), cy: Y(pts[i][1]), r: 3.6 }, svg);
+      mk("title", {}, c).textContent = `${n.name} (${n.class})`;
+      c.addEventListener("mouseenter", () => edgeEls.forEach(([a, b, l]) => l.classList.toggle("on", a === n.class || b === n.class)));
+      c.addEventListener("mouseleave", () => edgeEls.forEach(([, , l]) => l.classList.remove("on")));
+      (dotsBy[n.class] ??= []).push(c);
+    });
+    const placed = []; // label the key types, skipping any that would overlap one already placed
+    for (const c of KEY) {
+      if (!centre[c]) continue;
+      const [x, y] = centre[c];
+      const spot = [[6, -5], [6, 11], [-6, -5], [-6, 11]].map(([dx, dy]) => [x + dx, y + dy, dx < 0 ? "end" : "start"])
+        .find(([lx, ly]) => placed.every(([px, py]) => Math.abs(px - lx) > 26 || Math.abs(py - ly) > 10));
+      if (!spot) continue;
+      placed.push(spot);
+      mk("text", { x: spot[0], y: spot[1], class: "key", "text-anchor": spot[2] }, svg).textContent = c;
+    }
+    mk("line", { x1: 330, x2: 330 + 10 * k, y1: H - 8, y2: H - 8, stroke: "var(--muted)", "stroke-width": 1.5 }, svg);
+    mk("text", { x: 330 + 10 * k + 4, y: H - 5 }, svg).textContent = "10 µm";
+    mk("text", { x: 10, y: 12 }, svg).textContent = "← nose · dorsal ↑";
   }
-  function drawNeurons(f) {
-    const a = worm.activity[f];
-    for (const [i, el] of dots) el.style.opacity = (0.12 + 0.88 * Math.max(0, Math.min(1, (a[i] + 1) / 4))).toFixed(2);
+
+  // Exact breakdown of the risk at frame f: each signal's push on the log-odds (the model is linear, so they add up).
+  const BODY = ["speed", "head angle", "time since reversal"];
+  const MAPNOTE = document.getElementById("mapnote").textContent;
+  function contributions(f) {
+    if (risks[f] === null) return null;
+    const p = worm.models[modelName], x = features(f, modelName);
+    const terms = x.map((v, i) => ((v - p.mean[i]) / p.scale[i]) * p.coef[i]);
+    const nc = D.classes.length, out = {};
+    if (modelName === "brain+body") D.classes.forEach((c, i) => { out[c] = terms[i] + terms[nc + i]; }); // level + rising
+    terms.slice(-3).forEach((v, i) => { out[BODY[i]] = v; });
+    return { parts: out, logit: p.intercept + terms.reduce((a, b) => a + b, 0), intercept: p.intercept };
+  }
+
+  function drawMap(f) {
+    const a = worm.activity[f], why = view === "why" ? contributions(f) : null;
+    D.classes.forEach((c, i) => {
+      let fill = "var(--neuron)", op = 0.12 + 0.88 * Math.max(0, Math.min(1, (a[i] + 1) / 4));
+      if (view === "why") {
+        const v = why && why.parts[c] !== undefined ? why.parts[c] : 0;
+        fill = v > 0 ? "var(--risk)" : "var(--neuron)"; op = 0.1 + 0.9 * Math.min(1, Math.abs(v) / 0.5);
+      }
+      for (const d of dotsBy[c] || []) { d.setAttribute("fill", fill); d.setAttribute("fill-opacity", op.toFixed(2)); }
+    });
+    if (view === "why") drawWhy(why, f);
+  }
+
+  function drawWhy(why, f) {
+    if (!why) { $("why").innerHTML = `<span class="note">The model only scores moments when the worm crawls forward.</span>`; return; }
+    const items = Object.entries(why.parts).sort((x, y) => Math.abs(y[1]) - Math.abs(x[1])).slice(0, 7);
+    const max = Math.max(0.5, ...items.map(([, v]) => Math.abs(v)));
+    const sig = (z) => 1 / (1 + Math.exp(-z)), total = sig(why.logit), ok = Math.abs(total - risks[f]) < 1e-9;
+    $("why").innerHTML = items.map(([name, v]) => {
+      const w = (Math.abs(v) / max) * 50;
+      return `<div class="row"><span>${name}</span><span class="bar"><u></u><i style="left:${v > 0 ? 50 : 50 - w}%;width:${w}%;background:var(${v > 0 ? "--risk" : "--neuron"})"></i></span><span class="val">${v > 0 ? "+" : ""}${v.toFixed(2)}</span></div>`;
+    }).join("") + `<p class="note">Pushes on the risk (log-odds), biggest first: orange raises it, blue lowers it. A neuron type's
+      push combines its level and whether it is rising. Starting point ${(sig(why.intercept) * 100).toFixed(0)}% plus all ${Object.keys(why.parts).length} pushes =
+      ${(total * 100).toFixed(1)}%${ok ? ", exactly the risk shown above." : "."}</p>`;
   }
 
   function frame(now) {
@@ -389,7 +494,7 @@ footer a { color: var(--neuron); }
     if (playing) { t += (dt * speed) / spf; if (t >= n - 2) t = D.change_frames; }
     const f = Math.floor(t), r = risks[f];
     drawScope(t, r);
-    if ($("panel-compare").hidden) { drawSpark(t); drawNeurons(f); } else { drawDuel(t); drawBoard(f); }
+    if ($("panel-compare").hidden) { drawSpark(t); drawMap(f); } else { drawDuel(t); drawBoard(f); }
     $("clock").textContent = `${Math.floor(f * spf / 60)}:${String(Math.floor(f * spf % 60)).padStart(2, "0")}`;
     const rev = !!worm.reversing[f];
     $("state").textContent = rev ? "reversing" : "forward"; $("state").className = "state" + (rev ? " rev" : "");
@@ -402,9 +507,10 @@ footer a { color: var(--neuron); }
   }
   const redraw = () => { if (!playing) { last = 0; requestAnimationFrame(frame); } };
 
-  fetch("showcase.json").then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }).then((d) => {
-    D = d; buildNeurons();
-    d.worms.forEach((w, i) => { const o = document.createElement("option"); o.value = i; o.textContent = `Worm ${i + 1} (${w.uid})`; $("worm").appendChild(o); });
+  const getJSON = (u) => fetch(u).then((r) => { if (!r.ok) throw new Error(`${u}: ${r.status}`); return r.json(); });
+  Promise.all([getJSON("showcase.json"), getJSON("anatomy.json")]).then(([d, anatomy]) => {
+    D = d; A = anatomy; buildMap();
+    d.worms.forEach((w, i) => { const o = document.createElement("option"); o.value = i; o.textContent = `Worm ${i + 1} · AUC ${w.auc.brain_body.toFixed(2)} vs ${w.auc.body.toFixed(2)}`; o.title = `Recording ${w.uid}`; $("worm").appendChild(o); });
     load(0);
     if (reduce) { playing = false; $("play").textContent = "Play"; }
     requestAnimationFrame(frame);
@@ -419,6 +525,13 @@ footer a { color: var(--neuron); }
       document.querySelectorAll("[data-model]").forEach((x) => x.setAttribute("aria-pressed", x === b)); redraw();
     }));
     addEventListener("resize", redraw);
+    document.querySelectorAll("[data-view]").forEach((b) => b.addEventListener("click", () => {
+      view = b.dataset.view; $("why").hidden = view !== "why";
+      $("mapnote").textContent = view === "why"
+        ? "Each neuron is coloured by how much its type is pushing the reversal risk right now: orange up, blue down, brighter = stronger. Hover a neuron to see its connections."
+        : MAPNOTE;
+      document.querySelectorAll("[data-view]").forEach((x) => x.setAttribute("aria-pressed", x === b)); redraw();
+    }));
     $("lead").addEventListener("change", () => { scoreOutcomes(); redraw(); });
     const tabs = [$("tab-live"), $("tab-compare")];
     const show = (tab) => {
@@ -436,7 +549,7 @@ footer a { color: var(--neuron); }
         const next = tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length]; next.focus(); show(next);
       });
     });
-  }).catch((err) => { $("check").textContent = `Couldn't load the recording (showcase.json): ${err.message}. Reload to try again.`; });
+  }).catch((err) => { $("check").textContent = `Couldn't load the recording (${err.message}). Reload to try again.`; });
 })();
 </script>
 </body>

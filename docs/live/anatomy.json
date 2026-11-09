@@ -1,0 +1,2681 @@
+{
+"neurons": [
+{
+"name": "ADAL",
+"class": "ADA",
+"ap": -239.2,
+"dv": 31.1,
+"lr": 8.7
+},
+{
+"name": "ADAR",
+"class": "ADA",
+"ap": -239.2,
+"dv": 31.1,
+"lr": -12.9
+},
+{
+"name": "ADEL",
+"class": "ADE",
+"ap": -242.4,
+"dv": 32.5,
+"lr": 11.0
+},
+{
+"name": "ADER",
+"class": "ADE",
+"ap": -242.4,
+"dv": 32.5,
+"lr": -15.3
+},
+{
+"name": "AIBL",
+"class": "AIB",
+"ap": -266.2,
+"dv": 37.0,
+"lr": 2.7
+},
+{
+"name": "AIBR",
+"class": "AIB",
+"ap": -266.2,
+"dv": 37.0,
+"lr": -6.9
+},
+{
+"name": "AIML",
+"class": "AIM",
+"ap": -253.4,
+"dv": 28.4,
+"lr": 9.2
+},
+{
+"name": "AIMR",
+"class": "AIM",
+"ap": -253.4,
+"dv": 28.4,
+"lr": -13.5
+},
+{
+"name": "AINL",
+"class": "AIN",
+"ap": -269.5,
+"dv": 39.4,
+"lr": -1.4
+},
+{
+"name": "AINR",
+"class": "AIN",
+"ap": -269.5,
+"dv": 39.4,
+"lr": -3.1
+},
+{
+"name": "AIYL",
+"class": "AIY",
+"ap": -252.5,
+"dv": 28.9,
+"lr": 7.5
+},
+{
+"name": "AIYR",
+"class": "AIY",
+"ap": -252.5,
+"dv": 28.9,
+"lr": -11.7
+},
+{
+"name": "AIZL",
+"class": "AIZ",
+"ap": -258.8,
+"dv": 37.5,
+"lr": 5.6
+},
+{
+"name": "AIZR",
+"class": "AIZ",
+"ap": -258.8,
+"dv": 37.5,
+"lr": -9.9
+},
+{
+"name": "ASEL",
+"class": "ASE",
+"ap": -263.7,
+"dv": 40.0,
+"lr": 4.1
+},
+{
+"name": "ASER",
+"class": "ASE",
+"ap": -263.7,
+"dv": 40.0,
+"lr": -8.4
+},
+{
+"name": "ASGL",
+"class": "ASG",
+"ap": -265.4,
+"dv": 45.4,
+"lr": 3.7
+},
+{
+"name": "ASGR",
+"class": "ASG",
+"ap": -265.4,
+"dv": 45.4,
+"lr": -8.0
+},
+{
+"name": "AUAL",
+"class": "AUA",
+"ap": -264.0,
+"dv": 37.5,
+"lr": 4.5
+},
+{
+"name": "AUAR",
+"class": "AUA",
+"ap": -264.0,
+"dv": 37.5,
+"lr": -8.8
+},
+{
+"name": "AVAL",
+"class": "AVA",
+"ap": -271.5,
+"dv": 38.0,
+"lr": -0.6
+},
+{
+"name": "AVAR",
+"class": "AVA",
+"ap": -271.5,
+"dv": 38.0,
+"lr": -3.5
+},
+{
+"name": "AVDL",
+"class": "AVD",
+"ap": -268.7,
+"dv": 37.3,
+"lr": -0.2
+},
+{
+"name": "AVDR",
+"class": "AVD",
+"ap": -268.7,
+"dv": 37.3,
+"lr": -4.0
+},
+{
+"name": "AVEL",
+"class": "AVE",
+"ap": -269.4,
+"dv": 40.6,
+"lr": 2.8
+},
+{
+"name": "AVER",
+"class": "AVE",
+"ap": -269.4,
+"dv": 40.6,
+"lr": -8.4
+},
+{
+"name": "AVJL",
+"class": "AVJ",
+"ap": -264.9,
+"dv": 47.5,
+"lr": 0.2
+},
+{
+"name": "AVJR",
+"class": "AVJ",
+"ap": -264.9,
+"dv": 47.5,
+"lr": -4.8
+},
+{
+"name": "AWAL",
+"class": "AWA",
+"ap": -265.9,
+"dv": 42.8,
+"lr": 3.9
+},
+{
+"name": "AWAR",
+"class": "AWA",
+"ap": -265.9,
+"dv": 42.8,
+"lr": -8.2
+},
+{
+"name": "AWBL",
+"class": "AWB",
+"ap": -266.2,
+"dv": 43.1,
+"lr": 5.5
+},
+{
+"name": "AWBR",
+"class": "AWB",
+"ap": -266.2,
+"dv": 43.1,
+"lr": -9.8
+},
+{
+"name": "AWCL",
+"class": "AWC",
+"ap": -267.9,
+"dv": 39.0,
+"lr": 3.8
+},
+{
+"name": "AWCR",
+"class": "AWC",
+"ap": -267.9,
+"dv": 39.0,
+"lr": -8.1
+},
+{
+"name": "CEPDL",
+"class": "CEP",
+"ap": -275.0,
+"dv": 54.1,
+"lr": 1.4
+},
+{
+"name": "CEPDR",
+"class": "CEP",
+"ap": -275.0,
+"dv": 54.1,
+"lr": -5.6
+},
+{
+"name": "CEPVL",
+"class": "CEP",
+"ap": -277.1,
+"dv": 39.9,
+"lr": 0.7
+},
+{
+"name": "CEPVR",
+"class": "CEP",
+"ap": -277.1,
+"dv": 39.9,
+"lr": -5.0
+},
+{
+"name": "FLPL",
+"class": "FLP",
+"ap": -246.3,
+"dv": 31.1,
+"lr": 10.9
+},
+{
+"name": "FLPR",
+"class": "FLP",
+"ap": -246.3,
+"dv": 31.1,
+"lr": -15.1
+},
+{
+"name": "I1L",
+"class": "I1",
+"ap": -300.4,
+"dv": 53.1,
+"lr": 2.9
+},
+{
+"name": "I1R",
+"class": "I1",
+"ap": -300.4,
+"dv": 53.1,
+"lr": -7.2
+},
+{
+"name": "I2L",
+"class": "I2",
+"ap": -311.6,
+"dv": 54.5,
+"lr": 1.6
+},
+{
+"name": "I2R",
+"class": "I2",
+"ap": -311.6,
+"dv": 54.5,
+"lr": -5.8
+},
+{
+"name": "I3",
+"class": "I3",
+"ap": -296.6,
+"dv": 58.2,
+"lr": -2.0
+},
+{
+"name": "IL1DL",
+"class": "IL1",
+"ap": -282.8,
+"dv": 52.8,
+"lr": 2.8
+},
+{
+"name": "IL1DR",
+"class": "IL1",
+"ap": -282.8,
+"dv": 52.8,
+"lr": -7.1
+},
+{
+"name": "IL1L",
+"class": "IL1",
+"ap": -282.7,
+"dv": 47.9,
+"lr": 3.8
+},
+{
+"name": "IL1R",
+"class": "IL1",
+"ap": -282.7,
+"dv": 47.9,
+"lr": -8.1
+},
+{
+"name": "IL1VL",
+"class": "IL1",
+"ap": -279.5,
+"dv": 41.0,
+"lr": 2.2
+},
+{
+"name": "IL1VR",
+"class": "IL1",
+"ap": -279.5,
+"dv": 41.0,
+"lr": -6.5
+},
+{
+"name": "IL2DL",
+"class": "IL2",
+"ap": -287.5,
+"dv": 57.1,
+"lr": 7.1
+},
+{
+"name": "IL2DR",
+"class": "IL2",
+"ap": -287.5,
+"dv": 57.1,
+"lr": -11.3
+},
+{
+"name": "IL2L",
+"class": "IL2",
+"ap": -285.0,
+"dv": 49.4,
+"lr": 6.8
+},
+{
+"name": "IL2R",
+"class": "IL2",
+"ap": -285.0,
+"dv": 49.4,
+"lr": -11.0
+},
+{
+"name": "IL2VL",
+"class": "IL2",
+"ap": -288.9,
+"dv": 43.0,
+"lr": 3.3
+},
+{
+"name": "IL2VR",
+"class": "IL2",
+"ap": -288.9,
+"dv": 43.0,
+"lr": -7.6
+},
+{
+"name": "M3L",
+"class": "M3",
+"ap": -295.4,
+"dv": 48.1,
+"lr": 3.8
+},
+{
+"name": "M3R",
+"class": "M3",
+"ap": -295.4,
+"dv": 48.1,
+"lr": -8.1
+},
+{
+"name": "M4",
+"class": "M4",
+"ap": -288.9,
+"dv": 57.6,
+"lr": -2.0
+},
+{
+"name": "MCL",
+"class": "MC",
+"ap": -296.1,
+"dv": 52.3,
+"lr": 3.2
+},
+{
+"name": "MCR",
+"class": "MC",
+"ap": -296.1,
+"dv": 52.3,
+"lr": -7.2
+},
+{
+"name": "MI",
+"class": "MI",
+"ap": -293.5,
+"dv": 56.7,
+"lr": -2.2
+},
+{
+"name": "NSML",
+"class": "NSM",
+"ap": -292.2,
+"dv": 51.8,
+"lr": 2.6
+},
+{
+"name": "NSMR",
+"class": "NSM",
+"ap": -292.2,
+"dv": 51.8,
+"lr": -6.4
+},
+{
+"name": "OLLL",
+"class": "OLL",
+"ap": -283.9,
+"dv": 50.0,
+"lr": 4.4
+},
+{
+"name": "OLLR",
+"class": "OLL",
+"ap": -283.9,
+"dv": 50.0,
+"lr": -8.7
+},
+{
+"name": "OLQDL",
+"class": "OLQ",
+"ap": -280.0,
+"dv": 53.4,
+"lr": 2.8
+},
+{
+"name": "OLQDR",
+"class": "OLQ",
+"ap": -280.0,
+"dv": 53.4,
+"lr": -7.0
+},
+{
+"name": "OLQVL",
+"class": "OLQ",
+"ap": -279.2,
+"dv": 43.9,
+"lr": 4.2
+},
+{
+"name": "OLQVR",
+"class": "OLQ",
+"ap": -279.2,
+"dv": 43.9,
+"lr": -8.5
+},
+{
+"name": "RIAL",
+"class": "RIA",
+"ap": -270.2,
+"dv": 45.0,
+"lr": 4.0
+},
+{
+"name": "RIAR",
+"class": "RIA",
+"ap": -270.2,
+"dv": 45.0,
+"lr": -8.2
+},
+{
+"name": "RICL",
+"class": "RIC",
+"ap": -267.1,
+"dv": 38.1,
+"lr": -0.7
+},
+{
+"name": "RICR",
+"class": "RIC",
+"ap": -267.1,
+"dv": 38.1,
+"lr": -3.6
+},
+{
+"name": "RID",
+"class": "RID",
+"ap": -272.4,
+"dv": 54.9,
+"lr": -1.2
+},
+{
+"name": "RIH",
+"class": "RIH",
+"ap": -267.4,
+"dv": 36.0,
+"lr": -2.0
+},
+{
+"name": "RIML",
+"class": "RIM",
+"ap": -260.9,
+"dv": 39.0,
+"lr": 3.5
+},
+{
+"name": "RIMR",
+"class": "RIM",
+"ap": -260.9,
+"dv": 39.0,
+"lr": -7.8
+},
+{
+"name": "RIVL",
+"class": "RIV",
+"ap": -265.3,
+"dv": 50.4,
+"lr": 4.5
+},
+{
+"name": "RIVR",
+"class": "RIV",
+"ap": -265.3,
+"dv": 50.4,
+"lr": -8.8
+},
+{
+"name": "RMDDL",
+"class": "RMD",
+"ap": -269.1,
+"dv": 37.6,
+"lr": 3.6
+},
+{
+"name": "RMDDR",
+"class": "RMD",
+"ap": -269.1,
+"dv": 37.6,
+"lr": -7.8
+},
+{
+"name": "RMDL",
+"class": "RMD",
+"ap": -271.0,
+"dv": 41.2,
+"lr": 3.1
+},
+{
+"name": "RMDR",
+"class": "RMD",
+"ap": -271.0,
+"dv": 41.2,
+"lr": -7.4
+},
+{
+"name": "RMDVL",
+"class": "RMD",
+"ap": -271.2,
+"dv": 44.4,
+"lr": 4.9
+},
+{
+"name": "RMDVR",
+"class": "RMD",
+"ap": -271.2,
+"dv": 44.4,
+"lr": -9.0
+},
+{
+"name": "RMED",
+"class": "RME",
+"ap": -275.8,
+"dv": 58.5,
+"lr": -1.5
+},
+{
+"name": "RMEL",
+"class": "RME",
+"ap": -274.4,
+"dv": 47.0,
+"lr": 4.7
+},
+{
+"name": "RMER",
+"class": "RME",
+"ap": -274.4,
+"dv": 47.0,
+"lr": -8.9
+},
+{
+"name": "RMEV",
+"class": "RME",
+"ap": -273.0,
+"dv": 35.7,
+"lr": -2.0
+},
+{
+"name": "SAADL",
+"class": "SAA",
+"ap": -270.2,
+"dv": 42.1,
+"lr": -4.7
+},
+{
+"name": "SAADR",
+"class": "SAA",
+"ap": -270.2,
+"dv": 42.1,
+"lr": 0.5
+},
+{
+"name": "SAAVL",
+"class": "SAA",
+"ap": -270.9,
+"dv": 45.4,
+"lr": 3.9
+},
+{
+"name": "SAAVR",
+"class": "SAA",
+"ap": -270.9,
+"dv": 45.4,
+"lr": -8.2
+},
+{
+"name": "SMBDL",
+"class": "SMB",
+"ap": -264.3,
+"dv": 33.1,
+"lr": 3.1
+},
+{
+"name": "SMBDR",
+"class": "SMB",
+"ap": -264.3,
+"dv": 33.1,
+"lr": -7.0
+},
+{
+"name": "SMBVL",
+"class": "SMB",
+"ap": -263.4,
+"dv": 33.0,
+"lr": 0.4
+},
+{
+"name": "SMBVR",
+"class": "SMB",
+"ap": -263.4,
+"dv": 33.0,
+"lr": -4.6
+},
+{
+"name": "SMDDL",
+"class": "SMD",
+"ap": -266.2,
+"dv": 34.1,
+"lr": 3.2
+},
+{
+"name": "SMDDR",
+"class": "SMD",
+"ap": -266.2,
+"dv": 34.1,
+"lr": -7.5
+},
+{
+"name": "SMDVL",
+"class": "SMD",
+"ap": -270.9,
+"dv": 46.6,
+"lr": 4.7
+},
+{
+"name": "SMDVR",
+"class": "SMD",
+"ap": -270.9,
+"dv": 46.6,
+"lr": -8.9
+},
+{
+"name": "URADL",
+"class": "URA",
+"ap": -284.6,
+"dv": 52.2,
+"lr": 5.0
+},
+{
+"name": "URADR",
+"class": "URA",
+"ap": -284.6,
+"dv": 52.2,
+"lr": -9.3
+},
+{
+"name": "URAVL",
+"class": "URA",
+"ap": -279.6,
+"dv": 41.4,
+"lr": 0.3
+},
+{
+"name": "URAVR",
+"class": "URA",
+"ap": -279.6,
+"dv": 41.4,
+"lr": -4.6
+},
+{
+"name": "URBL",
+"class": "URB",
+"ap": -279.9,
+"dv": 47.5,
+"lr": 5.0
+},
+{
+"name": "URBR",
+"class": "URB",
+"ap": -279.9,
+"dv": 47.5,
+"lr": -9.3
+},
+{
+"name": "URXL",
+"class": "URX",
+"ap": -269.9,
+"dv": 48.3,
+"lr": 3.0
+},
+{
+"name": "URXR",
+"class": "URX",
+"ap": -269.9,
+"dv": 48.3,
+"lr": -7.3
+},
+{
+"name": "URYDL",
+"class": "URY",
+"ap": -281.4,
+"dv": 51.9,
+"lr": 4.1
+},
+{
+"name": "URYDR",
+"class": "URY",
+"ap": -281.4,
+"dv": 51.9,
+"lr": -8.4
+},
+{
+"name": "URYVL",
+"class": "URY",
+"ap": -280.9,
+"dv": 45.4,
+"lr": 3.4
+},
+{
+"name": "URYVR",
+"class": "URY",
+"ap": -280.9,
+"dv": 45.4,
+"lr": -7.7
+}
+],
+"edges": [
+{
+"a": "ADA",
+"b": "ADE",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "ADA",
+"b": "AIB",
+"chemical": 8,
+"electrical": 0
+},
+{
+"a": "ADA",
+"b": "AVA",
+"chemical": 18,
+"electrical": 0
+},
+{
+"a": "ADA",
+"b": "AVD",
+"chemical": 8,
+"electrical": 5
+},
+{
+"a": "ADA",
+"b": "AVE",
+"chemical": 4,
+"electrical": 0
+},
+{
+"a": "ADA",
+"b": "AVJ",
+"chemical": 24,
+"electrical": 0
+},
+{
+"a": "ADA",
+"b": "AWA",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "ADA",
+"b": "FLP",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "ADA",
+"b": "OLQ",
+"chemical": 0,
+"electrical": 4
+},
+{
+"a": "ADA",
+"b": "RIC",
+"chemical": 14,
+"electrical": 0
+},
+{
+"a": "ADA",
+"b": "RIM",
+"chemical": 33,
+"electrical": 0
+},
+{
+"a": "ADA",
+"b": "RIV",
+"chemical": 5,
+"electrical": 0
+},
+{
+"a": "ADA",
+"b": "SMD",
+"chemical": 4,
+"electrical": 0
+},
+{
+"a": "ADA",
+"b": "URA",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "ADA",
+"b": "URB",
+"chemical": 8,
+"electrical": 0
+},
+{
+"a": "ADA",
+"b": "URX",
+"chemical": 11,
+"electrical": 0
+},
+{
+"a": "ADA",
+"b": "URY",
+"chemical": 4,
+"electrical": 0
+},
+{
+"a": "ADE",
+"b": "AIN",
+"chemical": 0,
+"electrical": 6
+},
+{
+"a": "ADE",
+"b": "AVA",
+"chemical": 29,
+"electrical": 0
+},
+{
+"a": "ADE",
+"b": "AVD",
+"chemical": 7,
+"electrical": 0
+},
+{
+"a": "ADE",
+"b": "AVE",
+"chemical": 7,
+"electrical": 0
+},
+{
+"a": "ADE",
+"b": "AVJ",
+"chemical": 1,
+"electrical": 1
+},
+{
+"a": "ADE",
+"b": "CEP",
+"chemical": 8,
+"electrical": 0
+},
+{
+"a": "ADE",
+"b": "FLP",
+"chemical": 40,
+"electrical": 4
+},
+{
+"a": "ADE",
+"b": "IL1",
+"chemical": 7,
+"electrical": 0
+},
+{
+"a": "ADE",
+"b": "IL2",
+"chemical": 17,
+"electrical": 2
+},
+{
+"a": "ADE",
+"b": "OLL",
+"chemical": 16,
+"electrical": 0
+},
+{
+"a": "ADE",
+"b": "RIA",
+"chemical": 3,
+"electrical": 0
+},
+{
+"a": "ADE",
+"b": "RIH",
+"chemical": 3,
+"electrical": 0
+},
+{
+"a": "ADE",
+"b": "RIV",
+"chemical": 4,
+"electrical": 0
+},
+{
+"a": "ADE",
+"b": "RMD",
+"chemical": 21,
+"electrical": 1
+},
+{
+"a": "ADE",
+"b": "RME",
+"chemical": 1,
+"electrical": 1
+},
+{
+"a": "ADE",
+"b": "SAA",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "ADE",
+"b": "SMB",
+"chemical": 3,
+"electrical": 0
+},
+{
+"a": "ADE",
+"b": "SMD",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "ADE",
+"b": "URB",
+"chemical": 4,
+"electrical": 0
+},
+{
+"a": "ADE",
+"b": "URX",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "AIB",
+"b": "AIN",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "AIB",
+"b": "AIY",
+"chemical": 4,
+"electrical": 0
+},
+{
+"a": "AIB",
+"b": "AIZ",
+"chemical": 123,
+"electrical": 7
+},
+{
+"a": "AIB",
+"b": "ASE",
+"chemical": 65,
+"electrical": 0
+},
+{
+"a": "AIB",
+"b": "ASG",
+"chemical": 37,
+"electrical": 0
+},
+{
+"a": "AIB",
+"b": "AUA",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "AIB",
+"b": "AVA",
+"chemical": 7,
+"electrical": 0
+},
+{
+"a": "AIB",
+"b": "AVE",
+"chemical": 5,
+"electrical": 0
+},
+{
+"a": "AIB",
+"b": "AWB",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "AIB",
+"b": "AWC",
+"chemical": 36,
+"electrical": 0
+},
+{
+"a": "AIB",
+"b": "FLP",
+"chemical": 7,
+"electrical": 1
+},
+{
+"a": "AIB",
+"b": "RIA",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "AIB",
+"b": "RIC",
+"chemical": 5,
+"electrical": 1
+},
+{
+"a": "AIB",
+"b": "RIM",
+"chemical": 147,
+"electrical": 3
+},
+{
+"a": "AIB",
+"b": "RIV",
+"chemical": 0,
+"electrical": 4
+},
+{
+"a": "AIB",
+"b": "RME",
+"chemical": 0,
+"electrical": 2
+},
+{
+"a": "AIB",
+"b": "SAA",
+"chemical": 30,
+"electrical": 0
+},
+{
+"a": "AIB",
+"b": "SMD",
+"chemical": 45,
+"electrical": 3
+},
+{
+"a": "AIM",
+"b": "ASG",
+"chemical": 14,
+"electrical": 1
+},
+{
+"a": "AIM",
+"b": "AVA",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "AIM",
+"b": "AVD",
+"chemical": 3,
+"electrical": 0
+},
+{
+"a": "AIM",
+"b": "AVJ",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "AIM",
+"b": "AWB",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "AIM",
+"b": "CEP",
+"chemical": 4,
+"electrical": 1
+},
+{
+"a": "AIM",
+"b": "OLQ",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "AIM",
+"b": "RID",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "AIM",
+"b": "RMD",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "AIM",
+"b": "SMB",
+"chemical": 5,
+"electrical": 1
+},
+{
+"a": "AIM",
+"b": "URX",
+"chemical": 11,
+"electrical": 0
+},
+{
+"a": "AIN",
+"b": "AIY",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "AIN",
+"b": "ASE",
+"chemical": 5,
+"electrical": 0
+},
+{
+"a": "AIN",
+"b": "ASG",
+"chemical": 4,
+"electrical": 2
+},
+{
+"a": "AIN",
+"b": "AUA",
+"chemical": 7,
+"electrical": 4
+},
+{
+"a": "AIN",
+"b": "AVJ",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "AIN",
+"b": "AWC",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "AIN",
+"b": "CEP",
+"chemical": 4,
+"electrical": 0
+},
+{
+"a": "AIN",
+"b": "RIA",
+"chemical": 0,
+"electrical": 2
+},
+{
+"a": "AIN",
+"b": "RID",
+"chemical": 4,
+"electrical": 0
+},
+{
+"a": "AIN",
+"b": "RMD",
+"chemical": 3,
+"electrical": 0
+},
+{
+"a": "AIN",
+"b": "SAA",
+"chemical": 3,
+"electrical": 0
+},
+{
+"a": "AIN",
+"b": "URX",
+"chemical": 4,
+"electrical": 0
+},
+{
+"a": "AIY",
+"b": "AIZ",
+"chemical": 137,
+"electrical": 0
+},
+{
+"a": "AIY",
+"b": "ASE",
+"chemical": 107,
+"electrical": 0
+},
+{
+"a": "AIY",
+"b": "ASG",
+"chemical": 3,
+"electrical": 0
+},
+{
+"a": "AIY",
+"b": "AUA",
+"chemical": 2,
+"electrical": 1
+},
+{
+"a": "AIY",
+"b": "AWA",
+"chemical": 26,
+"electrical": 0
+},
+{
+"a": "AIY",
+"b": "AWB",
+"chemical": 3,
+"electrical": 0
+},
+{
+"a": "AIY",
+"b": "AWC",
+"chemical": 64,
+"electrical": 0
+},
+{
+"a": "AIY",
+"b": "RIA",
+"chemical": 101,
+"electrical": 0
+},
+{
+"a": "AIY",
+"b": "RIH",
+"chemical": 8,
+"electrical": 0
+},
+{
+"a": "AIY",
+"b": "RIM",
+"chemical": 0,
+"electrical": 8
+},
+{
+"a": "AIY",
+"b": "RIV",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "AIZ",
+"b": "ASE",
+"chemical": 8,
+"electrical": 0
+},
+{
+"a": "AIZ",
+"b": "ASG",
+"chemical": 0,
+"electrical": 4
+},
+{
+"a": "AIZ",
+"b": "AUA",
+"chemical": 4,
+"electrical": 0
+},
+{
+"a": "AIZ",
+"b": "AVE",
+"chemical": 59,
+"electrical": 0
+},
+{
+"a": "AIZ",
+"b": "AWA",
+"chemical": 49,
+"electrical": 6
+},
+{
+"a": "AIZ",
+"b": "AWB",
+"chemical": 23,
+"electrical": 0
+},
+{
+"a": "AIZ",
+"b": "AWC",
+"chemical": 5,
+"electrical": 0
+},
+{
+"a": "AIZ",
+"b": "RIA",
+"chemical": 55,
+"electrical": 0
+},
+{
+"a": "AIZ",
+"b": "RIC",
+"chemical": 17,
+"electrical": 0
+},
+{
+"a": "AIZ",
+"b": "RIH",
+"chemical": 31,
+"electrical": 1
+},
+{
+"a": "AIZ",
+"b": "RIM",
+"chemical": 69,
+"electrical": 0
+},
+{
+"a": "AIZ",
+"b": "SMB",
+"chemical": 73,
+"electrical": 0
+},
+{
+"a": "AIZ",
+"b": "SMD",
+"chemical": 9,
+"electrical": 0
+},
+{
+"a": "AIZ",
+"b": "URX",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "AIZ",
+"b": "URY",
+"chemical": 4,
+"electrical": 0
+},
+{
+"a": "ASE",
+"b": "ASG",
+"chemical": 3,
+"electrical": 6
+},
+{
+"a": "ASE",
+"b": "AWA",
+"chemical": 13,
+"electrical": 0
+},
+{
+"a": "ASE",
+"b": "AWB",
+"chemical": 3,
+"electrical": 1
+},
+{
+"a": "ASE",
+"b": "AWC",
+"chemical": 43,
+"electrical": 3
+},
+{
+"a": "ASE",
+"b": "IL2",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "ASE",
+"b": "OLL",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "ASE",
+"b": "RIA",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "ASG",
+"b": "AWA",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "ASG",
+"b": "AWB",
+"chemical": 1,
+"electrical": 1
+},
+{
+"a": "ASG",
+"b": "AWC",
+"chemical": 4,
+"electrical": 2
+},
+{
+"a": "ASG",
+"b": "CEP",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "ASG",
+"b": "SMD",
+"chemical": 1,
+"electrical": 2
+},
+{
+"a": "AUA",
+"b": "AVA",
+"chemical": 14,
+"electrical": 0
+},
+{
+"a": "AUA",
+"b": "AVD",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "AUA",
+"b": "AVE",
+"chemical": 22,
+"electrical": 0
+},
+{
+"a": "AUA",
+"b": "AWA",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "AUA",
+"b": "AWB",
+"chemical": 0,
+"electrical": 7
+},
+{
+"a": "AUA",
+"b": "AWC",
+"chemical": 0,
+"electrical": 1
+},
+{
+"a": "AUA",
+"b": "IL2",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "AUA",
+"b": "RIA",
+"chemical": 45,
+"electrical": 0
+},
+{
+"a": "AUA",
+"b": "RIH",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "AUA",
+"b": "RMD",
+"chemical": 0,
+"electrical": 2
+},
+{
+"a": "AUA",
+"b": "URX",
+"chemical": 41,
+"electrical": 3
+},
+{
+"a": "AVA",
+"b": "AVD",
+"chemical": 181,
+"electrical": 33
+},
+{
+"a": "AVA",
+"b": "AVE",
+"chemical": 75,
+"electrical": 4
+},
+{
+"a": "AVA",
+"b": "AVJ",
+"chemical": 10,
+"electrical": 14
+},
+{
+"a": "AVA",
+"b": "AWC",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "AVA",
+"b": "FLP",
+"chemical": 114,
+"electrical": 0
+},
+{
+"a": "AVA",
+"b": "IL2",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "AVA",
+"b": "OLQ",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "AVA",
+"b": "RIA",
+"chemical": 7,
+"electrical": 0
+},
+{
+"a": "AVA",
+"b": "RIC",
+"chemical": 61,
+"electrical": 0
+},
+{
+"a": "AVA",
+"b": "RIM",
+"chemical": 16,
+"electrical": 21
+},
+{
+"a": "AVA",
+"b": "RMD",
+"chemical": 1,
+"electrical": 3
+},
+{
+"a": "AVA",
+"b": "SAA",
+"chemical": 145,
+"electrical": 1
+},
+{
+"a": "AVA",
+"b": "SMB",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "AVA",
+"b": "SMD",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "AVA",
+"b": "URX",
+"chemical": 3,
+"electrical": 0
+},
+{
+"a": "AVA",
+"b": "URY",
+"chemical": 2,
+"electrical": 10
+},
+{
+"a": "AVD",
+"b": "AVE",
+"chemical": 20,
+"electrical": 0
+},
+{
+"a": "AVD",
+"b": "AVJ",
+"chemical": 11,
+"electrical": 7
+},
+{
+"a": "AVD",
+"b": "FLP",
+"chemical": 97,
+"electrical": 16
+},
+{
+"a": "AVD",
+"b": "OLQ",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "AVD",
+"b": "URB",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "AVD",
+"b": "URX",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "AVD",
+"b": "URY",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "AVE",
+"b": "AVJ",
+"chemical": 4,
+"electrical": 0
+},
+{
+"a": "AVE",
+"b": "CEP",
+"chemical": 41,
+"electrical": 0
+},
+{
+"a": "AVE",
+"b": "FLP",
+"chemical": 28,
+"electrical": 0
+},
+{
+"a": "AVE",
+"b": "IL1",
+"chemical": 12,
+"electrical": 0
+},
+{
+"a": "AVE",
+"b": "IL2",
+"chemical": 4,
+"electrical": 0
+},
+{
+"a": "AVE",
+"b": "OLL",
+"chemical": 93,
+"electrical": 0
+},
+{
+"a": "AVE",
+"b": "RIM",
+"chemical": 6,
+"electrical": 37
+},
+{
+"a": "AVE",
+"b": "RMD",
+"chemical": 3,
+"electrical": 17
+},
+{
+"a": "AVE",
+"b": "RME",
+"chemical": 0,
+"electrical": 2
+},
+{
+"a": "AVE",
+"b": "SMD",
+"chemical": 4,
+"electrical": 2
+},
+{
+"a": "AVE",
+"b": "URA",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "AVE",
+"b": "URX",
+"chemical": 12,
+"electrical": 0
+},
+{
+"a": "AVE",
+"b": "URY",
+"chemical": 66,
+"electrical": 0
+},
+{
+"a": "AVJ",
+"b": "FLP",
+"chemical": 6,
+"electrical": 0
+},
+{
+"a": "AVJ",
+"b": "RID",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "AVJ",
+"b": "RIM",
+"chemical": 4,
+"electrical": 0
+},
+{
+"a": "AVJ",
+"b": "SMB",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "AVJ",
+"b": "URX",
+"chemical": 4,
+"electrical": 0
+},
+{
+"a": "AVJ",
+"b": "URY",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "AWA",
+"b": "AWB",
+"chemical": 14,
+"electrical": 0
+},
+{
+"a": "AWB",
+"b": "AWC",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "AWB",
+"b": "OLQ",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "AWB",
+"b": "RIA",
+"chemical": 13,
+"electrical": 0
+},
+{
+"a": "AWB",
+"b": "RIC",
+"chemical": 0,
+"electrical": 4
+},
+{
+"a": "AWB",
+"b": "SMB",
+"chemical": 5,
+"electrical": 0
+},
+{
+"a": "AWB",
+"b": "URX",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "AWB",
+"b": "URY",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "AWC",
+"b": "IL2",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "AWC",
+"b": "RIA",
+"chemical": 9,
+"electrical": 0
+},
+{
+"a": "AWC",
+"b": "RIV",
+"chemical": 3,
+"electrical": 0
+},
+{
+"a": "AWC",
+"b": "SMD",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "AWC",
+"b": "URY",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "CEP",
+"b": "IL1",
+"chemical": 51,
+"electrical": 0
+},
+{
+"a": "CEP",
+"b": "IL2",
+"chemical": 6,
+"electrical": 1
+},
+{
+"a": "CEP",
+"b": "OLL",
+"chemical": 78,
+"electrical": 0
+},
+{
+"a": "CEP",
+"b": "OLQ",
+"chemical": 80,
+"electrical": 15
+},
+{
+"a": "CEP",
+"b": "RIA",
+"chemical": 6,
+"electrical": 0
+},
+{
+"a": "CEP",
+"b": "RIC",
+"chemical": 118,
+"electrical": 0
+},
+{
+"a": "CEP",
+"b": "RIH",
+"chemical": 20,
+"electrical": 1
+},
+{
+"a": "CEP",
+"b": "RIV",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "CEP",
+"b": "RMD",
+"chemical": 44,
+"electrical": 0
+},
+{
+"a": "CEP",
+"b": "SMB",
+"chemical": 17,
+"electrical": 0
+},
+{
+"a": "CEP",
+"b": "SMD",
+"chemical": 5,
+"electrical": 0
+},
+{
+"a": "CEP",
+"b": "URA",
+"chemical": 21,
+"electrical": 3
+},
+{
+"a": "CEP",
+"b": "URB",
+"chemical": 32,
+"electrical": 0
+},
+{
+"a": "CEP",
+"b": "URX",
+"chemical": 6,
+"electrical": 0
+},
+{
+"a": "CEP",
+"b": "URY",
+"chemical": 24,
+"electrical": 0
+},
+{
+"a": "FLP",
+"b": "RID",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "FLP",
+"b": "RIH",
+"chemical": 0,
+"electrical": 1
+},
+{
+"a": "I1",
+"b": "I2",
+"chemical": 19,
+"electrical": 3
+},
+{
+"a": "I1",
+"b": "I3",
+"chemical": 6,
+"electrical": 1
+},
+{
+"a": "I1",
+"b": "M3",
+"chemical": 17,
+"electrical": 2
+},
+{
+"a": "I1",
+"b": "MC",
+"chemical": 11,
+"electrical": 5
+},
+{
+"a": "I1",
+"b": "MI",
+"chemical": 4,
+"electrical": 0
+},
+{
+"a": "I1",
+"b": "NSM",
+"chemical": 6,
+"electrical": 5
+},
+{
+"a": "I2",
+"b": "M3",
+"chemical": 5,
+"electrical": 0
+},
+{
+"a": "I2",
+"b": "M4",
+"chemical": 7,
+"electrical": 0
+},
+{
+"a": "I2",
+"b": "MC",
+"chemical": 1,
+"electrical": 1
+},
+{
+"a": "I2",
+"b": "NSM",
+"chemical": 81,
+"electrical": 2
+},
+{
+"a": "I3",
+"b": "M3",
+"chemical": 4,
+"electrical": 0
+},
+{
+"a": "I3",
+"b": "M4",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "I3",
+"b": "MC",
+"chemical": 3,
+"electrical": 0
+},
+{
+"a": "I3",
+"b": "MI",
+"chemical": 3,
+"electrical": 1
+},
+{
+"a": "I3",
+"b": "NSM",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "IL1",
+"b": "IL2",
+"chemical": 118,
+"electrical": 1
+},
+{
+"a": "IL1",
+"b": "OLL",
+"chemical": 10,
+"electrical": 0
+},
+{
+"a": "IL1",
+"b": "OLQ",
+"chemical": 10,
+"electrical": 0
+},
+{
+"a": "IL1",
+"b": "RIA",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "IL1",
+"b": "RMD",
+"chemical": 262,
+"electrical": 2
+},
+{
+"a": "IL1",
+"b": "RME",
+"chemical": 16,
+"electrical": 9
+},
+{
+"a": "IL1",
+"b": "SAA",
+"chemical": 12,
+"electrical": 0
+},
+{
+"a": "IL1",
+"b": "URA",
+"chemical": 57,
+"electrical": 4
+},
+{
+"a": "IL1",
+"b": "URB",
+"chemical": 18,
+"electrical": 2
+},
+{
+"a": "IL1",
+"b": "URX",
+"chemical": 3,
+"electrical": 0
+},
+{
+"a": "IL1",
+"b": "URY",
+"chemical": 18,
+"electrical": 0
+},
+{
+"a": "IL2",
+"b": "OLL",
+"chemical": 6,
+"electrical": 2
+},
+{
+"a": "IL2",
+"b": "OLQ",
+"chemical": 95,
+"electrical": 0
+},
+{
+"a": "IL2",
+"b": "RIA",
+"chemical": 6,
+"electrical": 0
+},
+{
+"a": "IL2",
+"b": "RIC",
+"chemical": 4,
+"electrical": 0
+},
+{
+"a": "IL2",
+"b": "RIH",
+"chemical": 70,
+"electrical": 0
+},
+{
+"a": "IL2",
+"b": "RMD",
+"chemical": 7,
+"electrical": 2
+},
+{
+"a": "IL2",
+"b": "RME",
+"chemical": 132,
+"electrical": 3
+},
+{
+"a": "IL2",
+"b": "SMD",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "IL2",
+"b": "URA",
+"chemical": 44,
+"electrical": 6
+},
+{
+"a": "IL2",
+"b": "URB",
+"chemical": 6,
+"electrical": 8
+},
+{
+"a": "IL2",
+"b": "URX",
+"chemical": 6,
+"electrical": 5
+},
+{
+"a": "M3",
+"b": "M4",
+"chemical": 3,
+"electrical": 0
+},
+{
+"a": "M3",
+"b": "MI",
+"chemical": 4,
+"electrical": 0
+},
+{
+"a": "M3",
+"b": "NSM",
+"chemical": 47,
+"electrical": 3
+},
+{
+"a": "M4",
+"b": "MC",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "M4",
+"b": "NSM",
+"chemical": 13,
+"electrical": 0
+},
+{
+"a": "MC",
+"b": "MI",
+"chemical": 3,
+"electrical": 0
+},
+{
+"a": "MI",
+"b": "NSM",
+"chemical": 3,
+"electrical": 0
+},
+{
+"a": "OLL",
+"b": "OLQ",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "OLL",
+"b": "RMD",
+"chemical": 79,
+"electrical": 0
+},
+{
+"a": "OLL",
+"b": "RME",
+"chemical": 10,
+"electrical": 0
+},
+{
+"a": "OLL",
+"b": "SAA",
+"chemical": 8,
+"electrical": 0
+},
+{
+"a": "OLL",
+"b": "SMD",
+"chemical": 46,
+"electrical": 0
+},
+{
+"a": "OLL",
+"b": "URB",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "OLL",
+"b": "URY",
+"chemical": 15,
+"electrical": 0
+},
+{
+"a": "OLQ",
+"b": "RIC",
+"chemical": 18,
+"electrical": 0
+},
+{
+"a": "OLQ",
+"b": "RIH",
+"chemical": 61,
+"electrical": 2
+},
+{
+"a": "OLQ",
+"b": "RMD",
+"chemical": 59,
+"electrical": 8
+},
+{
+"a": "OLQ",
+"b": "RME",
+"chemical": 6,
+"electrical": 0
+},
+{
+"a": "OLQ",
+"b": "URB",
+"chemical": 2,
+"electrical": 15
+},
+{
+"a": "OLQ",
+"b": "URX",
+"chemical": 4,
+"electrical": 0
+},
+{
+"a": "OLQ",
+"b": "URY",
+"chemical": 15,
+"electrical": 0
+},
+{
+"a": "RIA",
+"b": "RIH",
+"chemical": 70,
+"electrical": 0
+},
+{
+"a": "RIA",
+"b": "RIM",
+"chemical": 7,
+"electrical": 0
+},
+{
+"a": "RIA",
+"b": "RIV",
+"chemical": 41,
+"electrical": 0
+},
+{
+"a": "RIA",
+"b": "RMD",
+"chemical": 550,
+"electrical": 2
+},
+{
+"a": "RIA",
+"b": "SAA",
+"chemical": 3,
+"electrical": 1
+},
+{
+"a": "RIA",
+"b": "SMB",
+"chemical": 12,
+"electrical": 0
+},
+{
+"a": "RIA",
+"b": "SMD",
+"chemical": 349,
+"electrical": 6
+},
+{
+"a": "RIA",
+"b": "URX",
+"chemical": 37,
+"electrical": 0
+},
+{
+"a": "RIA",
+"b": "URY",
+"chemical": 4,
+"electrical": 0
+},
+{
+"a": "RIC",
+"b": "RIM",
+"chemical": 21,
+"electrical": 0
+},
+{
+"a": "RIC",
+"b": "RIV",
+"chemical": 5,
+"electrical": 0
+},
+{
+"a": "RIC",
+"b": "SAA",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "RIC",
+"b": "SMB",
+"chemical": 9,
+"electrical": 0
+},
+{
+"a": "RIC",
+"b": "SMD",
+"chemical": 47,
+"electrical": 0
+},
+{
+"a": "RIC",
+"b": "URB",
+"chemical": 8,
+"electrical": 0
+},
+{
+"a": "RIC",
+"b": "URX",
+"chemical": 11,
+"electrical": 1
+},
+{
+"a": "RID",
+"b": "RME",
+"chemical": 5,
+"electrical": 0
+},
+{
+"a": "RID",
+"b": "URX",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "RID",
+"b": "URY",
+"chemical": 4,
+"electrical": 0
+},
+{
+"a": "RIH",
+"b": "RME",
+"chemical": 18,
+"electrical": 0
+},
+{
+"a": "RIH",
+"b": "SMB",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "RIH",
+"b": "URA",
+"chemical": 5,
+"electrical": 0
+},
+{
+"a": "RIH",
+"b": "URY",
+"chemical": 6,
+"electrical": 0
+},
+{
+"a": "RIM",
+"b": "RMD",
+"chemical": 61,
+"electrical": 1
+},
+{
+"a": "RIM",
+"b": "SAA",
+"chemical": 165,
+"electrical": 0
+},
+{
+"a": "RIM",
+"b": "SMD",
+"chemical": 71,
+"electrical": 0
+},
+{
+"a": "RIV",
+"b": "RMD",
+"chemical": 16,
+"electrical": 0
+},
+{
+"a": "RIV",
+"b": "SAA",
+"chemical": 24,
+"electrical": 3
+},
+{
+"a": "RIV",
+"b": "SMB",
+"chemical": 2,
+"electrical": 0
+},
+{
+"a": "RIV",
+"b": "SMD",
+"chemical": 28,
+"electrical": 10
+},
+{
+"a": "RMD",
+"b": "RME",
+"chemical": 4,
+"electrical": 1
+},
+{
+"a": "RMD",
+"b": "SAA",
+"chemical": 1,
+"electrical": 14
+},
+{
+"a": "RMD",
+"b": "SMB",
+"chemical": 9,
+"electrical": 0
+},
+{
+"a": "RMD",
+"b": "SMD",
+"chemical": 13,
+"electrical": 19
+},
+{
+"a": "RMD",
+"b": "URA",
+"chemical": 18,
+"electrical": 0
+},
+{
+"a": "RMD",
+"b": "URB",
+"chemical": 4,
+"electrical": 0
+},
+{
+"a": "RMD",
+"b": "URX",
+"chemical": 11,
+"electrical": 0
+},
+{
+"a": "RMD",
+"b": "URY",
+"chemical": 148,
+"electrical": 0
+},
+{
+"a": "RME",
+"b": "SAA",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "RME",
+"b": "SMB",
+"chemical": 57,
+"electrical": 0
+},
+{
+"a": "RME",
+"b": "SMD",
+"chemical": 16,
+"electrical": 1
+},
+{
+"a": "RME",
+"b": "URA",
+"chemical": 37,
+"electrical": 0
+},
+{
+"a": "RME",
+"b": "URY",
+"chemical": 7,
+"electrical": 0
+},
+{
+"a": "SAA",
+"b": "SMB",
+"chemical": 51,
+"electrical": 39
+},
+{
+"a": "SAA",
+"b": "SMD",
+"chemical": 42,
+"electrical": 12
+},
+{
+"a": "SMB",
+"b": "SMD",
+"chemical": 17,
+"electrical": 1
+},
+{
+"a": "SMB",
+"b": "URB",
+"chemical": 8,
+"electrical": 1
+},
+{
+"a": "SMB",
+"b": "URX",
+"chemical": 7,
+"electrical": 0
+},
+{
+"a": "SMB",
+"b": "URY",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "SMD",
+"b": "URY",
+"chemical": 44,
+"electrical": 0
+},
+{
+"a": "URA",
+"b": "URY",
+"chemical": 2,
+"electrical": 1
+},
+{
+"a": "URB",
+"b": "URX",
+"chemical": 50,
+"electrical": 0
+},
+{
+"a": "URB",
+"b": "URY",
+"chemical": 1,
+"electrical": 0
+},
+{
+"a": "URX",
+"b": "URY",
+"chemical": 3,
+"electrical": 0
+}
+],
+"sources": {
+"positions": "OpenWorm CElegansNeuroML (from the WormBase Virtual Worm), github.com/openworm/CElegansNeuroML",
+"wiring": "Cook et al. 2019, Nature 571:63-71, doi:10.1038/s41586-019-1352-7 (SI 5, corrected July 2020), via OpenWorm ConnectomeToolbox"
+}
+}
