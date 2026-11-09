@@ -79,6 +79,9 @@ svg.map { width: 100%; height: auto; display: block; background: var(--bg); bord
 svg.map text { font: 9px var(--data); fill: var(--muted); }
 svg.map text.key { fill: var(--ink); font-weight: 500; }
 svg.map .edge { stroke: var(--muted); stroke-opacity: 0.18; }
+svg.map:not(.all) .edge.weak { display: none; }
+svg.map circle.other { fill: var(--muted); fill-opacity: 0.3; cursor: default; }
+.allconn { display: inline-flex; gap: 5px; align-items: center; font-size: 12px; color: var(--muted); cursor: pointer; }
 svg.map .edge.on { stroke: var(--ink); stroke-opacity: 0.75; }
 svg.map circle { stroke: var(--bg); stroke-width: 0.8; cursor: pointer; }
 .why { display: grid; gap: 4px; font: 12px var(--data); }
@@ -159,10 +162,13 @@ footer a { color: var(--neuron); }
           <button type="button" data-view="activity" aria-pressed="true">Activity</button>
           <button type="button" data-view="why" aria-pressed="false">Why this risk?</button>
         </div>
+        <label class="allconn"><input type="checkbox" id="allconn"> Show all connections</label>
       </div>
       <svg class="map" id="map" viewBox="0 0 420 196" role="img" aria-label="Side view of the worm's head: each dot is a neuron at its real position, lines are its real connections"></svg>
-      <p class="note" id="mapnote">Side view of the head (nose left, back of the worm up), turned so the head lies level. Each dot is one
-        neuron at its real cell-body position; lines join neuron types with at least 10 synapses between them. Brightness is the recorded
+      <p class="note" id="mapnote">Side view of the head (nose left, back of the worm up), turned so the head lies level, with every
+        neuron at its real cell-body position. Coloured dots are the 115 neurons (46 types) the model reads; grey dots are the
+        other head neurons, recorded in too few worms to use. Lines join the model's neuron types: those with 10 or more
+        synapses, or all 311 links with "Show all connections" (links to grey neurons aren't drawn). Brightness is the recorded
         activity (left/right partners share their type's average). Hover a neuron to see its connections.</p>
       <div class="why" id="why" hidden></div>
       </div>
@@ -422,9 +428,10 @@ footer a { color: var(--neuron); }
     let flipX = 1, flipY = 1;
     if (byName.I1L && byName.AVAL && byName.I1L[0] > byName.AVAL[0]) flipX = -1;   // pharynx (front) must be left of AVA
     if (byName.RMED && byName.RMEV && byName.RMED[1] < byName.RMEV[1]) flipY = -1;  // RME dorsal must sit above RME ventral
-    const pts = A.neurons.map((d) => { const [u, v] = rot(d); return [u * flipX, v * flipY]; });
-    const u0 = Math.min(...pts.map((p) => p[0])) - 3, u1 = Math.max(...pts.map((p) => p[0])) + 3;
-    const v0 = Math.min(...pts.map((p) => p[1])) - 3, v1 = Math.max(...pts.map((p) => p[1])) + 3;
+    const place = (d) => { const [u, v] = rot(d); return [u * flipX, v * flipY]; };
+    const pts = A.neurons.map(place), opts = (A.others || []).map(place), all = pts.concat(opts);
+    const u0 = Math.min(...all.map((p) => p[0])) - 3, u1 = Math.max(...all.map((p) => p[0])) + 3;
+    const v0 = Math.min(...all.map((p) => p[1])) - 3, v1 = Math.max(...all.map((p) => p[1])) + 3;
     const k = Math.min(400 / (u1 - u0), 158 / (v1 - v0));
     const X = (u) => 10 + (u - u0) * k, Y = (v) => 20 + (v1 - v) * k;
     const H = Math.ceil(20 + (v1 - v0) * k + 18);
@@ -432,8 +439,13 @@ footer a { color: var(--neuron); }
     const centre = {};
     A.neurons.forEach((n, i) => (centre[n.class] ??= []).push([X(pts[i][0]), Y(pts[i][1])]));
     for (const c in centre) centre[c] = centre[c].reduce((s, p) => [s[0] + p[0] / centre[c].length, s[1] + p[1] / centre[c].length], [0, 0]);
-    edgeEls = A.edges.filter((e) => e.chemical + e.electrical >= 10).map((e) => {
-      const l = mk("line", { x1: centre[e.a][0], y1: centre[e.a][1], x2: centre[e.b][0], y2: centre[e.b][1], class: "edge",
+    A.others?.forEach((n, i) => { // head neurons the model doesn't read: shown for context, no activity
+      const c = mk("circle", { cx: X(opts[i][0]), cy: Y(opts[i][1]), r: 2.2, class: "other" }, svg);
+      mk("title", {}, c).textContent = `${n.name} (not read by the model)`;
+    });
+    edgeEls = A.edges.map((e) => {
+      const l = mk("line", { x1: centre[e.a][0], y1: centre[e.a][1], x2: centre[e.b][0], y2: centre[e.b][1],
+        class: e.chemical + e.electrical >= 10 ? "edge" : "edge weak",
         "stroke-width": (0.4 + Math.log1p(e.chemical + e.electrical) / 2.5).toFixed(2) }, svg);
       return [e.a, e.b, l];
     });
@@ -535,6 +547,7 @@ footer a { color: var(--neuron); }
       document.querySelectorAll("[data-model]").forEach((x) => x.setAttribute("aria-pressed", x === b)); redraw();
     }));
     addEventListener("resize", redraw);
+    $("allconn").addEventListener("change", (e) => $("map").classList.toggle("all", e.target.checked));
     document.querySelectorAll("[data-view]").forEach((b) => b.addEventListener("click", () => {
       view = b.dataset.view; $("why").hidden = view !== "why";
       $("mapnote").textContent = view === "why"
