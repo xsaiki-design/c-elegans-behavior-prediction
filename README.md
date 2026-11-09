@@ -14,7 +14,9 @@ within seconds; the brain's lasts at least 10 s.
 ![How far ahead](figures/horizon_curve.png)
 
 **[Live version](https://xsaiki-design.github.io/c-elegans-behavior-prediction/live/)**: the real worm crawling, its
-neurons, and the model running in your browser frame by frame (it checks itself against the offline analysis). A
+neurons, and the model running in your browser frame by frame (it checks itself against the offline analysis). Its neuron map puts each neuron at its real position in the head
+(OpenWorm) with its real wiring (Cook et al. 2019), and a **Why this risk?** view shows exactly how much each neuron type
+and body signal pushes the risk at that moment (the model is linear, so the pushes add up to the risk). A
 **Compare** tab races brain + body against body only on the same worm, scored live against its real reversals. The
 animation uses worms with clean posture tracking in ≥ 90 % of frames; the remaining glitch frames are blended from the
 good frames either side (`worms/showcase_data.py`, display only, the analysis doesn't use posture).
@@ -76,6 +78,7 @@ uv run python -m worms.figures     # figures/ from the results
 uv run python -m worms.demo_data   # held-out predictions for the interactive page -> docs/demo-data.json
 uv run python -m worms.alarms      # alarm analysis -> results/alarms.json
 uv run python -m worms.showcase_data  # typical worms + their held-out models for the live page -> docs/live/
+uv run python -m worms.anatomy     # neuron positions + wiring for the live page's map -> docs/live/anatomy.json
 ```
 
 To view the interactive page locally: `python -m http.server -d docs`, then open http://localhost:8000.
@@ -95,6 +98,7 @@ worms/alarms.py     exploratory: reversals caught with equal alarms, by warning 
 docs/index.html     the interactive page (GitHub Pages)
 docs/live/          the live page: animation + the model running in the browser
 worms/showcase_data.py  exports worms and model weights for the live page
+worms/anatomy.py    neuron positions and wiring for the live page's map
 tests/              tests
 docs/               write-up, decisions with references, reading list
 ```
@@ -136,3 +140,6 @@ in [`docs/decisions/`](docs/decisions); the reading list for the concepts is [`d
 ## Data credit
 
 Data: Atanas, Kim et al., *Cell* 186 (2023), Flavell lab, MIT. Please cite the paper, not this repository.
+Neuron positions for the live page: [OpenWorm CElegansNeuroML](https://github.com/openworm/CElegansNeuroML) (from the
+WormBase Virtual Worm). Wiring: Cook et al., [*Nature* 571 (2019)](https://doi.org/10.1038/s41586-019-1352-7),
+corrected July 2020, via OpenWorm's [ConnectomeToolbox](https://github.com/openworm/ConnectomeToolbox).
